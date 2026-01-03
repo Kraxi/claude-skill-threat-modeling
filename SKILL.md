@@ -395,7 +395,7 @@ Security Domains ──▶ Control Sets ──▶ OWASP References ──▶ Com
    design.yaml         *.md               *.md              (compliance tables)
 ```
 
-**Security Domains (15 total)**:
+**Security Domains (16 total)**:
 
 | Seq | Code | Name | STRIDE | Description |
 |-----|------|------|--------|-------------|
@@ -813,7 +813,7 @@ python $SKILL_PATH/scripts/list_files.py <path> --categorize --detect-type --pre
 - Apply Input Validation (IV) to mark validation points
 
 **Security Design**: `assets/knowledge/security-design.yaml`
-- Reference 15 security domains to identify security-relevant DFD elements
+- Reference 16 security domains to identify security-relevant DFD elements
 
 #### 2.4 Output Context
 **→ P3**: `dfd_elements` {elements[], flows[], dfd_diagram, dfd_issues[]}
@@ -857,7 +857,7 @@ python $SKILL_PATH/scripts/list_files.py <path> --categorize --detect-type --pre
 **← P1/P2/P3**: All cumulative findings
 
 #### 4.3 Knowledge Reference (Progressive Loading)
-1. Load `security-design.yaml` - Get all 15 domains with core requirements
+1. Load `security-design.yaml` - Get all 16 domains with core requirements
 2. For each relevant domain, load corresponding `control-set-*.md`
 3. When specific implementation details needed, load `reference-set-*.md`
 

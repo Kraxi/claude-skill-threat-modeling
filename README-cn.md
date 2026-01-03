@@ -21,9 +21,11 @@
 | **8阶段串行工作流** | 严格顺序执行，确保最大深度和完整覆盖 |
 | **双知识库** | 核心库 (969 CWE, 615 CAPEC) + CVE扩展 (323K+ CVE) |
 | **全链映射** | STRIDE → CWE → CAPEC → ATT&CK → CVE/KEV 威胁情报链 |
+| **安全设计与控制** | 11项安全原则 + 16个安全域评估与控制映射 |
 | **攻击路径验证** | CAPEC + ATT&CK 攻击链映射 + POC 设计 |
 | **KB增强缓解** | 基于知识库的上下文感知缓解建议 |
 | **AI/LLM 扩展** | OWASP LLM Top 10 + AI 组件威胁覆盖 |
+| **Agent Skill Prompt 评估** | OWASP Agentic Top 10 (ASI01-ASI10) + 最小代理原则评估 |
 
 ### 工作流概览
 
@@ -214,6 +216,20 @@ python scripts/unified_kb_query.py --all-llm
 | **云服务** | AWS / Azure / GCP / 阿里云 / 腾讯云 |
 | **AI/LLM** | OWASP LLM Top 10 + AI 组件威胁 |
 | **CVE验证** | 323K+ CVE + KEV (已知被利用漏洞) 检查 |
+| **Agent/Skill Prompt** | OWASP Agentic Security Top 10 + 最小代理原则 |
+
+### Agent & Skill Prompt 安全评估
+
+针对 AI Agent 系统和 Claude Code Skills 的专项安全评估：
+
+| 评估领域 | 覆盖内容 |
+|----------|----------|
+| **OWASP Agentic Top 10** | ASI01-ASI10 自主 AI Agent 漏洞类别 |
+| **最小代理原则** | 最小权限与能力范围评估 |
+| **工具调用安全** | MCP 服务器集成、命令注入、路径遍历 |
+| **Prompt 注入防御** | 直接/间接注入、越狱抵抗分析 |
+| **数据边界控制** | 敏感数据暴露、上下文泄漏防护 |
+| **自主性风险评估** | 决策边界、人工监督、操作可逆性 |
 
 ---
 

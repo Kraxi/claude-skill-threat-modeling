@@ -21,9 +21,11 @@ A comprehensive **Code-First** threat modeling toolkit for Claude Code that tran
 | **8-Phase Serial Workflow** | Strict sequential execution ensuring maximum depth and complete coverage |
 | **Dual Knowledge Base** | Core DB (969 CWE, 615 CAPEC) + CVE Extension (323K+ CVE) |
 | **Full Chain Mapping** | STRIDE → CWE → CAPEC → ATT&CK → CVE/KEV intelligence chain |
+| **Security Design & Control** | 11 security principles + 16 security domains assessment with control mapping |
 | **Attack Path Validation** | CAPEC + ATT&CK attack chain mapping with POC design |
 | **KB-Enhanced Mitigations** | Context-aware mitigation suggestions per threat |
 | **AI/LLM Extensions** | OWASP LLM Top 10 + AI component threat coverage |
+| **Agent Skill Prompt Assessment** | OWASP Agentic Top 10 (ASI01-ASI10) + Least Agency principle evaluation |
 
 ### Workflow Overview
 
@@ -215,6 +217,20 @@ python scripts/unified_kb_query.py --all-llm
 | **Cloud Services** | AWS / Azure / GCP / Alibaba Cloud / Tencent Cloud |
 | **AI/LLM** | OWASP LLM Top 10 + AI component threats |
 | **CVE Validation** | 323K+ CVE + KEV (Known Exploited Vulnerabilities) checks |
+| **Agent/Skill Prompt** | OWASP Agentic Security Top 10 + Least Agency principle |
+
+### Agent & Skill Prompt Security Assessment
+
+Specialized security assessment for AI Agent systems and Claude Code Skills:
+
+| Assessment Area | Coverage |
+|-----------------|----------|
+| **OWASP Agentic Top 10** | ASI01-ASI10 vulnerability categories for autonomous AI agents |
+| **Least Agency Principle** | Minimal permission & capability scoping evaluation |
+| **Tool Call Security** | MCP server integration, command injection, path traversal |
+| **Prompt Injection Defense** | Direct/indirect injection, jailbreak resistance analysis |
+| **Data Boundary Control** | Sensitive data exposure, context leakage prevention |
+| **Autonomy Risk Assessment** | Decision boundary, human oversight, action reversibility |
 
 ---
 

@@ -414,6 +414,7 @@ Security Domains ──▶ Control Sets ──▶ OWASP References ──▶ Com
 | ext-13 | AI | AI/LLM Security | - | LLM-specific threats (OWASP LLM Top 10) |
 | ext-14 | MOBILE | Mobile Security | - | Mobile app security |
 | ext-15 | CLOUD | Cloud Security | - | Cloud-native security controls |
+| ext-16 | AGENT | Agentic Security | S,T,R,I,D,E | AI Agent security (OWASP Agentic Top 10) |
 
 ### Threat Pattern Set
 

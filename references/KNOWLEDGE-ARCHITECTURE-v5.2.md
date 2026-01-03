@@ -37,7 +37,7 @@ The knowledge system consists of two parallel sets that work together:
 │                       ┌───────────────────────────────────────────┐                           │
 │                       │         Security Principles               │                           │
 │                       │    (Foundation - Guides All Phases)       │                           │
-│                       │  DID │ LP │ ZT │ FS │ SOD │ SBD │ CM │ EOM │ OD │ IV                 │
+│                       │  DID │ LP │ ZT │ FS │ SOD │ SBD │ CM │ EOM │ OD │ IV │ LA              │
 │                       └───────────────────────────────────────────┘                           │
 │                                           │                                                    │
 │                 ┌─────────────────────────┴─────────────────────────┐                         │
@@ -106,6 +106,7 @@ Security Principles serve as the foundation that guides all phases of the threat
 | **EOM** | Economy of Mechanism | 机制简化 | Simple and verifiable | Identify complexity risks |
 | **OD** | Open Design | 开放设计 | No security by obscurity | Identify obscurity dependencies |
 | **IV** | Input Validation | 输入验证 | Boundary validation | Identify injection surfaces |
+| **LA** | Least Agency | 最小代理 | Limit AI agent autonomy and tool access | Identify excessive agent permissions |
 
 ### 2.3 Security Control Set
 

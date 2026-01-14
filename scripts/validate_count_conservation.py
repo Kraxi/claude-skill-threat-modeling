@@ -66,7 +66,7 @@ def extract_threat_ids_from_p5(p5_content: str) -> Tuple[int, List[str]]:
     threats = list(set(matches))  # Unique threats
 
     # Try to find total count from summary section
-    total_pattern = re.compile(r'(?:total|总数|总计)[\s:]*(\d+)', re.IGNORECASE)
+    total_pattern = re.compile(r'(?:total|count)[\s:]*(\d+)', re.IGNORECASE)
     total_match = total_pattern.search(p5_content)
 
     if total_match:

@@ -2,7 +2,7 @@
 
 # Control Set 15: Mobile Security (MOBILE)
 
-**Domain**: MOBILE - 移动端安全
+**Domain**: MOBILE - Mobile Application Security
 **Version**: 1.0
 **Last Updated**: 2025-12-30
 
@@ -10,9 +10,9 @@
 
 ## Overview
 
-移动端安全控制集，适用于iOS/Android原生和跨平台应用。当检测到以下触发条件时按需加载：
-- iOS项目 (*.xcodeproj, Podfile)
-- Android项目 (build.gradle, AndroidManifest.xml)
+Mobile application security control set, applicable to iOS/Android native and cross-platform applications. Automatically loaded when the following trigger conditions are detected:
+- iOS projects (*.xcodeproj, Podfile)
+- Android projects (build.gradle, AndroidManifest.xml)
 - React Native (react-native.config.js)
 - Flutter (pubspec.yaml)
 
@@ -21,58 +21,58 @@
 ## Core Controls
 
 ### MOBILE-01: Secure Local Storage
-**控制要求**: 本地存储必须加密保护
+**Control Requirement**: Local storage must be encrypted and protected
 
-- 使用平台安全存储 (Keychain/Keystore)
-- 敏感数据加密存储
-- 禁止明文存储凭证
-- 应用卸载时清理数据
+- Use platform secure storage (Keychain/Keystore)
+- Encrypt sensitive data at rest
+- Prohibit plaintext credential storage
+- Clean up data on application uninstall
 
 ### MOBILE-02: Transport Security
-**控制要求**: 网络传输必须安全
+**Control Requirement**: Network transport must be secure
 
-- 强制HTTPS通信
-- 证书固定 (Certificate Pinning)
-- 禁止不安全的TLS配置
-- 检测代理/中间人攻击
+- Enforce HTTPS communication
+- Certificate pinning
+- Prohibit insecure TLS configurations
+- Detect proxy/man-in-the-middle attacks
 
 ### MOBILE-03: Code Protection
-**控制要求**: 应用代码必须保护
+**Control Requirement**: Application code must be protected
 
-- 代码混淆 (ProGuard/R8/SwiftShield)
-- 防止反编译和调试
-- 资源文件加密
-- 敏感逻辑服务端实现
+- Code obfuscation (ProGuard/R8/SwiftShield)
+- Prevent decompilation and debugging
+- Resource file encryption
+- Implement sensitive logic server-side
 
 ### MOBILE-04: Runtime Protection
-**控制要求**: 运行时环境必须安全
+**Control Requirement**: Runtime environment must be secure
 
-- 检测越狱/Root设备
-- 防止动态注入
-- 完整性校验
-- 调试检测和阻断
+- Detect jailbroken/rooted devices
+- Prevent dynamic injection
+- Integrity verification
+- Debug detection and prevention
 
 ### MOBILE-05: Authentication Security
-**控制要求**: 移动端认证必须安全
+**Control Requirement**: Mobile authentication must be secure
 
-- 生物识别集成 (Face ID/Touch ID)
-- 安全的会话管理
-- 设备绑定和注册
-- 离线认证策略
+- Biometric integration (Face ID/Touch ID)
+- Secure session management
+- Device binding and registration
+- Offline authentication strategy
 
 ### MOBILE-06: Data Leakage Prevention
-**控制要求**: 防止数据泄露
+**Control Requirement**: Prevent data leakage
 
-- 禁止敏感数据剪贴板
-- 截屏保护
-- 日志脱敏
-- 第三方SDK审核
+- Prohibit sensitive data on clipboard
+- Screenshot protection
+- Log sanitization
+- Third-party SDK audit
 
 ---
 
 ## L4 References
 
-详细实践指南参考 `references/` 目录：
+Detailed practice guides in the `references/` directory:
 - reference-set-15-mobile-security.md
 - reference-set-15-certificate-pinning.md
 

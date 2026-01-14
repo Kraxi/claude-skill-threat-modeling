@@ -2,7 +2,7 @@
 
 # Control Set 13: Supply Chain Security (SUPPLY)
 
-**Domain**: SUPPLY - 供应链安全
+**Domain**: SUPPLY - Supply Chain Security
 **Version**: 1.0
 **Last Updated**: 2025-12-30
 
@@ -10,7 +10,7 @@
 
 ## Overview
 
-供应链安全控制集，适用于依赖管理和构建流水线。当检测到以下触发条件时按需加载：
+Supply chain security control set, applicable to dependency management and build pipelines. Automatically loaded when the following trigger conditions are detected:
 - package.json / package-lock.json
 - requirements.txt / Pipfile
 - pom.xml / build.gradle
@@ -22,58 +22,58 @@
 ## Core Controls
 
 ### SUPPLY-01: Dependency Vulnerability Scanning
-**控制要求**: 所有依赖必须进行漏洞扫描
+**Control Requirement**: All dependencies must undergo vulnerability scanning
 
-- 集成到CI/CD流水线 (npm audit/pip-audit/snyk)
-- 阻断高危漏洞的构建
-- 定期扫描已部署应用
-- 漏洞修复SLA (Critical: 24h, High: 7d)
+- Integrate into CI/CD pipeline (npm audit/pip-audit/snyk)
+- Block builds with high-severity vulnerabilities
+- Regular scanning of deployed applications
+- Vulnerability fix SLA (Critical: 24h, High: 7d)
 
 ### SUPPLY-02: Dependency Pinning
-**控制要求**: 依赖版本必须锁定
+**Control Requirement**: Dependency versions must be locked
 
-- 使用锁文件 (package-lock.json, Pipfile.lock)
-- 禁止使用范围版本 (`^`, `~`, `*`)
-- 定期审核和更新依赖
-- 记录依赖更新原因
+- Use lock files (package-lock.json, Pipfile.lock)
+- Prohibit range versions (`^`, `~`, `*`)
+- Regular dependency review and updates
+- Document dependency update reasons
 
 ### SUPPLY-03: SBOM Generation
-**控制要求**: 必须生成和维护软件物料清单
+**Control Requirement**: Software Bill of Materials must be generated and maintained
 
-- 每次构建生成SBOM (CycloneDX/SPDX)
-- SBOM存储和版本管理
-- 支持漏洞追溯查询
-- 合规性报告生成
+- Generate SBOM on each build (CycloneDX/SPDX)
+- SBOM storage and version management
+- Support vulnerability traceability queries
+- Compliance report generation
 
 ### SUPPLY-04: Source Verification
-**控制要求**: 依赖来源必须可验证
+**Control Requirement**: Dependency sources must be verifiable
 
-- 使用官方/可信仓库
-- 校验包完整性 (checksum/signature)
-- 私有仓库访问控制
-- 禁止直接从Git安装未发布包
+- Use official/trusted repositories
+- Verify package integrity (checksum/signature)
+- Private repository access control
+- Prohibit direct installation from Git of unpublished packages
 
 ### SUPPLY-05: CI/CD Pipeline Security
-**控制要求**: 构建流水线必须安全配置
+**Control Requirement**: Build pipelines must be securely configured
 
-- 流水线配置版本控制
-- 密钥不硬编码在流水线中
-- 最小权限执行
-- 构建产物签名
+- Pipeline configuration under version control
+- No hardcoded secrets in pipelines
+- Least privilege execution
+- Build artifact signing
 
 ### SUPPLY-06: License Compliance
-**控制要求**: 依赖许可证必须合规
+**Control Requirement**: Dependency licenses must be compliant
 
-- 许可证扫描和审核
-- 禁止不兼容许可证
-- 维护许可证白名单
-- 法律合规文档
+- License scanning and review
+- Prohibit incompatible licenses
+- Maintain license whitelist
+- Legal compliance documentation
 
 ---
 
 ## L4 References
 
-详细实践指南参考 `references/` 目录：
+Detailed practice guides in the `references/` directory:
 - reference-set-13-dependency-management.md
 - reference-set-13-supply-chain-security.md
 - reference-set-13-npm-security.md

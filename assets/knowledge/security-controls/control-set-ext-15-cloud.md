@@ -2,7 +2,7 @@
 
 # Control Set 16: Cloud Security (CLOUD)
 
-**Domain**: CLOUD - 云服务安全
+**Domain**: CLOUD - Cloud Service Security
 **Version**: 1.0
 **Last Updated**: 2025-12-30
 
@@ -10,11 +10,11 @@
 
 ## Overview
 
-云服务安全控制集，适用于AWS/Azure/GCP/阿里云等云平台。当检测到以下触发条件时按需加载：
+Cloud service security control set, applicable to AWS/Azure/GCP/Alibaba Cloud and other cloud platforms. Automatically loaded when the following trigger conditions are detected:
 - terraform/*.tf
-- AWS SDK调用 (boto3, aws-sdk)
-- Azure SDK调用 (azure-*)
-- GCP SDK调用 (google-cloud-*)
+- AWS SDK calls (boto3, aws-sdk)
+- Azure SDK calls (azure-*)
+- GCP SDK calls (google-cloud-*)
 - serverless.yml
 
 ---
@@ -22,58 +22,58 @@
 ## Core Controls
 
 ### CLOUD-01: IAM Least Privilege
-**控制要求**: IAM权限必须遵循最小权限原则
+**Control Requirement**: IAM permissions must follow the least privilege principle
 
-- 禁止使用通配符权限 (`*`)
-- 定期权限审查和清理
-- 使用角色而非长期凭证
-- 条件策略限制访问范围
+- Prohibit wildcard permissions (`*`)
+- Regular permission review and cleanup
+- Use roles instead of long-term credentials
+- Condition policies to limit access scope
 
 ### CLOUD-02: Resource Access Policy
-**控制要求**: 资源访问策略必须明确限制
+**Control Requirement**: Resource access policies must have explicit restrictions
 
-- S3/Blob存储禁止公开访问
-- 数据库不暴露公网
-- API网关认证授权
-- 资源标签和分类
+- S3/Blob storage must prohibit public access
+- Databases must not be exposed to public network
+- API gateway authentication and authorization
+- Resource tagging and classification
 
 ### CLOUD-03: Security Group Configuration
-**控制要求**: 安全组必须最小化开放
+**Control Requirement**: Security groups must minimize exposure
 
-- 禁止0.0.0.0/0入站规则 (除必要端口)
-- 仅开放必需端口
-- 使用安全组引用而非IP
-- 定期审核安全组规则
+- Prohibit 0.0.0.0/0 inbound rules (except necessary ports)
+- Only open required ports
+- Use security group references instead of IP addresses
+- Regular security group rule auditing
 
 ### CLOUD-04: Logging and Monitoring
-**控制要求**: 必须启用全面的日志和监控
+**Control Requirement**: Comprehensive logging and monitoring must be enabled
 
-- CloudTrail/Activity Log启用
-- VPC Flow Logs启用
-- 安全事件告警配置
-- 日志集中存储和保留
+- CloudTrail/Activity Log enabled
+- VPC Flow Logs enabled
+- Security event alerting configured
+- Centralized log storage and retention
 
 ### CLOUD-05: Encryption Configuration
-**控制要求**: 数据必须加密存储和传输
+**Control Requirement**: Data must be encrypted at rest and in transit
 
-- 存储加密 (EBS/S3/RDS加密)
-- 传输加密 (TLS强制)
-- 密钥管理 (KMS/Key Vault)
-- 客户管理密钥 (CMK)
+- Storage encryption (EBS/S3/RDS encryption)
+- Transport encryption (TLS enforced)
+- Key management (KMS/Key Vault)
+- Customer-managed keys (CMK)
 
 ### CLOUD-06: Network Architecture
-**控制要求**: 网络架构必须安全设计
+**Control Requirement**: Network architecture must be securely designed
 
-- VPC/VNet隔离
-- 私有子网部署应用
-- NAT网关出站
-- PrivateLink服务访问
+- VPC/VNet isolation
+- Applications deployed in private subnets
+- NAT gateway for outbound traffic
+- PrivateLink for service access
 
 ---
 
 ## L4 References
 
-详细实践指南参考 `references/` 目录：
+Detailed practice guides in the `references/` directory:
 - reference-set-16-cloud-architecture.md
 - reference-set-16-serverless-security.md
 

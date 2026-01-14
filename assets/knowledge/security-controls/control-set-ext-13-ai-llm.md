@@ -2,7 +2,7 @@
 
 # Control Set 14: AI/LLM Security (AI)
 
-**Domain**: AI - AI/LLM安全
+**Domain**: AI - AI/LLM Security
 **Version**: 1.0
 **Last Updated**: 2025-12-30
 
@@ -10,73 +10,73 @@
 
 ## Overview
 
-AI/LLM安全控制集，适用于大语言模型和AI Agent应用。当检测到以下触发条件时按需加载：
-- openai API调用
-- anthropic API调用
-- langchain/llamaindex导入
-- 本地模型加载 (transformers/llama.cpp)
+AI/LLM security control set, applicable to large language model and AI Agent applications. Automatically loaded when the following trigger conditions are detected:
+- openai API calls
+- anthropic API calls
+- langchain/llamaindex imports
+- Local model loading (transformers/llama.cpp)
 
 ---
 
 ## Core Controls
 
 ### AI-01: Prompt Injection Prevention
-**控制要求**: 必须防护提示词注入攻击
+**Control Requirement**: Prompt injection attacks must be prevented
 
-- 用户输入与系统提示词隔离
-- 输入净化和转义
-- 使用结构化提示词模板
-- 检测和阻断注入尝试
+- Isolate user input from system prompts
+- Input sanitization and escaping
+- Use structured prompt templates
+- Detect and block injection attempts
 
 ### AI-02: Output Validation
-**控制要求**: LLM输出必须验证后使用
+**Control Requirement**: LLM output must be validated before use
 
-- 输出格式验证 (JSON Schema)
-- 敏感信息过滤
-- 代码执行前沙箱验证
-- 幻觉检测和标记
+- Output format validation (JSON Schema)
+- Sensitive information filtering
+- Sandbox verification before code execution
+- Hallucination detection and flagging
 
 ### AI-03: Model Access Control
-**控制要求**: 模型访问必须受控
+**Control Requirement**: Model access must be controlled
 
-- API密钥安全存储和轮换
-- 速率限制防滥用
-- 用户级别访问控制
-- 审计日志记录所有调用
+- Secure API key storage and rotation
+- Rate limiting to prevent abuse
+- User-level access control
+- Audit logging for all calls
 
 ### AI-04: Data Isolation
-**控制要求**: 敏感数据不得泄露给模型
+**Control Requirement**: Sensitive data must not be leaked to models
 
-- PII脱敏后再发送
-- 上下文窗口敏感数据检测
-- 禁止训练数据包含敏感信息
-- 数据分类和标记
+- PII sanitization before sending
+- Context window sensitive data detection
+- Prohibit sensitive information in training data
+- Data classification and labeling
 
 ### AI-05: Agent Action Control
-**控制要求**: AI Agent执行动作必须受限
+**Control Requirement**: AI Agent actions must be restricted
 
-- 动作白名单机制
-- 高风险操作人工确认
-- 资源访问范围限制
-- 回滚和撤销能力
+- Action whitelist mechanism
+- Human confirmation for high-risk operations
+- Resource access scope limits
+- Rollback and undo capability
 
 ### AI-06: Model Security
-**控制要求**: 模型本身必须安全
+**Control Requirement**: Models themselves must be secure
 
-- 模型文件完整性校验
-- 防止模型窃取/提取
-- 对抗样本防护
-- 模型版本管理
+- Model file integrity verification
+- Prevent model theft/extraction
+- Adversarial example protection
+- Model version management
 
 ---
 
 ## L4 References
 
-详细实践指南参考 `references/` 目录：
+Detailed practice guides in the `references/` directory:
 - reference-set-14-ai-agent-security.md
 - reference-set-14-prompt-injection-prevention.md
 
-内部参考：
+Internal reference:
 - llm-threats.yaml
 
 ---

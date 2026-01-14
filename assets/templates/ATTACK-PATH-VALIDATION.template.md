@@ -1,163 +1,163 @@
 <!-- Code-First Deep Threat Modeling Workflow | Version 2.1.0 | https://github.com/fr33d3m0n/skill-threat-modeling | License: BSD-3-Clause | Welcome to cite but please retain all sources and declarations -->
 
-# 攻击路径验证报告: {PROJECT_NAME}
+# Attack Path ValidationReport: {PROJECT_NAME}
 
-> **评估时间**: {ASSESSMENT_DATETIME}
-> **分析师**: Claude (Deep Risk Analysis)
-> **框架版本**: STRIDE-TM v1.0.2
-> **报告版本**: {REPORT_VERSION}
-> **分类**: 机密 - 安全评估
+> **Assessment Time**: {ASSESSMENT_DATETIME}
+> **AnalysisAnalyst**: Claude (Deep Risk Analysis)
+> **FrameworkVersion**: STRIDE-TM v1.0.2
+> **ReportVersion**: {REPORT_VERSION}
+> **Category**: Confidential - SecurityAssessment
 
 ---
 
-## 1. 验证概述
+## 1. ValidationOverview
 
-### 1.1 验证范围
+### 1.1 ValidationScope
 
-| 属性 | 值 |
+| Property | Value |
 |------|-----|
-| **评估目标** | {PROJECT_NAME} |
-| **验证威胁数** | {VALIDATED_THREATS} |
-| **确认攻击路径** | {CONFIRMED_PATHS} |
-| **排除误报** | {FALSE_POSITIVES} |
-| **验证方法** | 代码审计 + POC验证 |
+| **AssessmentTarget** | {PROJECT_NAME} |
+| **ValidationThreatCount** | {VALIDATED_THREATS} |
+| **ConfirmAttack Path** | {CONFIRMED_PATHS} |
+| **Exclude False Positives** | {FALSE_POSITIVES} |
+| **Validation Method** | CodeAudit + POCValidation |
 
-### 1.2 验证方法
+### 1.2 Validation Method
 
-| 方法 | 描述 | 使用场景 |
+| Method | Description | UsageScenario |
 |------|------|---------|
-| **代码审计** | 静态代码分析确认漏洞存在 | 所有威胁 |
-| **POC验证** | 构造验证请求/代码 | Critical/High威胁 |
-| **攻击链分析** | 分析多步骤攻击路径 | 复杂攻击场景 |
-| **影响评估** | 评估实际可利用性和影响 | 风险评级校准 |
+| **CodeAudit** | StaticCodeAnalysisConfirmVulnerabilityExists | AllThreat |
+| **POCValidation** | ConstructValidationRequest/Code | Critical/HighThreat |
+| **Attack ChainAnalysis** | AnalysisMultipleStepAttack Path | ComplexAttackScenario |
+| **ImpactAssessment** | AssessmentActualExploitableUseCapability and Impact | RiskRating Calibration |
 
-### 1.3 结果摘要
+### 1.3 ResultSummary
 
-| 验证结果 | 数量 | 百分比 |
+| ValidationResult | Count | Percentage |
 |---------|------|--------|
-| ✅ 已确认 (Confirmed) | {CONFIRMED_COUNT} | {CONFIRMED_PCT}% |
-| ⚠️ 需进一步验证 | {NEEDS_VERIFICATION} | {NEEDS_PCT}% |
-| ❌ 误报 (False Positive) | {FP_COUNT} | {FP_PCT}% |
-| **总计** | **{TOTAL_VALIDATED}** | **100%** |
+| ✅ AlreadyConfirm (Confirmed) | {CONFIRMED_COUNT} | {CONFIRMED_PCT}% |
+| ⚠️ Requires FurtherValidation | {NEEDS_VERIFICATION} | {NEEDS_PCT}% |
+| ❌ False positive (False Positive) | {FP_COUNT} | {FP_PCT}% |
+| **Total** | **{TOTAL_VALIDATED}** | **100%** |
 
 ---
 
-## 2. 已验证攻击路径
+## 2. VerifiedAttack Path
 
-### 2.1 攻击路径汇总
+### 2.1 Attack PathSummary
 
-| 路径ID | 目标威胁 | 攻击链描述 | 可利用性 | 验证状态 |
+| PathID | TargetThreat | Attack ChainDescription | ExploitableUseCapability | Validation Status |
 |--------|---------|-----------|---------|---------|
 {ATTACK_PATHS_SUMMARY_TABLE}
 <!--
-格式:
-| AP-001 | T-S-P01-001 | JWT伪造 → 身份冒充 | Very High | ✅ 已确认 |
-| AP-002 | T-T-DS01-001 | SQL注入 → 数据泄露 | High | ✅ 已确认 |
-| AP-003 | T-E-P02-001 | 权限绕过 → 管理员访问 | High | ✅ 已确认 |
+Format:
+| AP-001 | T-S-P01-001 | JWTForgery → IdentityImpersonation | Very High | ✅ AlreadyConfirm |
+| AP-002 | T-T-DS01-001 | SQLInjection → DataDisclosure | High | ✅ AlreadyConfirm |
+| AP-003 | T-E-P02-001 | PermissionBypass → ManagementMemberAccess | High | ✅ AlreadyConfirm |
 -->
 
-### 2.2 攻击路径详情
+### 2.2 Attack PathDetails
 
 {ATTACK_PATH_DETAILS_SECTION}
 
 <!--
 =============================================================================
-攻击路径详情模板
+Attack PathDetailsTemplate
 =============================================================================
 
 #### AP-{SEQ}: {ATTACK_PATH_NAME}
 
-**目标威胁**: {THREAT_ID} - {THREAT_NAME}
+**TargetThreat**: {THREAT_ID} - {THREAT_NAME}
 
-**严重程度**: {SEVERITY_ICON} {SEVERITY}
+**Severity**: {SEVERITY_ICON} {SEVERITY}
 
-**CVSS评分**: {CVSS_SCORE}
+**CVSSScore**: {CVSS_SCORE}
 
-**攻击链可视化**:
+**Attack ChainCanVisualization**:
 
 ```
 {ATTACK_CHAIN_ASCII}
 ```
 
-示例:
+Example:
 ```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   攻击者    │     │   入口点    │     │   中间步骤   │     │   最终影响  │
-│             │────►│             │────►│             │────►│             │
-│  External   │     │ Login API   │     │ JWT Decode  │     │ Admin Access│
-└─────────────┘     └─────────────┘     └─────────────┘     └─────────────┘
-        │                 │                   │                   │
-        │                 │                   │                   │
-    攻击者获取        分析JWT            破解弱密钥          冒充管理员
-    有效JWT样本      结构和算法         伪造Token          执行任意操作
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ AttackActor │ │ Entry Point │ │ MediumBetweenStep │ │ MostEndImpact │
+│ │────►│ │────►│ │────►│ │
+│ External │ │ Login API │ │ JWT Decode │ │ Admin Access│
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+ │ │ │ │
+ │ │ │ │
+ AttackActorObtain AnalysisJWT CrackWeakKey ImpersonationManagementMember
+ ValidJWTSample Structure and Algorithm ForgeryToken ExecutionArbitrary Operation
 ```
 
-**攻击链描述**:
+**Attack ChainDescription**:
 
-| 步骤 | 描述 | 所需技能 | 所需工具 |
+| Step | Description | RequiredSkill | RequiredTool |
 |------|------|---------|---------|
 | 1 | {STEP_1_DESC} | {STEP_1_SKILL} | {STEP_1_TOOL} |
 | 2 | {STEP_2_DESC} | {STEP_2_SKILL} | {STEP_2_TOOL} |
 | 3 | {STEP_3_DESC} | {STEP_3_SKILL} | {STEP_3_TOOL} |
 | 4 | {STEP_4_DESC} | {STEP_4_SKILL} | {STEP_4_TOOL} |
 
-**前置条件**:
+**Prerequisites**:
 
 1. {PREREQUISITE_1}
 2. {PREREQUISITE_2}
 3. {PREREQUISITE_3}
 
-**验证步骤**:
+**ValidationStep**:
 
 ```{VERIFICATION_LANGUAGE}
 {VERIFICATION_STEPS}
 ```
 
-**POC 方法**:
+**POC Method**:
 
-**类型**: {POC_TYPE}
+**Type**: {POC_TYPE}
 
-**描述**: {POC_DESCRIPTION}
+**Description**: {POC_DESCRIPTION}
 
 ```{POC_LANGUAGE}
 {POC_CODE}
 ```
 
-**验证命令**:
+**ValidationCommand**:
 
 ```bash
 {VERIFICATION_COMMAND}
 ```
 
-**预期结果**: {EXPECTED_RESULT}
+**Expected Result**: {EXPECTED_RESULT}
 
-**实际结果**: {ACTUAL_RESULT}
+**ActualResult**: {ACTUAL_RESULT}
 
-**可利用性评估**:
+**ExploitableUseCapabilityAssessment**:
 
-| 因素 | 评估 | 说明 |
+| Factor | Assessment | Description |
 |------|------|------|
-| 攻击复杂度 | {ATTACK_COMPLEXITY} | {AC_DESC} |
-| 所需权限 | {REQUIRED_PRIVILEGES} | {RP_DESC} |
-| 用户交互 | {USER_INTERACTION} | {UI_DESC} |
-| 影响范围 | {SCOPE} | {SCOPE_DESC} |
+| AttackComplexity | {ATTACK_COMPLEXITY} | {AC_DESC} |
+| RequiredPermission | {REQUIRED_PRIVILEGES} | {RP_DESC} |
+| UserInteraction | {USER_INTERACTION} | {UI_DESC} |
+| Impact Scope | {SCOPE} | {SCOPE_DESC} |
 
-**ATT&CK 映射**:
+**ATT&CK Mapping**:
 
-| 战术 | 技术 | 子技术 |
+| Tactic | Technology | Sub-Technology |
 |------|------|--------|
 | {TACTIC_1} | {TECHNIQUE_1} | {SUB_TECHNIQUE_1} |
 | {TACTIC_2} | {TECHNIQUE_2} | {SUB_TECHNIQUE_2} |
 
-**影响分析**:
+**ImpactAnalysis**:
 
-- **机密性影响**: {IMPACT_C} - {IMPACT_C_DESC}
-- **完整性影响**: {IMPACT_I} - {IMPACT_I_DESC}
-- **可用性影响**: {IMPACT_A} - {IMPACT_A_DESC}
+- **ConfidentialCapabilityImpact**: {IMPACT_C} - {IMPACT_C_DESC}
+- **CompleteCapabilityImpact**: {IMPACT_I} - {IMPACT_I_DESC}
+- **CanUseCapabilityImpact**: {IMPACT_A} - {IMPACT_A_DESC}
 
-**建议缓解**:
+**RecommendationMitigation**:
 
-| 缓解措施 | 描述 | 参考 |
+| Mitigation Measures | Description | Reference |
 |---------|------|------|
 | {MITIGATION_1} | {MIT_DESC_1} | M-{XXX} |
 | {MITIGATION_2} | {MIT_DESC_2} | M-{XXX} |
@@ -168,67 +168,67 @@
 
 ---
 
-## 3. 攻击面分析
+## 3. Attack SurfaceAnalysis
 
-### 3.1 外部攻击面
+### 3.1 ExternalAttack Surface
 
 ```
 {EXTERNAL_ATTACK_SURFACE_ASCII}
 ```
 <!--
-示例:
+Example:
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         External Attack Surface                              │
+│ External Attack Surface │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  ┌─────────────┐                                                            │
-│  │  Internet   │                                                            │
-│  └──────┬──────┘                                                            │
-│         │                                                                    │
-│  ═══════╪════════════════════════════════════════════════════════════════   │
-│         │         Network Boundary                                           │
-│  ═══════╪════════════════════════════════════════════════════════════════   │
-│         │                                                                    │
-│         ▼                                                                    │
-│  ┌─────────────────────────────────────────────────────────────────────┐   │
-│  │                      External Entry Points                           │   │
-│  ├─────────────────────────────────────────────────────────────────────┤   │
-│  │                                                                      │   │
-│  │  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐        │   │
-│  │  │ HTTPS:443 │  │ API:8080  │  │ WSS:3000  │  │ Webhook   │        │   │
-│  │  │ (Web UI)  │  │ (REST)    │  │ (Socket)  │  │ (Inbound) │        │   │
-│  │  │  ████████ │  │  ██████   │  │  ████     │  │  ██       │        │   │
-│  │  │ 12 threats│  │ 8 threats │  │ 4 threats │  │ 2 threats │        │   │
-│  │  └───────────┘  └───────────┘  └───────────┘  └───────────┘        │   │
-│  │                                                                      │   │
-│  └─────────────────────────────────────────────────────────────────────┘   │
-│                                                                              │
-│  Risk Level: ████████ Critical  ██████ High  ████ Medium  ██ Low           │
-│                                                                              │
+│ │
+│ ┌─────────────┐ │
+│ │ Internet │ │
+│ └──────┬──────┘ │
+│ │ │
+│ ═══════╪════════════════════════════════════════════════════════════════ │
+│ │ Network Boundary │
+│ ═══════╪════════════════════════════════════════════════════════════════ │
+│ │ │
+│ ▼ │
+│ ┌─────────────────────────────────────────────────────────────────────┐ │
+│ │ External Entry Points │ │
+│ ├─────────────────────────────────────────────────────────────────────┤ │
+│ │ │ │
+│ │ ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐ │ │
+│ │ │ HTTPS:443 │ │ API:8080 │ │ WSS:3000 │ │ Webhook │ │ │
+│ │ │ (Web UI) │ │ (REST) │ │ (Socket) │ │ (Inbound) │ │ │
+│ │ │ ████████ │ │ ██████ │ │ ████ │ │ ██ │ │ │
+│ │ │ 12 threats│ │ 8 threats │ │ 4 threats │ │ 2 threats │ │ │
+│ │ └───────────┘ └───────────┘ └───────────┘ └───────────┘ │ │
+│ │ │ │
+│ └─────────────────────────────────────────────────────────────────────┘ │
+│ │
+│ Risk Level: ████████ Critical ██████ High ████ Medium ██ Low │
+│ │
 └─────────────────────────────────────────────────────────────────────────────┘
 -->
 
-| 入口点 | 端口/协议 | 威胁数 | 最高风险 | 验证状态 |
+| Entry Point | Port/Protocol | ThreatCount | MostHighRisk | Validation Status |
 |--------|----------|--------|---------|---------|
 {EXTERNAL_ENTRY_POINTS_TABLE}
 
-### 3.2 内部攻击面
+### 3.2 InternalAttack Surface
 
 ```
 {INTERNAL_ATTACK_SURFACE_ASCII}
 ```
 
-| 内部接口 | 类型 | 威胁数 | 最高风险 | 验证状态 |
+| InternalInterface | Type | ThreatCount | MostHighRisk | Validation Status |
 |---------|------|--------|---------|---------|
 {INTERNAL_ENTRY_POINTS_TABLE}
 
-### 3.3 高风险入口点
+### 3.3 HighRiskEntry Point
 
-| 排名 | 入口点 | 威胁数 | Critical | High | 累计风险 |
+| Rank | Entry Point | ThreatCount | Critical | High | CumulativeRisk |
 |------|--------|--------|----------|------|---------|
 {HIGH_RISK_ENTRY_POINTS_TABLE}
 <!--
-格式:
+Format:
 | 1 | API Gateway (/api/v1/*) | 12 | 3 | 5 | 85% |
 | 2 | Auth Endpoint (/auth/*) | 8 | 2 | 3 | 70% |
 | 3 | WebSocket (/ws) | 4 | 1 | 2 | 50% |
@@ -236,110 +236,110 @@
 
 ---
 
-## 4. 攻击链可视化
+## 4. Attack ChainCanVisualization
 
-### 4.1 完整攻击链图
+### 4.1 CompleteAttack ChainDiagram
 
 ```
 {FULL_ATTACK_CHAIN_DIAGRAM}
 ```
 <!--
-示例:
+Example:
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         Attack Chain Overview                                │
+│ Attack Chain Overview │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  Initial Access          Execution           Persistence         Impact     │
-│  ─────────────          ──────────          ───────────          ──────     │
-│                                                                              │
-│  ┌───────────┐         ┌───────────┐       ┌───────────┐     ┌───────────┐ │
-│  │ AP-001    │────────►│ AP-002    │──────►│ AP-003    │────►│ AP-004    │ │
-│  │JWT Bypass │         │Code Exec  │       │ Backdoor  │     │Data Theft │ │
-│  └───────────┘         └───────────┘       └───────────┘     └───────────┘ │
-│       │                                                                      │
-│       │                ┌───────────┐                        ┌───────────┐  │
-│       └───────────────►│ AP-005    │───────────────────────►│ AP-006    │  │
-│                        │SQL Inject │                        │ Privilege │  │
-│                        └───────────┘                        └───────────┘  │
-│                                                                              │
-│  Legend: ───► Leads to   ════ Critical Path                                 │
-│                                                                              │
+│ │
+│ Initial Access Execution Persistence Impact │
+│ ───────────── ────────── ─────────── ────── │
+│ │
+│ ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐ │
+│ │ AP-001 │────────►│ AP-002 │──────►│ AP-003 │────►│ AP-004 │ │
+│ │JWT Bypass │ │Code Exec │ │ Backdoor │ │Data Theft │ │
+│ └───────────┘ └───────────┘ └───────────┘ └───────────┘ │
+│ │ │
+│ │ ┌───────────┐ ┌───────────┐ │
+│ └───────────────►│ AP-005 │───────────────────────►│ AP-006 │ │
+│ │SQL Inject │ │ Privilege │ │
+│ └───────────┘ └───────────┘ │
+│ │
+│ Legend: ───► Leads to ════ Critical Path │
+│ │
 └─────────────────────────────────────────────────────────────────────────────┘
 -->
 
-### 4.2 关键攻击链
+### 4.2 KeyAttack Chain
 
-| 攻击链 | 路径 | 最终影响 | 风险等级 |
+| Attack Chain | Path | MostEndImpact | RiskLevel |
 |--------|------|---------|---------|
 {CRITICAL_ATTACK_CHAINS_TABLE}
 <!--
-格式:
-| Chain-1 | AP-001 → AP-002 → AP-004 | 完整数据泄露 | 🔴 Critical |
-| Chain-2 | AP-005 → AP-006 | 权限提升至管理员 | 🔴 Critical |
-| Chain-3 | AP-001 → AP-003 | 持久化后门 | 🟠 High |
+Format:
+| Chain-1 | AP-001 → AP-002 → AP-004 | CompleteDataDisclosure | 🔴 Critical |
+| Chain-2 | AP-005 → AP-006 | PermissionElevationToManagementMember | 🔴 Critical |
+| Chain-3 | AP-001 → AP-003 | PersistenceBackdoor | 🟠 High |
 -->
 
 ---
 
-## 5. 排除项
+## 5. ExcludeItem
 
-### 5.1 排除的误报
+### 5.1 Exclude False Positives
 
-| 威胁ID | 原始风险名称 | 排除原因 | 验证证据 |
+| Threat ID | OriginalRisk Name | ExcludeReason | ValidationEvidence |
 |--------|-------------|---------|---------|
 {FALSE_POSITIVES_TABLE}
 <!--
-格式:
-| T-S-P01-003 | 会话固定 | 实际使用随机Session ID | 代码审计确认 |
-| T-T-DS01-002 | 时间盲注 | 查询使用参数化 | POC验证失败 |
+Format:
+| T-S-P01-003 | SessionFixation | ActualUsageRandomSession ID | CodeAuditConfirm |
+| T-T-DS01-002 | TimeBlind injection | QueryUsageParametersTransform | POCValidationFailure |
 -->
 
-### 5.2 需进一步验证
+### 5.2 Requires FurtherValidation
 
-| 威胁ID | 风险名称 | 当前状态 | 所需验证 |
+| Threat ID | Risk Name | when BeforeStatus | RequiredValidation |
 |--------|---------|---------|---------|
 {NEEDS_VERIFICATION_TABLE}
 <!--
-格式:
-| T-I-P02-001 | 敏感日志 | 需确认生产配置 | 检查生产日志级别 |
-| T-D-P01-002 | 资源耗尽 | 需负载测试 | 压力测试验证 |
+Format:
+| T-I-P02-001 | SensitiveLog | NeedConfirmProductionConfiguration | CheckProductionLogLevel |
+| T-D-P01-002 | ResourceSourceExhaustion | NeedLoadTesting | PressureTestingValidation |
 -->
 
 ---
 
-## 6. 验证证据
+## 6. ValidationEvidence
 
-### 6.1 代码审计发现
+### 6.1 CodeAuditFinding
 
-| 威胁ID | 文件位置 | 问题代码 | 验证结论 |
+| Threat ID | FileLocation | IssueCode | ValidationConclusion |
 |--------|---------|---------|---------|
 {CODE_AUDIT_EVIDENCE_TABLE}
 
-### 6.2 POC 执行记录
+### 6.2 POC ExecutionRecord
 
-| 攻击路径 | POC类型 | 执行时间 | 结果 |
+| Attack Path | POCType | ExecutionTime | Result |
 |---------|--------|---------|------|
 {POC_EXECUTION_LOG}
 
 ---
 
-## 7. 风险评级校准
+## 7. RiskRating Calibration
 
-### 7.1 验证后风险调整
+### 7.1 ValidationAfterRiskAdjust
 
-| 威胁ID | 原始评级 | 调整后评级 | 调整原因 |
+| Threat ID | OriginalAssessmentLevel | AdjustAfterAssessmentLevel | AdjustReason |
 |--------|---------|-----------|---------|
 {RISK_ADJUSTMENT_TABLE}
 <!--
-格式:
-| T-S-P01-001 | High | Critical | POC确认可远程利用 |
-| T-T-DS01-001 | Critical | High | 需要认证后才能利用 |
-| T-I-P02-001 | Medium | Low | 信息敏感度低于预期 |
+Format:
+| T-S-P01-001 | High | Critical | POCConfirmCanRemoteExploitUse |
+| T-T-DS01-001 | Critical | High | NeedRequireAuthenticationAfterAbilityExploitUse |
+| T-I-P02-001 | Medium | Low | InformationSensitiveDegreeLowInExpected Period |
 -->
 
-### 7.2 验证后统计
+### 7.2 ValidationAfterStatistics
 
-| 严重程度 | 原始数量 | 验证后数量 | 变化 |
+| Severity | OriginalCount | ValidationAfterCount | Change |
 |---------|---------|-----------|------|
 | 🔴 Critical | {ORIG_CRITICAL} | {NEW_CRITICAL} | {CRITICAL_CHANGE} |
 | 🟠 High | {ORIG_HIGH} | {NEW_HIGH} | {HIGH_CHANGE} |
@@ -348,37 +348,37 @@
 
 ---
 
-## 附录
+## Appendices
 
-### 附录 A: 验证工具清单
+### Appendices A: ValidationToolList
 
-| 工具 | 版本 | 用途 |
+| Tool | Version | UsePath |
 |------|------|------|
-| curl | latest | HTTP 请求测试 |
-| jwt-tool | 2.x | JWT 分析和测试 |
-| sqlmap | 1.x | SQL 注入验证 |
-| Burp Suite | 2023.x | 综合 Web 安全测试 |
+| curl | latest | HTTP RequestTesting |
+| jwt-tool | 2.x | JWT Analysis and Testing |
+| sqlmap | 1.x | SQL InjectionValidation |
+| Burp Suite | 2023.x | Comprehensive Web SecurityTesting |
 | {ADDITIONAL_TOOLS} | | |
 
-### 附录 B: 验证环境
+### Appendices B: ValidationEnvironment
 
-| 环境 | 配置 | 说明 |
+| Environment | Configuration | Description |
 |------|------|------|
-| 测试环境 | {TEST_ENV_CONFIG} | 用于POC验证 |
-| 代码分析 | {ANALYSIS_CONFIG} | 静态代码审计 |
+| TestingEnvironment | {TEST_ENV_CONFIG} | UseInPOCValidation |
+| CodeAnalysis | {ANALYSIS_CONFIG} | StaticCodeAudit |
 
-### 附录 C: 验证时间线
+### Appendices C: ValidationTimeThread
 
-| 日期时间 | 活动 | 发现 |
+| DateTime | Activity | Finding |
 |---------|------|------|
 {VALIDATION_TIMELINE}
 
 ---
 
-**报告结束**
+**ReportEnd**
 
 ---
 
-> **安全声明**: 本报告包含敏感安全信息，包括可利用的漏洞详情和POC代码。
-> 请严格限制访问范围，仅供授权安全人员使用。
-> 未经授权禁止传播或用于非法目的。
+> **SecurityDeclaration**: ThisReportIncludeSensitiveSecurityInformation，IncludeExploitableUseVulnerabilityDetails and POC Code。
+> Please Strictly Limit AccessScope，OnlySupplyAuthorizationSecurityPersonnelUsage。
+> NotThroughAuthorizationDo not distribute or UseInNon-legal Purpose。

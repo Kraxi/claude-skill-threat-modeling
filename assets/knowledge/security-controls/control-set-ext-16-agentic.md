@@ -2,7 +2,7 @@
 
 # Control Set 17: Agentic Security (AGENT)
 
-**Domain**: AGENT - Agent系统与类Agent组件安全
+**Domain**: AGENT - Agentic System and Agent-like Component Security
 **Version**: 1.0
 **Last Updated**: 2026-01-03
 **Reference**: OWASP Top 10 for Agentic Applications 2026 (ASI01-ASI10)
@@ -11,397 +11,397 @@
 
 ## Overview
 
-Agentic Security 控制集，适用于完整 AI Agent 系统和类 Agent 组件（Tools, Prompts, Skills）。本控制集关注 Agent 的**行为、意图和自主性**安全，与 ext-13 (AI/LLM Security) 形成互补关系：
+Agentic Security control set, applicable to complete AI Agent systems and agent-like components (Tools, Prompts, Skills). This control set focuses on Agent **behavior, intent, and autonomy** security, complementing ext-13 (AI/LLM Security):
 
-- **ext-13**: 聚焦 LLM 模型层面的输入/输出安全
-- **ext-16**: 聚焦 Agent 行为层面的自主性和协作安全
+- **ext-13**: Focuses on LLM model-level input/output security
+- **ext-16**: Focuses on Agent behavior-level autonomy and collaboration security
 
-**核心安全范式**: Least-Agency Principle (最小自主性原则)
+**Core Security Paradigm**: Least-Agency Principle
 > "Avoid giving agents unnecessary autonomy, not just unnecessary privileges." — OWASP ASI
 
 ---
 
-## Trigger Conditions (按需加载)
+## Trigger Conditions (On-demand Loading)
 
-当检测到以下条件时自动加载本控制集：
+This control set is automatically loaded when the following conditions are detected:
 
-### 完整 Agent 系统
+### Complete Agent Systems
 - `langchain` / `langgraph` import
 - `crewai` / `autogen` / `autogpt` import
-- `anthropic.Agent` / `openai.Assistant` API 调用
-- Agent workflow 定义文件 (`agent.yaml`, `crew.yaml`)
+- `anthropic.Agent` / `openai.Assistant` API calls
+- Agent workflow definition files (`agent.yaml`, `crew.yaml`)
 
-### 类 Agent 组件
-- MCP Server 配置 (`mcp.json`, `claude_desktop_config.json`)
-- Tool/Function 定义 (`tools/*.py`, `functions/*.ts`)
-- Skill 定义 (`.claude/skills/`, `skills/*.md`)
-- Prompt 模板库 (`prompts/*.yaml`, `prompt_templates/`)
-- Custom Instructions 配置
+### Agent-like Components
+- MCP Server configuration (`mcp.json`, `claude_desktop_config.json`)
+- Tool/Function definitions (`tools/*.py`, `functions/*.ts`)
+- Skill definitions (`.claude/skills/`, `skills/*.md`)
+- Prompt template libraries (`prompts/*.yaml`, `prompt_templates/`)
+- Custom Instructions configuration
 
-### 多 Agent 系统
-- A2A (Agent-to-Agent) 协议配置
-- Agent 编排框架 (Temporal workflows, Prefect flows)
+### Multi-Agent Systems
+- A2A (Agent-to-Agent) protocol configuration
+- Agent orchestration frameworks (Temporal workflows, Prefect flows)
 - Multi-agent communication channels
 
 ---
 
 ## Core Controls
 
-### AGENT-01: Goal & Intent Protection (目标与意图保护)
-**控制要求**: Agent 的目标和意图必须受到保护，防止篡改和劫持
+### AGENT-01: Goal & Intent Protection
+**Control Requirement**: Agent goals and intents must be protected against tampering and hijacking
 
-**适用范围**: Agent 系统、Prompt 模板、Skill 定义
+**Applicable Scope**: Agent systems, Prompt templates, Skill definitions
 
-**控制措施**:
-- **目标完整性验证**
-  - System prompt 完整性校验 (hash/签名)
-  - 目标定义不可被用户输入覆盖
-  - 使用结构化目标定义而非自由文本
+**Control Measures**:
+- **Goal Integrity Verification**
+  - System prompt integrity verification (hash/signature)
+  - Goal definitions cannot be overwritten by user input
+  - Use structured goal definitions instead of free text
 
-- **意图对齐监控**
-  - 输出与预期目标的一致性检测
-  - 行为偏离告警机制
-  - 意图推理日志记录
+- **Intent Alignment Monitoring**
+  - Consistency detection between output and expected goals
+  - Behavior deviation alerting mechanism
+  - Intent reasoning logging
 
-- **目标篡改检测**
-  - 检测试图修改 Agent 目标的提示词
-  - 多轮对话中的目标漂移检测
-  - 间接目标注入（通过工具返回值）检测
+- **Goal Tampering Detection**
+  - Detect prompts attempting to modify Agent goals
+  - Goal drift detection in multi-turn conversations
+  - Indirect goal injection detection (via tool return values)
 
-**交叉引用**: 与 ext-13 AI-01 (Prompt Injection Prevention) 互补
+**Cross-reference**: Complements ext-13 AI-01 (Prompt Injection Prevention)
 
-**OWASP ASI 映射**: ASI01 - Agent Goal Hijack
-
----
-
-### AGENT-02: Tool & Skill Governance (工具与技能治理)
-**控制要求**: Agent 可使用的工具和技能必须受控、可审计、最小化
-
-**适用范围**: MCP Tools, Function Calling, Skills, Plugins
-
-**控制措施**:
-- **工具注册与验证**
-  - 工具来源验证和签名校验
-  - 工具能力声明审核
-  - 版本管理和变更追踪
-  - 禁止动态加载未审核工具
-
-- **能力边界限制**
-  - 工具权限白名单机制
-  - 资源访问范围限制 (文件路径、网络、API)
-  - 操作类型限制 (读/写/执行/删除)
-  - 调用频率和配额限制
-
-- **工具调用链审计**
-  - 完整的调用链日志
-  - 工具参数记录（脱敏）
-  - 调用结果记录
-  - 异常调用模式检测
-
-- **MCP Server 安全**
-  - MCP Server 来源验证
-  - 最小权限配置
-  - 通信加密 (stdio/SSE)
-  - Server 隔离执行
-
-**交叉引用**: 与 ext-13 AI-05 (Agent Action Control), ext-12 SUPPLY-04 (Source Verification) 互补
-
-**OWASP ASI 映射**: ASI02 - Tool Misuse & Exploitation, ASI04 - Agentic Supply Chain
+**OWASP ASI Mapping**: ASI01 - Agent Goal Hijack
 
 ---
 
-### AGENT-03: Non-Human Identity (NHI) Management (非人类身份管理)
-**控制要求**: Agent 及其组件的身份必须明确、可追踪、权限受控
+### AGENT-02: Tool & Skill Governance
+**Control Requirement**: Tools and skills available to Agent must be controlled, auditable, and minimized
 
-**适用范围**: Agent 服务账户、API 凭证、委托链
+**Applicable Scope**: MCP Tools, Function Calling, Skills, Plugins
 
-**控制措施**:
-- **Agent 身份认证**
-  - 唯一 Agent 标识符
-  - Agent 凭证安全存储
-  - 凭证自动轮换
-  - 多因素认证（高风险操作）
+**Control Measures**:
+- **Tool Registration & Verification**
+  - Tool source verification and signature validation
+  - Tool capability declaration review
+  - Version management and change tracking
+  - Prohibit dynamic loading of unreviewed tools
 
-- **委托链验证 (Delegation Chain)**
-  - 用户 → Agent → Tool 的完整授权链
-  - 委托范围限制
-  - 委托时效控制
-  - 委托链审计日志
+- **Capability Boundary Limits**
+  - Tool permission whitelist mechanism
+  - Resource access scope limits (file paths, network, API)
+  - Operation type limits (read/write/execute/delete)
+  - Call frequency and quota limits
 
-- **服务账户最小权限**
-  - Agent 专用服务账户
-  - 按功能分离权限
-  - 禁止共享凭证
-  - 定期权限审查
+- **Tool Call Chain Auditing**
+  - Complete call chain logging
+  - Tool parameter recording (sanitized)
+  - Call result recording
+  - Anomalous call pattern detection
 
-- **身份生命周期管理**
-  - Agent 实例创建/销毁记录
-  - 凭证生命周期管理
-  - 权限变更审计
-  - 僵尸 Agent 检测和清理
+- **MCP Server Security**
+  - MCP Server source verification
+  - Least privilege configuration
+  - Communication encryption (stdio/SSE)
+  - Server isolated execution
 
-**交叉引用**: 与 ext-15 CLOUD-01 (IAM Least Privilege), Control-01 (Authentication) 互补
+**Cross-reference**: Complements ext-13 AI-05 (Agent Action Control), ext-12 SUPPLY-04 (Source Verification)
 
-**OWASP ASI 映射**: ASI03 - Identity & Privilege Abuse
-
----
-
-### AGENT-04: Memory & Context Security (记忆与上下文安全)
-**控制要求**: Agent 的持久化记忆和上下文必须受到保护，防止污染和泄露
-
-**适用范围**: Agent Memory, Context Window, Session State, RAG
-
-**控制措施**:
-- **持久化记忆保护**
-  - 记忆存储加密
-  - 记忆访问控制
-  - 记忆内容分类（敏感/普通）
-  - 记忆版本控制和回滚
-
-- **上下文污染检测**
-  - 检测恶意注入的历史消息
-  - 上下文完整性校验
-  - 异常上下文模式告警
-  - 会话历史审计
-
-- **会话隔离**
-  - 用户间会话严格隔离
-  - Agent 实例间上下文隔离
-  - 租户级数据隔离
-  - 跨会话信息泄露防护
-
-- **记忆清理策略**
-  - 敏感数据自动过期
-  - 用户请求删除能力
-  - 定期记忆审查
-  - 合规性数据保留
-
-**交叉引用**: 与 ext-13 AI-04 (Data Isolation), Control-10 (Data Protection) 互补
-
-**OWASP ASI 映射**: ASI06 - Memory & Context Poisoning
+**OWASP ASI Mapping**: ASI02 - Tool Misuse & Exploitation, ASI04 - Agentic Supply Chain
 
 ---
 
-### AGENT-05: Multi-Agent Communication Security (多Agent通信安全)
-**控制要求**: Agent 间通信必须安全、可验证、边界受控
+### AGENT-03: Non-Human Identity (NHI) Management
+**Control Requirement**: Agent and component identities must be explicit, traceable, and access-controlled
 
-**适用范围**: Multi-Agent 系统, A2A 协议, Agent 编排
+**Applicable Scope**: Agent service accounts, API credentials, delegation chains
 
-**控制措施**:
-- **A2A 协议安全**
-  - Agent 间通信加密
-  - 消息认证和完整性
-  - 防重放攻击
-  - 协议版本兼容性验证
+**Control Measures**:
+- **Agent Identity Authentication**
+  - Unique Agent identifiers
+  - Secure Agent credential storage
+  - Automatic credential rotation
+  - Multi-factor authentication (high-risk operations)
 
-- **Agent 间信任验证**
-  - Agent 身份互认证
-  - 信任级别分层
-  - 信任传递规则
-  - 恶意 Agent 检测
+- **Delegation Chain Verification**
+  - Complete authorization chain: User → Agent → Tool
+  - Delegation scope limits
+  - Delegation time limits
+  - Delegation chain audit logs
 
-- **消息内容安全**
-  - 消息格式验证
-  - 敏感数据脱敏
-  - 消息大小限制
-  - 恶意载荷检测
+- **Service Account Least Privilege**
+  - Agent-specific service accounts
+  - Permission separation by function
+  - Prohibit shared credentials
+  - Regular permission reviews
 
-- **协作边界控制**
-  - Agent 协作范围限制
-  - 跨 Agent 数据流控制
-  - 协作模式白名单
-  - 协作行为审计
+- **Identity Lifecycle Management**
+  - Agent instance creation/destruction records
+  - Credential lifecycle management
+  - Permission change auditing
+  - Zombie Agent detection and cleanup
 
-**交叉引用**: 与 Control-09 (API Security), ext-11 INFRA-04 (Network Segmentation) 互补
+**Cross-reference**: Complements ext-15 CLOUD-01 (IAM Least Privilege), Control-01 (Authentication)
 
-**OWASP ASI 映射**: ASI07 - Insecure Inter-Agent Communication
-
----
-
-### AGENT-06: Behavioral Monitoring & Alignment (行为监控与对齐)
-**控制要求**: Agent 行为必须持续监控，确保与预期目标对齐
-
-**适用范围**: 所有 Agent 系统和类 Agent 组件
-
-**控制措施**:
-- **行为偏离检测**
-  - 预期行为基线建立
-  - 实时行为偏离分析
-  - 异常行为模式识别
-  - 行为漂移趋势监控
-
-- **自主性边界控制**
-  - 自主决策范围限制
-  - 高风险决策人工确认
-  - 自主性级别动态调整
-  - 紧急情况自主性降级
-
-- **行为审计日志**
-  - 完整决策过程记录
-  - 推理链路追踪
-  - 行为归因分析
-  - 不可篡改审计日志
-
-- **Rogue Agent 检测**
-  - 恶意行为模式库
-  - 行为一致性检测
-  - 目标背离告警
-  - 自动隔离机制
-
-**交叉引用**: 与 Control-07 (Logging), ext-13 AI-05 (Agent Action Control) 互补
-
-**OWASP ASI 映射**: ASI10 - Rogue Agents
+**OWASP ASI Mapping**: ASI03 - Identity & Privilege Abuse
 
 ---
 
-### AGENT-07: Cascading Failure Prevention (级联故障预防)
-**控制要求**: Agent 系统必须具备故障隔离和降级能力，防止故障级联传播
+### AGENT-04: Memory & Context Security
+**Control Requirement**: Agent persistent memory and context must be protected against pollution and leakage
 
-**适用范围**: Multi-Agent 编排, Agent 工作流, Tool 调用链
+**Applicable Scope**: Agent Memory, Context Window, Session State, RAG
 
-**控制措施**:
-- **故障隔离**
-  - Agent 实例级隔离
-  - 工具调用失败隔离
-  - 错误边界设置
-  - 故障域划分
+**Control Measures**:
+- **Persistent Memory Protection**
+  - Memory storage encryption
+  - Memory access control
+  - Memory content classification (sensitive/normal)
+  - Memory version control and rollback
 
-- **错误传播阻断**
-  - 错误类型分类处理
-  - 错误传播链路切断
-  - 毒化输入检测
-  - 级联触发检测
+- **Context Pollution Detection**
+  - Detect maliciously injected history messages
+  - Context integrity verification
+  - Anomalous context pattern alerting
+  - Session history auditing
 
-- **降级与熔断**
-  - 服务降级策略
-  - 熔断器模式实现
-  - 优雅降级路径
-  - 降级状态监控
+- **Session Isolation**
+  - Strict isolation between user sessions
+  - Context isolation between Agent instances
+  - Tenant-level data isolation
+  - Cross-session information leakage protection
 
-- **编排层容错**
-  - 工作流重试策略
-  - 补偿事务机制
-  - 超时控制
-  - 死锁检测和恢复
+- **Memory Cleanup Policies**
+  - Sensitive data automatic expiration
+  - User-requested deletion capability
+  - Regular memory review
+  - Compliance data retention
 
-**交叉引用**: 与 Control-08 (Error Handling), ext-11 INFRA-03 (Resource Limits) 互补
+**Cross-reference**: Complements ext-13 AI-04 (Data Isolation), Control-10 (Data Protection)
 
-**OWASP ASI 映射**: ASI08 - Cascading Failures
+**OWASP ASI Mapping**: ASI06 - Memory & Context Poisoning
 
 ---
 
-### AGENT-08: Human-Agent Trust Boundary (人机信任边界)
-**控制要求**: 必须建立清晰的人机信任边界，高风险操作需人工确认
+### AGENT-05: Multi-Agent Communication Security
+**Control Requirement**: Agent-to-Agent communication must be secure, verifiable, and boundary-controlled
 
-**适用范围**: 所有 Agent 系统
+**Applicable Scope**: Multi-Agent systems, A2A protocols, Agent orchestration
 
-**控制措施**:
+**Control Measures**:
+- **A2A Protocol Security**
+  - Agent-to-Agent communication encryption
+  - Message authentication and integrity
+  - Replay attack prevention
+  - Protocol version compatibility verification
+
+- **Inter-Agent Trust Verification**
+  - Agent mutual identity authentication
+  - Trust level stratification
+  - Trust transitivity rules
+  - Malicious Agent detection
+
+- **Message Content Security**
+  - Message format validation
+  - Sensitive data sanitization
+  - Message size limits
+  - Malicious payload detection
+
+- **Collaboration Boundary Control**
+  - Agent collaboration scope limits
+  - Cross-Agent data flow control
+  - Collaboration pattern whitelist
+  - Collaboration behavior auditing
+
+**Cross-reference**: Complements Control-09 (API Security), ext-11 INFRA-04 (Network Segmentation)
+
+**OWASP ASI Mapping**: ASI07 - Insecure Inter-Agent Communication
+
+---
+
+### AGENT-06: Behavioral Monitoring & Alignment
+**Control Requirement**: Agent behavior must be continuously monitored to ensure alignment with expected goals
+
+**Applicable Scope**: All Agent systems and agent-like components
+
+**Control Measures**:
+- **Behavior Deviation Detection**
+  - Expected behavior baseline establishment
+  - Real-time behavior deviation analysis
+  - Anomalous behavior pattern recognition
+  - Behavior drift trend monitoring
+
+- **Autonomy Boundary Control**
+  - Autonomous decision scope limits
+  - Human confirmation for high-risk decisions
+  - Dynamic autonomy level adjustment
+  - Emergency autonomy downgrade
+
+- **Behavior Audit Logging**
+  - Complete decision process recording
+  - Reasoning chain tracing
+  - Behavior attribution analysis
+  - Tamper-proof audit logs
+
+- **Rogue Agent Detection**
+  - Malicious behavior pattern library
+  - Behavior consistency detection
+  - Goal deviation alerting
+  - Automatic isolation mechanism
+
+**Cross-reference**: Complements Control-07 (Logging), ext-13 AI-05 (Agent Action Control)
+
+**OWASP ASI Mapping**: ASI10 - Rogue Agents
+
+---
+
+### AGENT-07: Cascading Failure Prevention
+**Control Requirement**: Agent systems must have fault isolation and degradation capabilities to prevent cascading failures
+
+**Applicable Scope**: Multi-Agent orchestration, Agent workflows, Tool call chains
+
+**Control Measures**:
+- **Fault Isolation**
+  - Agent instance-level isolation
+  - Tool call failure isolation
+  - Error boundary settings
+  - Fault domain partitioning
+
+- **Error Propagation Prevention**
+  - Error type classification handling
+  - Error propagation chain interruption
+  - Poisoned input detection
+  - Cascade trigger detection
+
+- **Degradation & Circuit Breaking**
+  - Service degradation strategy
+  - Circuit breaker pattern implementation
+  - Graceful degradation paths
+  - Degradation state monitoring
+
+- **Orchestration Layer Fault Tolerance**
+  - Workflow retry strategies
+  - Compensating transaction mechanisms
+  - Timeout control
+  - Deadlock detection and recovery
+
+**Cross-reference**: Complements Control-08 (Error Handling), ext-11 INFRA-03 (Resource Limits)
+
+**OWASP ASI Mapping**: ASI08 - Cascading Failures
+
+---
+
+### AGENT-08: Human-Agent Trust Boundary
+**Control Requirement**: Clear human-agent trust boundaries must be established; high-risk operations require human confirmation
+
+**Applicable Scope**: All Agent systems
+
+**Control Measures**:
 - **Human-in-the-Loop (HITL)**
-  - 高风险操作必须人工确认
-  - 确认机制不可被绕过
-  - 确认超时自动拒绝
-  - 批量确认风险控制
+  - High-risk operations must have human confirmation
+  - Confirmation mechanism cannot be bypassed
+  - Confirmation timeout auto-rejection
+  - Batch confirmation risk control
 
-- **信任级别分层**
-  - 操作风险等级划分
-  - 信任阈值动态调整
-  - 用户信任级别管理
-  - 上下文感知信任评估
+- **Trust Level Stratification**
+  - Operation risk level classification
+  - Dynamic trust threshold adjustment
+  - User trust level management
+  - Context-aware trust assessment
 
-- **透明度要求**
-  - Agent 行为可解释
-  - 决策过程可追溯
-  - 用户知情同意
-  - 能力边界清晰告知
+- **Transparency Requirements**
+  - Agent behavior explainability
+  - Decision process traceability
+  - User informed consent
+  - Clear capability boundary disclosure
 
-- **撤销与回滚**
-  - 操作可撤销
-  - 状态回滚能力
-  - 撤销时效限制
-  - 撤销审计记录
+- **Revocation & Rollback**
+  - Operations must be revocable
+  - State rollback capability
+  - Revocation time limits
+  - Revocation audit records
 
-**交叉引用**: 与 ext-13 AI-05 (Agent Action Control) LLM08 (Excessive Agency) 互补
+**Cross-reference**: Complements ext-13 AI-05 (Agent Action Control) LLM08 (Excessive Agency)
 
-**OWASP ASI 映射**: ASI05 - Unexpected Code Execution, ASI09 - Human-Agent Trust Exploitation
-
----
-
-### AGENT-09: Prompt & Skill Template Security (提示词与技能模板安全)
-**控制要求**: Prompt 模板和 Skill 定义必须安全管理，防止恶意篡改和注入
-
-**适用范围**: Prompt Templates, Skills, Custom Instructions
-
-**控制措施**:
-- **模板完整性**
-  - 模板版本控制
-  - 模板签名验证
-  - 变更审批流程
-  - 模板来源验证
-
-- **注入防护**
-  - 变量边界清晰定义
-  - 用户输入与模板隔离
-  - 特殊字符转义
-  - 嵌套注入检测
-
-- **Skill 安全评估**
-  - Skill 能力声明审核
-  - Skill 行为测试
-  - Skill 依赖审查
-  - Skill 沙箱执行
-
-- **模板访问控制**
-  - 模板读/写权限分离
-  - 敏感模板加密存储
-  - 模板使用审计
-  - 模板泄露检测
-
-**交叉引用**: 与 ext-13 AI-01 (Prompt Injection Prevention), ext-12 SUPPLY-04 (Source Verification) 互补
-
-**OWASP ASI 映射**: ASI01 - Agent Goal Hijack (via Prompt), ASI04 - Agentic Supply Chain (Skills)
+**OWASP ASI Mapping**: ASI05 - Unexpected Code Execution, ASI09 - Human-Agent Trust Exploitation
 
 ---
 
-### AGENT-10: Agentic Supply Chain Security (Agent 供应链安全)
-**控制要求**: Agent 相关组件的供应链必须安全可控
+### AGENT-09: Prompt & Skill Template Security
+**Control Requirement**: Prompt templates and Skill definitions must be securely managed to prevent malicious tampering and injection
 
-**适用范围**: Agent Frameworks, MCP Servers, Tools, Skills, Plugins
+**Applicable Scope**: Prompt Templates, Skills, Custom Instructions
 
-**控制措施**:
-- **框架安全**
-  - Agent 框架漏洞监控
-  - 框架版本管理
-  - 安全补丁及时应用
-  - 框架配置审计
+**Control Measures**:
+- **Template Integrity**
+  - Template version control
+  - Template signature verification
+  - Change approval workflow
+  - Template source verification
 
-- **MCP Server 供应链**
-  - MCP Server 来源验证
-  - Server 代码审查
-  - 依赖项扫描
-  - 恶意 Server 检测
+- **Injection Protection**
+  - Clear variable boundary definitions
+  - User input isolation from templates
+  - Special character escaping
+  - Nested injection detection
 
-- **Tool/Skill 供应链**
-  - Tool 来源白名单
-  - Skill 发布者验证
-  - 代码签名验证
-  - 恶意代码扫描
+- **Skill Security Assessment**
+  - Skill capability declaration review
+  - Skill behavior testing
+  - Skill dependency review
+  - Skill sandbox execution
 
-- **第三方集成安全**
-  - 第三方服务安全评估
-  - API 凭证安全管理
-  - 集成点监控
-  - 数据流安全
+- **Template Access Control**
+  - Template read/write permission separation
+  - Sensitive template encrypted storage
+  - Template usage auditing
+  - Template leakage detection
 
-**交叉引用**: 与 ext-12 (Supply Chain Security) 全面互补
+**Cross-reference**: Complements ext-13 AI-01 (Prompt Injection Prevention), ext-12 SUPPLY-04 (Source Verification)
 
-**OWASP ASI 映射**: ASI04 - Agentic Supply Chain Vulnerabilities
+**OWASP ASI Mapping**: ASI01 - Agent Goal Hijack (via Prompt), ASI04 - Agentic Supply Chain (Skills)
+
+---
+
+### AGENT-10: Agentic Supply Chain Security
+**Control Requirement**: Agent-related component supply chains must be secure and controlled
+
+**Applicable Scope**: Agent Frameworks, MCP Servers, Tools, Skills, Plugins
+
+**Control Measures**:
+- **Framework Security**
+  - Agent framework vulnerability monitoring
+  - Framework version management
+  - Timely security patch application
+  - Framework configuration auditing
+
+- **MCP Server Supply Chain**
+  - MCP Server source verification
+  - Server code review
+  - Dependency scanning
+  - Malicious Server detection
+
+- **Tool/Skill Supply Chain**
+  - Tool source whitelist
+  - Skill publisher verification
+  - Code signature verification
+  - Malicious code scanning
+
+- **Third-party Integration Security**
+  - Third-party service security assessment
+  - API credential security management
+  - Integration point monitoring
+  - Data flow security
+
+**Cross-reference**: Fully complements ext-12 (Supply Chain Security)
+
+**OWASP ASI Mapping**: ASI04 - Agentic Supply Chain Vulnerabilities
 
 ---
 
 ## Control Applicability Matrix
 
-| 控制 | Agent 系统 | MCP Tools | Skills | Prompts | Multi-Agent |
-|------|:----------:|:---------:|:------:|:-------:|:-----------:|
+| Control | Agent Systems | MCP Tools | Skills | Prompts | Multi-Agent |
+|---------|:-------------:|:---------:|:------:|:-------:|:-----------:|
 | AGENT-01 | ● | ○ | ● | ● | ● |
 | AGENT-02 | ● | ● | ● | ○ | ● |
 | AGENT-03 | ● | ● | ○ | ○ | ● |
@@ -413,23 +413,23 @@ Agentic Security 控制集，适用于完整 AI Agent 系统和类 Agent 组件�
 | AGENT-09 | ○ | ○ | ● | ● | ○ |
 | AGENT-10 | ● | ● | ● | ○ | ● |
 
-**Legend**: ● 强相关 | ○ 弱相关或按需
+**Legend**: ● Strongly relevant | ○ Weakly relevant or as-needed
 
 ---
 
 ## L4 References
 
-详细实践指南参考 `references/` 目录：
+Detailed practice guides in the `references/` directory:
 - reference-set-17-agentic-security.md
 - reference-set-17-mcp-security.md
 - reference-set-17-multi-agent-patterns.md
 - reference-set-17-skill-security.md
 
-内部参考：
+Internal references:
 - agentic-threats.yaml
-- llm-threats.yaml (交叉引用)
+- llm-threats.yaml (cross-reference)
 
-外部参考：
+External references:
 - OWASP Top 10 for Agentic Applications 2026
 - OWASP Non-Human Identities (NHI) Top 10
 - MITRE ATLAS (Adversarial Threat Landscape for AI Systems)
@@ -440,12 +440,12 @@ Agentic Security 控制集，适用于完整 AI Agent 系统和类 Agent 组件�
 
 | STRIDE | Applicable Controls | Threat Examples |
 |--------|---------------------|-----------------|
-| S | AGENT-03, AGENT-05 | Agent 身份伪造, A2A 消息伪造 |
-| T | AGENT-01, AGENT-04, AGENT-09 | 目标篡改, 记忆污染, 模板注入 |
-| R | AGENT-06, AGENT-08 | 行为不可追溯, 操作无法审计 |
-| I | AGENT-04, AGENT-05 | 记忆泄露, Agent 间数据泄露 |
-| D | AGENT-07 | 级联故障导致服务不可用 |
-| E | AGENT-01, AGENT-02, AGENT-06 | 目标劫持提权, 工具滥用, Rogue Agent |
+| S | AGENT-03, AGENT-05 | Agent identity spoofing, A2A message forgery |
+| T | AGENT-01, AGENT-04, AGENT-09 | Goal tampering, memory poisoning, template injection |
+| R | AGENT-06, AGENT-08 | Untraceable behavior, unauditable operations |
+| I | AGENT-04, AGENT-05 | Memory leakage, inter-Agent data leakage |
+| D | AGENT-07 | Cascading failures causing service unavailability |
+| E | AGENT-01, AGENT-02, AGENT-06 | Goal hijacking privilege escalation, tool abuse, Rogue Agent |
 
 ---
 
@@ -453,28 +453,28 @@ Agentic Security 控制集，适用于完整 AI Agent 系统和类 Agent 组件�
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        安全控制层次关系                                  │
+│                     Security Control Layer Relationship                  │
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
 │  Application Layer                                                       │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
 │  │  ext-16: Agentic Security (AGENT)                                │   │
 │  │  ───────────────────────────────────────────────────────────    │   │
-│  │  • Agent 行为与意图安全                                          │   │
-│  │  • 工具/技能治理                                                 │   │
-│  │  • 多 Agent 协作安全                                             │   │
-│  │  • 人机信任边界                                                  │   │
+│  │  • Agent behavior and intent security                            │   │
+│  │  • Tool/Skill governance                                         │   │
+│  │  • Multi-Agent collaboration security                            │   │
+│  │  • Human-Agent trust boundary                                    │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
-│                              │ 依赖                                     │
+│                              │ Depends on                                │
 │                              ▼                                          │
 │  Model Layer                                                             │
 │  ┌─────────────────────────────────────────────────────────────────┐   │
 │  │  ext-13: AI/LLM Security (AI)                                    │   │
 │  │  ───────────────────────────────────────────────────────────    │   │
-│  │  • 提示词注入防护                                                │   │
-│  │  • 输出验证                                                      │   │
-│  │  • 模型访问控制                                                  │   │
-│  │  • 数据隔离                                                      │   │
+│  │  • Prompt injection protection                                   │   │
+│  │  • Output validation                                             │   │
+│  │  • Model access control                                          │   │
+│  │  • Data isolation                                                │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
 │                                                                          │
 │  Relationship: ext-16 EXTENDS ext-13 (Agent builds on LLM)              │

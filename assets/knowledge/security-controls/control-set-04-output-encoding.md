@@ -7,7 +7,7 @@ STRIDE Category: T (Tampering), I (Information Disclosure)
 
 ## Overview
 
-输出编码安全控制关注数据从应用程序输出到各种目标时的安全处理，防止注入攻击和信息泄露。
+Output encoding security controls focus on secure handling of data output from applications to various destinations, preventing injection attacks and information disclosure.
 
 ## Control ID Prefix: OUTPUT
 
@@ -15,7 +15,7 @@ STRIDE Category: T (Tampering), I (Information Disclosure)
 
 ## OUTPUT-01: Context-Aware Output Encoding
 
-**Description**: 根据输出上下文选择正确的编码方式
+**Description**: Select the correct encoding method based on output context
 
 **Implementation**:
 ```python
@@ -49,7 +49,7 @@ def safe_css_value(value):
 
 ## OUTPUT-02: Template Engine Security
 
-**Description**: 安全使用模板引擎，防止服务端模板注入 (SSTI)
+**Description**: Securely use template engines to prevent Server-Side Template Injection (SSTI)
 
 **Implementation**:
 ```python
@@ -85,7 +85,7 @@ const template = Handlebars.compile(source, { strict: true });
 
 ## OUTPUT-03: File Export Security
 
-**Description**: 安全导出文件（PDF、Excel、CSV等），防止注入和信息泄露
+**Description**: Securely export files (PDF, Excel, CSV, etc.) to prevent injection and information disclosure
 
 **Implementation**:
 ```python
@@ -130,7 +130,7 @@ def safe_pdf_paragraph(text):
 
 ## OUTPUT-04: API Response Security
 
-**Description**: API响应的安全编码和头设置
+**Description**: Secure encoding and header settings for API responses
 
 **Implementation**:
 ```python
@@ -173,7 +173,7 @@ def filter_sensitive_fields(obj, sensitive_fields=['password', 'token', 'secret'
 
 ## OUTPUT-05: Log Output Sanitization
 
-**Description**: 日志输出的敏感数据脱敏
+**Description**: Sensitive data sanitization for log output
 
 **Implementation**:
 ```python
@@ -215,7 +215,7 @@ logger.addHandler(handler)
 
 ## OUTPUT-06: Error Message Security
 
-**Description**: 错误消息的安全输出，防止信息泄露
+**Description**: Secure error message output to prevent information disclosure
 
 **Implementation**:
 ```python

@@ -6,7 +6,7 @@
 
 8-Phase Serial Workflow · Dual Knowledge Base Architecture · STRIDE+CWE+CAPEC+ATT&CK Full Chain Mapping
 
-[Installation](#installation) · [Quick Start](#quick-start) · [Documentation](#documentation) · [中文版](README-cn.md)
+[Installation](#installation) · [Quick Start](#quick-start) · [Documentation](#documentation)
 
 ---
 
@@ -31,8 +31,8 @@ A comprehensive **Code-First** threat modeling toolkit for Claude Code that tran
 
 ```
 Phase 1 ──► Phase 2 ──► Phase 3 ──► Phase 4 ──► Phase 5 ──► Phase 6 ──► Phase 7 ──► Phase 8
-Project     Call Flow    Trust      Security    STRIDE      Risk        Mitigation   Report
-Understanding  DFD      Boundaries   Design     Analysis   Validation
+Project Call Flow Trust Security STRIDE Risk Mitigation Report
+Understanding DFD Boundaries Design Analysis Validation
 ```
 
 ---
@@ -45,16 +45,16 @@ This skill supports multiple AI agent platforms:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                        Supported Agent Platforms                             │
+│ Supported Agent Platforms │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│  Platform        │  Global Path                    │  Project-Local Path    │
+│ Platform │ Global Path │ Project-Local Path │
 ├──────────────────┼─────────────────────────────────┼────────────────────────┤
-│  Claude Code     │  ~/.claude/skills/              │  .claude/skills/       │
-│  OpenAI Codex    │  ~/.codex/skills/               │  .codex/skills/        │
-│  GitHub Copilot  │  (uses .github/skills/)         │  .github/skills/       │
-│  Qwen Code       │  ~/.qwen/agents/                │  .qwen/agents/         │
-│  Goose           │  ~/.config/goose/skills/        │  .goose/skills/        │
-│  Portable (XDG)  │  ~/.config/agents/skills/       │  .agents/skills/       │
+│ Claude Code │ ~/.claude/skills/ │ .claude/skills/ │
+│ OpenAI Codex │ ~/.codex/skills/ │ .codex/skills/ │
+│ GitHub Copilot │ (uses .github/skills/) │ .github/skills/ │
+│ Qwen Code │ ~/.qwen/agents/ │ .qwen/agents/ │
+│ Goose │ ~/.config/goose/skills/ │ .goose/skills/ │
+│ Portable (XDG) │ ~/.config/agents/skills/ │ .agents/skills/ │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -62,25 +62,25 @@ This skill supports multiple AI agent platforms:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                 How to Choose Installation?                  │
+│ How to Choose Installation? │
 ├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Personal use, share across projects  ──────►  Global       │
-│                                        ~/.claude/skills/     │
-│                                                              │
-│  Team collaboration, version control  ──────►  Project-local│
-│                                        project/.claude/skills│
-│                                                              │
-│  Cross-platform / portable            ──────►  XDG Standard │
-│                                        ~/.config/agents/skills│
-│                                                              │
+│ │
+│ Personal use, share across projects ──────► Global │
+│ ~/.claude/skills/ │
+│ │
+│ Team collaboration, version control ──────► Project-local│
+│ project/.claude/skills│
+│ │
+│ Cross-platform / portable ──────► XDG Standard │
+│ ~/.config/agents/skills│
+│ │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### System Requirements
 
 ```
-Python 3.8+  |  PyYAML >= 6.0
+Python 3.8+ | PyYAML >= 6.0
 ```
 
 ### Option 1: Global Installation (Available to All Projects)
@@ -143,34 +143,34 @@ python scripts/unified_kb_query.py --all-stride --pretty
 
 ```
 threat-modeling/
-├── SKILL.md                  # ← Claude Code entry point (8-phase workflow)
-├── WORKFLOW.md               # Detailed workflow templates
-├── VALIDATION.md             # Validation rules and quality gates
-├── REPORT.md                 # Report generation templates
-├── README.md / README-cn.md  # Documentation (EN/CN)
-├── EXAMPLES.md / EXAMPLES-cn.md  # Usage examples
-├── VERSION                   # Version number
-├── LICENSE                   # BSD-3-Clause license
-├── scripts/                  # Tool scripts
-│   ├── list_files.py             # Phase 1: Project structure analysis
-│   ├── stride_matrix.py          # Phase 5: STRIDE matrix
-│   ├── unified_kb_query.py       # Phase 5/6/7: Unified KB query
-│   ├── collect_code_stats.py     # Code statistics collection
-│   └── validate_count_conservation.py  # Validation utility
+├── SKILL.md # ← Claude Code entry point (8-phase workflow)
+├── WORKFLOW.md # Detailed workflow templates
+├── VALIDATION.md # Validation rules and quality gates
+├── REPORT.md # Report generation templates
+├── README.md / README-cn.md # Documentation (EN/CN)
+├── EXAMPLES.md / EXAMPLES-cn.md # Usage examples
+├── VERSION # Version number
+├── LICENSE # BSD-3-Clause license
+├── scripts/ # Tool scripts
+│ ├── list_files.py # Phase 1: Project structure analysis
+│ ├── stride_matrix.py # Phase 5: STRIDE matrix
+│ ├── unified_kb_query.py # Phase 5/6/7: Unified KB query
+│ ├── collect_code_stats.py # Code statistics collection
+│ └── validate_count_conservation.py # Validation utility
 ├── assets/
-│   ├── knowledge/            # Dual database knowledge system
-│   │   ├── security_kb.sqlite    # Core DB (18MB)
-│   │   ├── security-*.yaml       # Security rules and mappings
-│   │   ├── security-controls/    # 16 security domain controls
-│   │   └── semantic_index/       # Semantic search index
-│   ├── schemas/              # Output schema definitions
-│   └── templates/            # Report templates
-├── references/               # Architecture documentation
-│   ├── SKILL-ARCHITECTURE-DESIGN.md      # System architecture
-│   ├── ARCHITECTURE-WORKFLOW-GUIDE.md    # Workflow guide
-│   └── KNOWLEDGE-ARCHITECTURE-v5.2.md    # Knowledge base architecture
-├── kb                        # Knowledge base symlink
-└── skill_path.sh             # Path detection helper
+│ ├── knowledge/ # Dual database knowledge system
+│ │ ├── security_kb.sqlite # Core DB (18MB)
+│ │ ├── security-*.yaml # Security rules and mappings
+│ │ ├── security-controls/ # 16 security domain controls
+│ │ └── semantic_index/ # Semantic search index
+│ ├── schemas/ # Output schema definitions
+│ └── templates/ # Report templates
+├── references/ # Architecture documentation
+│ ├── SKILL-ARCHITECTURE-DESIGN.md # System architecture
+│ ├── ARCHITECTURE-WORKFLOW-GUIDE.md # Workflow guide
+│ └── KNOWLEDGE-ARCHITECTURE-v5.2.md # Knowledge base architecture
+├── kb # Knowledge base symlink
+└── skill_path.sh # Path detection helper
 ```
 
 ---
@@ -185,13 +185,13 @@ The skill automatically activates when you mention these keywords:
 
 | English | Chinese |
 |---------|---------|
-| threat model | 威胁建模 |
-| security assessment | 安全评估 |
-| security check | 安全检查 |
-| DFD / data flow diagram | 数据流图 |
-| trust boundary | 信任边界 |
-| attack surface | 攻击面 |
-| STRIDE analysis | STRIDE 分析 |
+| threat model | Threat Modeling |
+| security assessment | Security Assessment |
+| security check | Security Check |
+| DFD / data flow diagram | Data Flow Diagram |
+| trust boundary | Trust Boundary |
+| attack surface | Attack Surface |
+| STRIDE analysis | STRIDE Analysis |
 
 #### Usage Examples
 
@@ -200,14 +200,14 @@ The skill automatically activates when you mention these keywords:
 User: Help me threat model @/path/to/project
 
 Claude: [Auto-activates skill]
-        Phase 1: Analyzing project structure...
-        Phase 2: Building DFD...
-        Phase 5: STRIDE analysis...
+ Phase 1: Analyzing project structure...
+ Phase 2: Building DFD...
+ Phase 5: STRIDE analysis...
 
-        ## Threat List
-        | ID | Category | Description | Priority |
-        | T-S-P1-001 | Spoofing | API lacks authentication | Critical |
-        ...
+ ## Threat List
+ | ID | Category | Description | Priority |
+ | T-S-P1-001 | Spoofing | API lacks authentication | Critical |
+ ...
 ```
 
 **Quick Security Check**
@@ -215,9 +215,9 @@ Claude: [Auto-activates skill]
 User: Quick security check on this service @/path/to/service
 
 Claude: Found 3 high-severity threats:
-        - T-S-P1-001: API endpoint lacks authentication
-        - T-E-P2-001: Delete endpoint missing authorization
-        - T-I-DF1-001: Sensitive data transmitted in plaintext
+ - T-S-P1-001: API endpoint lacks authentication
+ - T-E-P2-001: Delete endpoint missing authorization
+ - T-I-DF1-001: Sensitive data transmitted in plaintext
 ```
 
 **AI/LLM Applications**
@@ -225,9 +225,9 @@ Claude: Found 3 high-severity threats:
 User: Analyze security risks for this RAG app @/path/to/rag-app
 
 Claude: [Enables OWASP LLM Top 10 extension]
-        - LLM01: Prompt Injection risk
-        - LLM06: Sensitive information disclosure risk
-        ...
+ - LLM01: Prompt Injection risk
+ - LLM06: Sensitive information disclosure risk
+ ...
 ```
 
 ### Manual Script Execution
@@ -319,19 +319,19 @@ Specialized security assessment for AI Agent systems and Claude Code Skills:
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         Dual Knowledge Architecture                          │
+│ Dual Knowledge Architecture │
 ├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  System A: Security Control Hierarchy        System B: Threat Intelligence  │
-│  ─────────────────────────────────           ─────────────────────────────  │
-│  L1: Security Principles (11) +              L1: STRIDE Classification      │
-│      Security Domains (16)                   L2: CWE+CAPEC+ATT&CK Mapping   │
-│  L2: Control Sets + OWASP References         L3: CVE Vulnerability Database │
-│  L3: Compliance Frameworks                   L4: KEV Real-time Intelligence │
-│                                                                              │
-│  Verification Set: WSTG(121) + MASTG(206) + ASVS(345) = 672 Tests          │
-│  → Mapped to 1,269 STRIDE+Test combinations                                 │
-│                                                                              │
+│ │
+│ System A: Security Control Hierarchy System B: Threat Intelligence │
+│ ───────────────────────────────── ───────────────────────────── │
+│ L1: Security Principles (11) + L1: STRIDE Classification │
+│ Security Domains (16) L2: CWE+CAPEC+ATT&CK Mapping │
+│ L2: Control Sets + OWASP References L3: CVE Vulnerability Database │
+│ L3: Compliance Frameworks L4: KEV Real-time Intelligence │
+│ │
+│ Verification Set: WSTG(121) + MASTG(206) + ASVS(345) = 672 Tests │
+│ → Mapped to 1,269 STRIDE+Test combinations │
+│ │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -339,16 +339,16 @@ Specialized security assessment for AI Agent systems and Claude Code Skills:
 
 ```
 STRIDE → CWE → CAPEC → ATT&CK → CVE/KEV
-  L1      ├────── L2 ──────┤    L3 + L4
+ L1 ├────── L2 ──────┤ L3 + L4
 
 L1 STRIDE → L2 Threat Intelligence:
 ───────────────────────────────────────────────────────────────────────────────
-S(Spoofing)      → CWE-287/290/307 → CAPEC-151/194/600 → T1078/T1110 → CVE-*
-T(Tampering)     → CWE-20/77/89    → CAPEC-66/88/248   → T1190/T1059 → CVE-*
-R(Repudiation)   → CWE-117/223/778 → CAPEC-93/268      → T1070/T1562 → CVE-*
+S(Spoofing) → CWE-287/290/307 → CAPEC-151/194/600 → T1078/T1110 → CVE-*
+T(Tampering) → CWE-20/77/89 → CAPEC-66/88/248 → T1190/T1059 → CVE-*
+R(Repudiation) → CWE-117/223/778 → CAPEC-93/268 → T1070/T1562 → CVE-*
 I(Info Disclosure)→ CWE-200/209/311 → CAPEC-116/157/497 → T1552/T1213 → CVE-*
 D(Denial of Svc) → CWE-400/770/918 → CAPEC-125/227/469 → T1498/T1499 → CVE-*
-E(Elev. of Priv) → CWE-269/284/862 → CAPEC-122/233/17  → T1068/T1548 → CVE-*
+E(Elev. of Priv) → CWE-269/284/862 → CAPEC-122/233/17 → T1068/T1548 → CVE-*
 ```
 
 ---
@@ -365,4 +365,4 @@ E(Elev. of Priv) → CWE-269/284/862 → CAPEC-122/233/17  → T1068/T1548 → C
 
 ---
 
-**Version 2.1.1** | [中文版](README-cn.md)
+**Version 2.1.1** | 

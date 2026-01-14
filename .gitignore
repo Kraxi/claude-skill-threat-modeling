@@ -51,5 +51,8 @@ temp/
 .coverage
 htmlcov/
 
+# LLM
+.claude/
+
 # Skill-specific
 # (Add any skill-specific ignores here)

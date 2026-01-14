@@ -29,14 +29,14 @@ core_domains:
   authn:
     code: AUTHN
     seq: "01"
-    name: "认证与会话"
+    name: "Authentication & Session"
     stride_category: S  # Spoofing
-    description: "身份验证和会话生命周期管理"
+    description: "Identity verification and session lifecycle management"
     core_requirements:
-      - "多因素认证 (MFA) 用于敏感操作"
-      - "安全的密码存储 (bcrypt/argon2)"
-      - "会话固定攻击防护"
-      - "会话超时和失效机制"
+      - "Multi-factor authentication (MFA) for sensitive operations"
+      - "Secure password storage (bcrypt/argon2)"
+      - "Session fixation attack protection"
+      - "Session timeout and invalidation mechanism"
     core_principles: [ZT, CM, FS]
     controls_ref: control-set-01-authentication.md
     patterns_ref: control-set-ext-01_02-auth-patterns.md
@@ -56,14 +56,14 @@ core_domains:
   authz:
     code: AUTHZ
     seq: "02"
-    name: "授权访问控制"
+    name: "Authorization & Access Control"
     stride_category: E  # Elevation of Privilege
-    description: "访问权限的执行和验证"
+    description: "Access permission enforcement and verification"
     core_requirements:
-      - "RBAC/ABAC 访问控制模型"
-      - "API 层权限检查"
-      - "资源所有权验证"
-      - "最小权限原则"
+      - "RBAC/ABAC access control model"
+      - "API layer permission checking"
+      - "Resource ownership verification"
+      - "Least Privilege principle"
     core_principles: [LP, SOD, CM]
     controls_ref: control-set-02-authorization.md
     patterns_ref: control-set-ext-01_02-auth-patterns.md
@@ -76,14 +76,14 @@ core_domains:
   input:
     code: INPUT
     seq: "03"
-    name: "输入验证"
+    name: "Input validation"
     stride_category: T  # Tampering
-    description: "外部输入的验证和净化"
+    description: "External input validation and sanitization"
     core_requirements:
-      - "信任边界处验证"
-      - "参数化查询防注入"
-      - "白名单优于黑名单"
-      - "类型和范围验证"
+      - "Validation at trust boundaries"
+      - "Parameterized queries for injection prevention"
+      - "Whitelist over blacklist"
+      - "Type and range validation"
     core_principles: [IV, DID]
     controls_ref: control-set-03-input-validation.md
     owasp_refs:
@@ -104,15 +104,15 @@ core_domains:
   output:
     code: OUTPUT
     seq: "04"
-    name: "输出编码"
+    name: "Output Encoding"
     stride_category: [T, I]  # Tampering, Information Disclosure
-    description: "输出内容的上下文编码和安全处理"
+    description: "Context-aware encoding and secure handling of output content"
     core_requirements:
-      - "上下文感知的输出编码"
-      - "模板引擎安全配置"
-      - "文件导出安全"
-      - "API响应安全"
-      - "日志输出脱敏"
+      - "Context-aware output encoding"
+      - "Template engine security configuration"
+      - "File export security"
+      - "API response security"
+      - "Log output masking"
     core_principles: [DID, SBD]
     controls_ref: control-set-04-output-encoding.md
     owasp_refs: []  # No dedicated OWASP refs yet
@@ -120,15 +120,15 @@ core_domains:
   client:
     code: CLIENT
     seq: "05"
-    name: "客户端安全"
+    name: "Client-Side Security"
     stride_category: [S, T, I]  # Multiple categories
-    description: "浏览器和客户端安全控制"
+    description: "Browser and client-side security controls"
     core_requirements:
-      - "XSS/DOM XSS 防护"
-      - "CSP 内容安全策略"
-      - "CSRF 防护"
-      - "Clickjacking 防护"
-      - "第三方脚本隔离"
+      - "XSS/DOM XSS protection"
+      - "CSP (Content Security Policy)"
+      - "CSRF protection"
+      - "Clickjacking protection"
+      - "Third-party script isolation"
     core_principles: [DID, SBD]
     controls_ref: control-set-05-client-side.md
     owasp_refs:
@@ -149,14 +149,14 @@ core_domains:
   crypto:
     code: CRYPTO
     seq: "06"
-    name: "加密与传输安全"
+    name: "Cryptography & Transport Security"
     stride_category: I  # Information Disclosure
-    description: "数据传输和存储加密"
+    description: "Data transmission and storage encryption"
     core_requirements:
-      - "TLS 1.2+ 传输加密"
-      - "AES-256/ChaCha20 存储加密"
-      - "安全密钥管理和轮换"
-      - "避免自定义加密实现"
+      - "TLS 1.2+ transport encryption"
+      - "AES-256/ChaCha20 storage encryption"
+      - "Secure key management and rotation"
+      - "Avoid custom cryptographic implementations"
     core_principles: [DID, EOM]
     controls_ref: control-set-06-cryptography.md
     owasp_refs:
@@ -170,14 +170,14 @@ core_domains:
   log:
     code: LOG
     seq: "07"
-    name: "日志与监控"
+    name: "Logging & Monitoring"
     stride_category: R  # Repudiation
-    description: "安全事件记录和审计"
+    description: "Security event recording and auditing"
     core_requirements:
-      - "结构化日志 (JSON)"
-      - "敏感信息脱敏"
-      - "日志完整性保护"
-      - "关联ID追踪"
+      - "Structured logging (JSON)"
+      - "Sensitive data masking"
+      - "Log integrity protection"
+      - "Correlation ID tracing"
     core_principles: [DID, CM]
     controls_ref: control-set-07-logging.md
     owasp_refs:
@@ -187,14 +187,14 @@ core_domains:
   error:
     code: ERROR
     seq: "08"
-    name: "错误处理"
+    name: "Error Handling"
     stride_category: I  # Information Disclosure
-    description: "安全的错误处理和信息控制"
+    description: "Secure error handling and information control"
     core_requirements:
-      - "通用错误消息给用户"
-      - "详细日志给内部"
-      - "避免堆栈跟踪泄露"
-      - "安全失败模式"
+      - "Generic error messages for users"
+      - "Detailed logging for internal use"
+      - "Avoid stack trace exposure"
+      - "Fail-safe mode"
     core_principles: [FS, OD]
     controls_ref: control-set-08-error-handling.md
     owasp_refs:
@@ -204,14 +204,14 @@ core_domains:
   api:
     code: API
     seq: "09"
-    name: "API与服务安全"
+    name: "API & Service Security"
     stride_category: [S, T, I, D, E]  # Multiple categories
-    description: "API 端点和服务间通信安全"
+    description: "API endpoint and inter-service communication security"
     core_requirements:
-      - "API 认证和授权"
-      - "速率限制和配额"
-      - "输入输出验证"
-      - "版本管理和弃用"
+      - "API authentication and authorization"
+      - "Rate limiting and quotas"
+      - "Input/output validation"
+      - "Version management and deprecation"
     core_principles: [ZT, CM, LP]
     controls_ref: control-set-09-api-security.md
     owasp_refs:
@@ -226,14 +226,14 @@ core_domains:
   data:
     code: DATA
     seq: "10"
-    name: "数据保护"
+    name: "Data Protection"
     stride_category: I  # Information Disclosure
-    description: "敏感数据和凭证的保护"
+    description: "Sensitive data and credential protection"
     core_requirements:
-      - "数据分类和标记"
-      - "凭证安全存储"
-      - "PII 最小化"
-      - "数据生命周期管理"
+      - "Data classification and labeling"
+      - "Secure credential storage"
+      - "PII minimization"
+      - "Data lifecycle management"
     core_principles: [LP, DID]
     controls_ref: control-set-10-data-protection.md
     extensions:
@@ -251,8 +251,8 @@ cross_domain_extensions:
   auth_patterns:
     code: AUTHN_AUTHZ
     domains: ["01", "02"]
-    name: "认证授权模式"
-    description: "跨 AUTHN 和 AUTHZ 域的实现模式集合"
+    name: "Authentication & Authorization Patterns"
+    description: "Implementation patterns spanning AUTHN and AUTHZ domains"
     controls_ref: control-set-ext-01_02-auth-patterns.md
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -263,17 +263,17 @@ extended_domains:
   infra:
     code: INFRA
     seq: "ext-11"
-    name: "基础设施安全"
+    name: "Infrastructure Security"
     trigger_conditions:
       - "Dockerfile detected"
       - "docker-compose.yml detected"
       - "kubernetes/*.yaml detected"
       - "helm chart detected"
     core_requirements:
-      - "容器镜像安全扫描"
-      - "最小权限容器运行"
-      - "网络隔离和分段"
-      - "资源限制配置"
+      - "Container image security scanning"
+      - "Least privilege container execution"
+      - "Network isolation and segmentation"
+      - "Resource limits configuration"
     controls_ref: control-set-ext-11-infrastructure.md
     owasp_refs:
       - reference-set-ext-11-docker-security.md
@@ -284,17 +284,17 @@ extended_domains:
   supply:
     code: SUPPLY
     seq: "ext-12"
-    name: "供应链安全"
+    name: "Supply Chain Security"
     trigger_conditions:
       - "package.json detected"
       - "requirements.txt detected"
       - "pom.xml detected"
       - "go.mod detected"
     core_requirements:
-      - "依赖漏洞扫描"
-      - "SBOM 生成和维护"
-      - "依赖锁定"
-      - "私有仓库安全"
+      - "Dependency vulnerability scanning"
+      - "SBOM generation and maintenance"
+      - "Dependency locking"
+      - "Private repository security"
     controls_ref: control-set-ext-12-supply-chain.md
     owasp_refs:
       - reference-set-ext-12-dependency-management.md
@@ -305,17 +305,17 @@ extended_domains:
   ai:
     code: AI
     seq: "ext-13"
-    name: "AI/LLM安全"
+    name: "AI/LLM Security"
     trigger_conditions:
       - "openai API usage"
       - "anthropic API usage"
       - "langchain import"
       - "LLM model loading"
     core_requirements:
-      - "Prompt 注入防护"
-      - "输出过滤和验证"
-      - "模型访问控制"
-      - "敏感数据隔离"
+      - "Prompt injection protection"
+      - "Output filtering and validation"
+      - "Model access control"
+      - "Sensitive data isolation"
     controls_ref: control-set-ext-13-ai-llm.md
     owasp_refs:
       - reference-set-ext-13-ai-agent-security.md
@@ -324,17 +324,17 @@ extended_domains:
   mobile:
     code: MOBILE
     seq: "ext-14"
-    name: "移动端安全"
+    name: "Mobile Security"
     trigger_conditions:
       - "iOS project detected"
       - "Android project detected"
       - "React Native detected"
       - "Flutter detected"
     core_requirements:
-      - "安全本地存储"
-      - "证书固定"
-      - "代码混淆"
-      - "运行时保护"
+      - "Secure local storage"
+      - "Certificate pinning"
+      - "Code obfuscation"
+      - "Runtime protection"
     controls_ref: control-set-ext-14-mobile.md
     owasp_refs:
       - reference-set-ext-14-mobile-security.md
@@ -344,7 +344,7 @@ extended_domains:
   cloud:
     code: CLOUD
     seq: "ext-15"
-    name: "云服务安全"
+    name: "Cloud Service Security"
     trigger_conditions:
       - "terraform/*.tf detected"
       - "AWS SDK usage"
@@ -352,10 +352,10 @@ extended_domains:
       - "GCP SDK usage"
       - "serverless.yml detected"
     core_requirements:
-      - "IAM 最小权限"
-      - "资源访问策略"
-      - "安全组配置"
-      - "日志和监控启用"
+      - "IAM least privilege"
+      - "Resource access policy"
+      - "Security group configuration"
+      - "Logging and monitoring enabled"
     controls_ref: control-set-ext-15-cloud.md
     owasp_refs:
       - reference-set-ext-15-cloud-architecture.md
@@ -363,7 +363,7 @@ extended_domains:
   agent:
     code: AGENT
     seq: "ext-16"
-    name: "Agent安全"
+    name: "Agentic Security"
     trigger_conditions:
       - "langchain import"
       - "langgraph import"
@@ -374,30 +374,30 @@ extended_domains:
       - "tool_definitions detected"
       - "function_calling usage"
     core_requirements:
-      - "最小代理权限 (Least Agency)"
-      - "工具调用白名单"
-      - "目标劫持防护"
-      - "对话记忆安全"
-      - "失控预防机制"
-      - "资源限制"
-      - "沙箱强制执行"
-      - "信任边界执行"
+      - "Least Agency principle"
+      - "Tool invocation whitelist"
+      - "Goal hijacking protection"
+      - "Conversation memory security"
+      - "Runaway prevention mechanism"
+      - "Resource limits"
+      - "Sandbox enforcement"
+      - "Trust boundary enforcement"
     core_principles: [LA, LP, ZT, CM]
     controls_ref: control-set-ext-16-agentic.md
     owasp_refs:
       - reference-set-ext-17-agentic-security.md
     internal_ref: agentic-threats.yaml
     asi_mapping:
-      ASI01: "AGENT-01 过度权限控制"
-      ASI02: "AGENT-02 目标劫持防护"
-      ASI03: "AGENT-03 工具滥用防护"
-      ASI04: "AGENT-04 对话记忆安全"
-      ASI05: "AGENT-05 失控预防"
-      ASI06: "AGENT-06 资源限制"
-      ASI07: "AGENT-07 输入验证"
-      ASI08: "AGENT-08 身份冒充防护"
-      ASI09: "AGENT-09 沙箱强制"
-      ASI10: "AGENT-10 信任边界执行"
+      ASI01: "AGENT-01 Excessive Permission Control"
+      ASI02: "AGENT-02 Goal Hijacking Protection"
+      ASI03: "AGENT-03 Tool Abuse Protection"
+      ASI04: "AGENT-04 Conversation Memory Security"
+      ASI05: "AGENT-05 Runaway Prevention"
+      ASI06: "AGENT-06 Resource Limits"
+      ASI07: "AGENT-07 Input Validation"
+      ASI08: "AGENT-08 Identity Impersonation Protection"
+      ASI09: "AGENT-09 Sandbox Enforcement"
+      ASI10: "AGENT-10 Trust Boundary Enforcement"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # STRIDE TO DOMAIN MAPPING

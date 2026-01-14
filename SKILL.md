@@ -3,25 +3,25 @@
 ---
 name: threat-modeling
 description: |
-  Code-first automated threat modeling toolkit. STRICT 8-PHASE WORKFLOW - DO NOT MODIFY.
+ Code-first automated threat modeling toolkit. STRICT 8-PHASE WORKFLOW - DO NOT MODIFY.
 
-  **MANDATORY: Create exactly 8 TodoWrite items with these EXACT names:**
-  - Phase 1: Project Understanding (项目理解)
-  - Phase 2: Call Flow & DFD Analysis (数据流分析)
-  - Phase 3: Trust Boundary Evaluation (信任边界)
-  - Phase 4: Security Design Review (安全设计评审)
-  - Phase 5: STRIDE Threat Analysis (STRIDE分析)
-  - Phase 6: Risk Validation (风险验证) ← NOT mitigation!
-  - Phase 7: Mitigation Planning (缓解措施) ← AFTER validation!
-  - Phase 8: Report Generation (报告生成) ← Output to Risk_Assessment_Report/
+ **MANDATORY: Create exactly 8 TodoWrite items with these EXACT names:**
+ - Phase 1: Project Understanding
+ - Phase 2: Call Flow & DFD Analysis
+ - Phase 3: Trust Boundary Evaluation
+ - Phase 4: Security Design Review
+ - Phase 5: STRIDE Threat Analysis
+ - Phase 6: Risk Validation ← NOT mitigation!
+ - Phase 7: Mitigation Planning ← AFTER validation!
+ - Phase 8: Report Generation ← Output to Risk_Assessment_Report/
 
-  **MANDATORY OUTPUT (Phase 8):**
-  - Directory: `{PROJECT_ROOT}/Risk_Assessment_Report/`
-  - Main report: `{PROJECT}-RISK-ASSESSMENT-REPORT.md` (PROJECT=UPPERCASE)
-  - Required: 4 reports + 6 phase docs (P1-P6)
-  - ❌ FORBIDDEN: `THREAT-MODEL-REPORT.md` or reports in project root
+ **MANDATORY OUTPUT (Phase 8):**
+ - Directory: `{PROJECT_ROOT}/Risk_Assessment_Report/`
+ - Main report: `{PROJECT}-RISK-ASSESSMENT-REPORT.md` (PROJECT=UPPERCASE)
+ - Required: 4 reports + 6 phase docs (P1-P6)
+ - ❌ FORBIDDEN: `THREAT-MODEL-REPORT.md` or reports in project root
 
-  Use when: threat model, STRIDE, DFD, security assessment, 威胁建模, 安全评估.
+ Use when: threat model, STRIDE, DFD, security assessment.
 ---
 
 # Code-First Deep Risk Analysis v2.0
@@ -34,8 +34,8 @@ Code-first automated deep threat modeling with comprehensive security chain anal
 
 ```
 Phase 1 ──► Phase 2 ──► Phase 3 ──► Phase 4 ──► Phase 5 ──► Phase 6 ──► Phase 7 ──► Phase 8
-Project     Call Flow    Trust      Security    STRIDE      Risk        Mitigation   Report
-Understanding  DFD      Boundaries   Design     Analysis   Validation
+Project Call Flow Trust Security STRIDE Risk Mitigation Report
+Understanding DFD Boundaries Design Analysis Validation
 ```
 
 **Strict Workflow Rules**:
@@ -55,28 +55,28 @@ Understanding  DFD      Boundaries   Design     Analysis   Validation
 
 ```json
 [
-  {"content": "Phase 1: Project Understanding", "status": "pending", "activeForm": "分析项目架构和技术栈"},
-  {"content": "Phase 2: Call Flow & DFD Analysis", "status": "pending", "activeForm": "构建数据流图"},
-  {"content": "Phase 3: Trust Boundary Evaluation", "status": "pending", "activeForm": "识别信任边界"},
-  {"content": "Phase 4: Security Design Review", "status": "pending", "activeForm": "评估安全设计"},
-  {"content": "Phase 5: STRIDE Threat Analysis", "status": "pending", "activeForm": "执行STRIDE分析"},
-  {"content": "Phase 6: Risk Validation", "status": "pending", "activeForm": "验证风险和攻击路径"},
-  {"content": "Phase 7: Mitigation Planning", "status": "pending", "activeForm": "制定缓解措施"},
-  {"content": "Phase 8: Report Generation", "status": "pending", "activeForm": "生成威胁建模报告"}
+ {"content": "Phase 1: Project Understanding", "status": "pending", "activeForm": "Analyzing project architecture and tech stack"},
+ {"content": "Phase 2: Call Flow & DFD Analysis", "status": "pending", "activeForm": "Building data flow diagram"},
+ {"content": "Phase 3: Trust Boundary Evaluation", "status": "pending", "activeForm": "Identifying trust boundaries"},
+ {"content": "Phase 4: Security Design Review", "status": "pending", "activeForm": "Assessing security design"},
+ {"content": "Phase 5: STRIDE Threat Analysis", "status": "pending", "activeForm": "Executing STRIDE analysis"},
+ {"content": "Phase 6: Risk Validation", "status": "pending", "activeForm": "Validating risks and attack paths"},
+ {"content": "Phase 7: Mitigation Planning", "status": "pending", "activeForm": "Developing mitigation measures"},
+ {"content": "Phase 8: Report Generation", "status": "pending", "activeForm": "Generating threat modeling report"}
 ]
 ```
 
 **VIOLATIONS (will cause incorrect analysis)**:
 - ❌ Creating fewer than 8 phases
 - ❌ Combining phases (e.g., "Phase 2-7: Complete analysis")
-- ❌ Renaming phases (e.g., "Phase 6: 缓解措施" instead of "Phase 6: Risk Validation")
+- ❌ Renaming phases (e.g., "Phase 6: Mitigation" instead of "Phase 6: Risk Validation")
 - ❌ Skipping Phase 6 (Risk Validation) or Phase 7 (Mitigation Planning)
 - ❌ Starting analysis before creating all 8 todo items
 
 **CORRECT execution order**:
-1. Phase 6 = Risk Validation (验证风险和攻击路径) — NOT mitigation
-2. Phase 7 = Mitigation Planning (制定缓解措施) — comes AFTER validation
-3. Phase 8 = Report Generation (生成报告) — final phase, MUST exist
+1. Phase 6 = Risk Validation — NOT mitigation
+2. Phase 7 = Mitigation Planning — comes AFTER validation
+3. Phase 8 = Report Generation — final phase, MUST exist
 
 ## Report Output Convention
 
@@ -84,144 +84,106 @@ Understanding  DFD      Boundaries   Design     Analysis   Validation
 
 ```
 {PROJECT_ROOT}/
-└── Risk_Assessment_Report/              ← 最终报告输出目录
-    │
-    │  ┌─ 必需报告 (4份) ──────────────────────────────────────────────┐
-    ├── {PROJECT}-RISK-ASSESSMENT-REPORT.md    ← 风险评估报告 (主报告)
-    ├── {PROJECT}-RISK-INVENTORY.md            ← 风险清单
-    ├── {PROJECT}-MITIGATION-MEASURES.md       ← 缓解措施
-    ├── {PROJECT}-PENETRATION-TEST-PLAN.md     ← 渗透测试方案 ✨ NEW
-    │  └──────────────────────────────────────────────────────────────┘
-    │
-    │  ┌─ 阶段过程文档 (从.phase_working复制，保留英文名) ──────────────┐
-    ├── P1-PROJECT-UNDERSTANDING.md            ← Phase 1 项目理解
-    ├── P2-DFD-ANALYSIS.md                     ← Phase 2 DFD分析
-    ├── P3-TRUST-BOUNDARY.md                   ← Phase 3 信任边界
-    ├── P4-SECURITY-DESIGN-REVIEW.md           ← Phase 4 安全设计评估
-    ├── P5-STRIDE-THREATS.md                   ← Phase 5 STRIDE威胁分析
-    ├── P6-RISK-VALIDATION.md                  ← Phase 6 风险验证
-    │  └──────────────────────────────────────────────────────────────┘
-    │
-    └── .phase_working/                        ← 阶段产物工作目录 (隐藏)
-        ├── _session_meta.yaml                 ← 会话元数据
-        ├── P1-PROJECT-UNDERSTANDING.md        ← Phase 1 工作文档
-        ├── P2-DFD-ANALYSIS.md                 ← Phase 2 工作文档
-        ├── P3-TRUST-BOUNDARY.md               ← Phase 3 工作文档
-        ├── P4-SECURITY-DESIGN-REVIEW.md       ← Phase 4 工作文档
-        ├── P5-STRIDE-THREATS.md               ← Phase 5 工作文档
-        ├── P6-RISK-VALIDATION.md              ← Phase 6 工作文档
-        └── P7-MITIGATION-PLAN.md              ← Phase 7 工作文档
+└── Risk_Assessment_Report/ ← Final report output directory
+ │
+ │ ┌─ Required Reports (4 files) ─────────────────────────────────┐
+ ├── {PROJECT}-RISK-ASSESSMENT-REPORT.md ← Risk Assessment Report (main)
+ ├── {PROJECT}-RISK-INVENTORY.md ← Risk Inventory
+ ├── {PROJECT}-MITIGATION-MEASURES.md ← Mitigation Measures
+ ├── {PROJECT}-PENETRATION-TEST-PLAN.md ← Penetration Test Plan ✨ NEW
+ │ └──────────────────────────────────────────────────────────────┘
+ │
+ │ ┌─ Phase Documentation (copied from.phase_working) ───────────┐
+ ├── P1-PROJECT-UNDERSTANDING.md ← Phase 1 Project Understanding
+ ├── P2-DFD-ANALYSIS.md ← Phase 2 DFD Analysis
+ ├── P3-TRUST-BOUNDARY.md ← Phase 3 Trust Boundary
+ ├── P4-SECURITY-DESIGN-REVIEW.md ← Phase 4 Security Design Review
+ ├── P5-STRIDE-THREATS.md ← Phase 5 STRIDE Threat Analysis
+ ├── P6-RISK-VALIDATION.md ← Phase 6 Risk Validation
+ │ └──────────────────────────────────────────────────────────────┘
+ │
+ └──.phase_working/ ← Phase working directory (hidden)
+ ├── _session_meta.yaml ← Session metadata
+ ├── P1-PROJECT-UNDERSTANDING.md ← Phase 1 working doc
+ ├── P2-DFD-ANALYSIS.md ← Phase 2 working doc
+ ├── P3-TRUST-BOUNDARY.md ← Phase 3 working doc
+ ├── P4-SECURITY-DESIGN-REVIEW.md ← Phase 4 working doc
+ ├── P5-STRIDE-THREATS.md ← Phase 5 working doc
+ ├── P6-RISK-VALIDATION.md ← Phase 6 working doc
+ └── P7-MITIGATION-PLAN.md ← Phase 7 working doc
 ```
 
 ### File Naming Convention
 
 **Format**: `{PROJECT}-{REPORT_TYPE}.md`
 
-- **PROJECT**: 从项目名提取，转大写，最多30字符
-  - 格式: `^[A-Z][A-Z0-9-]{0,29}$`
-  - 示例: `OPEN-WEBUI`, `MY-PROJECT`, `STRIDE-DEMO`
-- **REPORT_TYPE**: 标准报告类型 (大写)
+- **PROJECT**: Extracted from project name, uppercase, max 30 characters
+ - Format: `^[A-Z][A-Z0-9-]{0,29}$`
+ - Examples: `OPEN-WEBUI`, `MY-PROJECT`, `STRIDE-DEMO`
+- **REPORT_TYPE**: Standard report type (uppercase)
 
-| 报告类型 | 必需条件 | 文件名示例 |
-|---------|---------|-----------|
-| 风险评估报告 (主报告) | ✅ 始终 | `OPEN-WEBUI-RISK-ASSESSMENT-REPORT.md` |
-| 风险清单 | ✅ 始终 | `OPEN-WEBUI-RISK-INVENTORY.md` |
-| 缓解措施 | ✅ 始终 | `OPEN-WEBUI-MITIGATION-MEASURES.md` |
-| 渗透测试方案 | ✅ 始终 | `OPEN-WEBUI-PENETRATION-TEST-PLAN.md` |
-| 架构分析 | ⚪ 可选 | `OPEN-WEBUI-ARCHITECTURE-ANALYSIS.md` |
-| DFD图 | ⚪ 可选 | `OPEN-WEBUI-DFD-DIAGRAM.md` |
-| 合规映射 | ⚪ 可选 | `OPEN-WEBUI-COMPLIANCE-MAPPING.md` |
-| 攻击路径 | ⚪ 可选 | `OPEN-WEBUI-ATTACK-PATHS.md` |
-| 执行摘要 | ⚪ 可选 | `OPEN-WEBUI-EXECUTIVE-SUMMARY.md` |
+| Report Type | Required | Filename Example |
+|-------------|----------|------------------|
+| Risk Assessment Report (main) | ✅ Always | `OPEN-WEBUI-RISK-ASSESSMENT-REPORT.md` |
+| Risk Inventory | ✅ Always | `OPEN-WEBUI-RISK-INVENTORY.md` |
+| Mitigation Measures | ✅ Always | `OPEN-WEBUI-MITIGATION-MEASURES.md` |
+| Penetration Test Plan | ✅ Always | `OPEN-WEBUI-PENETRATION-TEST-PLAN.md` |
+| Architecture Analysis | ⚪ Optional | `OPEN-WEBUI-ARCHITECTURE-ANALYSIS.md` |
+| DFD Diagram | ⚪ Optional | `OPEN-WEBUI-DFD-DIAGRAM.md` |
+| Compliance Mapping | ⚪ Optional | `OPEN-WEBUI-COMPLIANCE-MAPPING.md` |
+| Attack Paths | ⚪ Optional | `OPEN-WEBUI-ATTACK-PATHS.md` |
+| Executive Summary | ⚪ Optional | `OPEN-WEBUI-EXECUTIVE-SUMMARY.md` |
 
-**图例**: ✅ 必需 | ⚪ 可选
+**Legend**: ✅ Required | ⚪ Optional
 
 ### Phase Output Persistence
 
-**每阶段完成时**:
-1. 将阶段输出写入 `.phase_working/P{N}-*.md`
-2. 更新 `_session_meta.yaml` 的 `phases_completed`
+**At completion of each phase**:
+1. Write phase output to `.phase_working/P{N}-*.md`
+2. Update `phases_completed` in `_session_meta.yaml`
 
-**会话元数据** (`_session_meta.yaml`):
+**Session metadata** (`_session_meta.yaml`):
 ```yaml
 session_id: "20260103-120000"
 project_name: "OPEN-WEBUI"
 project_path: "/path/to/project"
 started_at: "2026-01-03T12:00:00+08:00"
-phases_completed: [1, 2, 3]  # 已完成的阶段
+phases_completed: [1, 2, 3] # Completed phases
 current_phase: 4
 skill_version: "2.1.0"
 ```
 
 ### Session Recovery
 
-新会话启动时检查 `.phase_working/`:
-- 存在且 `project_name` 匹配 → 提示: "继续上次会话" 或 "覆盖重新开始"
-- 存在但 `project_name` 不同 → 清空目录，开始新会话
-- 不存在 → 创建目录，开始新会话
+When starting a new session, check `.phase_working/`:
+- Exists and `project_name` matches → Prompt: "Continue previous session" or "Overwrite and restart"
+- Exists but `project_name` different → Clear directory and start new session
+- Does not exist → Create directory and start new session
 
-> **详细规范**: 见 `WORKFLOW.md` Phase 8 部分
-> **示例**: 见 `EXAMPLES.md`
+> **Detailed specification**: See `WORKFLOW.md` Phase 8 section
+> **Examples**: See `EXAMPLES.md`
 
 ## Language Adaptation Rules
 
-**原则**: 输出语言跟随上下文语言，除非显式指定。
+**Note**: This skill has been converted to English-only for personal use. The original bilingual functionality has been removed.
 
-### 语言检测逻辑
+### Language Detection Logic
 
 ```
-用户指令语言 → 输出语言
-├── 中文指令/上下文 → 中文文件名 + 中文内容
-├── 英文指令/上下文 → 英文文件名 + 英文内容
-├── 其他语言 → 跟随该语言
-└── --lang=xx 显式指定 → 覆盖自动检测
+English Only Mode
+└── All outputs in English (filenames, content, reports)
 ```
 
-### 影响范围
+### Output Scope
 
-| 元素 | 语言自适应 | 示例 (中文上下文) | 示例 (英文上下文) |
-|------|-----------|------------------|------------------|
-| 报告文件名 | ✅ | `项目-风险评估报告.md` | `PROJECT-RISK-ASSESSMENT-REPORT.md` |
-| 阶段产物文件名 | ✅ | `P1-项目理解.md` | `P1-PROJECT-UNDERSTANDING.md` |
-| 报告内容 | ✅ | 中文正文 | English content |
-| 目录名 | ✅ | `风险评估报告/` | `Risk_Assessment_Report/` |
-| 模板占位符 | ❌ | 保持英文 (内部使用) | 保持英文 |
+| Element | Language | Example |
+|---------|----------|---------|
+| Report Filenames | English | `PROJECT-RISK-ASSESSMENT-REPORT.md` |
+| Phase Output Filenames | English | `P1-PROJECT-UNDERSTANDING.md` |
+| Report Content | English | English content |
+| Directory Names | English | `Risk_Assessment_Report/` |
+| Template Placeholders | English | English (internal use) |
 
-### 显式语言指定
-
-```bash
-# 强制英文输出 (即使上下文是中文)
---lang=en
-
-# 强制中文输出 (即使上下文是英文)
---lang=zh
-
-# 支持的语言代码: en, zh, ja, ko, es, fr, de, pt, ru
-```
-
-### 实现方式
-
-- **模板**: 保持单一英文模板 (assets/templates/*.template.md)
-- **转换**: LLM 根据上下文语言实时翻译输出
-- **文件名映射**: 见下表
-
-#### 文件名语言映射表
-
-| English (Default) | 中文 | Français | Español |
-|-------------------|------|----------|---------|
-| `RISK-ASSESSMENT-REPORT` | `风险评估报告` | `RAPPORT-EVALUATION-RISQUES` | `INFORME-EVALUACION-RIESGOS` |
-| `RISK-INVENTORY` | `风险清单` | `INVENTAIRE-RISQUES` | `INVENTARIO-RIESGOS` |
-| `MITIGATION-MEASURES` | `缓解措施` | `MESURES-ATTENUATION` | `MEDIDAS-MITIGACION` |
-| `PENETRATION-TEST-PLAN` | `渗透测试方案` | `PLAN-TEST-PENETRATION` | `PLAN-PRUEBA-PENETRACION` |
-| `P1-PROJECT-UNDERSTANDING` | `P1-项目理解` | `P1-COMPREHENSION-PROJET` | `P1-COMPRENSION-PROYECTO` |
-| `P2-DFD-ANALYSIS` | `P2-数据流分析` | `P2-ANALYSE-DFD` | `P2-ANALISIS-DFD` |
-| `P3-TRUST-BOUNDARY` | `P3-信任边界` | `P3-LIMITE-CONFIANCE` | `P3-LIMITE-CONFIANZA` |
-| `P4-SECURITY-DESIGN-REVIEW` | `P4-安全设计评审` | `P4-REVUE-CONCEPTION-SECURITE` | `P4-REVISION-DISENO-SEGURIDAD` |
-| `P5-STRIDE-THREATS` | `P5-STRIDE威胁分析` | `P5-MENACES-STRIDE` | `P5-AMENAZAS-STRIDE` |
-| `P6-RISK-VALIDATION` | `P6-风险验证` | `P6-VALIDATION-RISQUES` | `P6-VALIDACION-RIESGOS` |
-| `Risk_Assessment_Report/` | `风险评估报告/` | `Rapport_Evaluation_Risques/` | `Informe_Evaluacion_Riesgos/` |
-
-> **注意**: 技术术语 (STRIDE, DFD, CWE, CAPEC, ATT&CK) 保持英文不翻译。
 
 ## Skill Path Resolution
 
@@ -236,18 +198,18 @@ Priority Order:
 1. $SKILL_PATH environment variable (explicit override)
 2. Script self-location (when running from skill directory)
 3. Project-local paths (multi-platform):
-   - .claude/skills/{threat-modeling|skill-threat-modeling}/
-   - .agents/skills/{name}/     (Portable/XDG standard)
-   - .qwen/agents/{name}/       (Qwen Code)
-   - .codex/skills/{name}/      (OpenAI Codex)
-   - .github/skills/{name}/     (GitHub Copilot)
-   - .goose/skills/{name}/      (Goose)
+ -.claude/skills/{threat-modeling|skill-threat-modeling}/
+ -.agents/skills/{name}/ (Portable/XDG standard)
+ -.qwen/agents/{name}/ (Qwen Code)
+ -.codex/skills/{name}/ (OpenAI Codex)
+ -.github/skills/{name}/ (GitHub Copilot)
+ -.goose/skills/{name}/ (Goose)
 4. Global paths (multi-platform):
-   - ~/.claude/skills/{name}/
-   - ~/.config/agents/skills/{name}/   (XDG Portable)
-   - ~/.qwen/agents/{name}/
-   - ~/.codex/skills/{name}/
-   - ~/.config/goose/skills/{name}/
+ - ~/.claude/skills/{name}/
+ - ~/.config/agents/skills/{name}/ (XDG Portable)
+ - ~/.qwen/agents/{name}/
+ - ~/.codex/skills/{name}/
+ - ~/.config/goose/skills/{name}/
 ```
 
 **Supported Directory Names**: `threat-modeling`, `skill-threat-modeling` (both work)
@@ -308,9 +270,9 @@ python scripts/unified_kb_query.py --stride spoofing
 
 ### Script Invocation Convention
 
-All `python scripts/unified_kb_query.py ...` examples in this document assume:
+All `python scripts/unified_kb_query.py...` examples in this document assume:
 1. `cd $SKILL_PATH` has been executed, or
-2. Use `$SKILL_PATH/kb ...` as replacement
+2. Use `$SKILL_PATH/kb...` as replacement
 
 **Claude should detect SKILL_PATH at session start and use `kb` wrapper or cd mode.**
 
@@ -324,46 +286,46 @@ The security knowledge system consists of three complementary sets:
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────────────────────────┐
-│                              Security Knowledge Architecture                                   │
+│ Security Knowledge Architecture │
 ├───────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                                │
-│                       ┌───────────────────────────────────────────┐                           │
-│                       │         Security Principles               │                           │
-│                       │    (Foundation - Guides All Phases)       │                           │
-│                       │  DID │ LP │ ZT │ FS │ SOD │ SBD │ CM │ EOM │ OD │ IV │ LA            │
-│                       └───────────────────────────────────────────┘                           │
-│                                           │                                                    │
-│                 ┌─────────────────────────┴─────────────────────────┐                         │
-│                 │                                                    │                         │
-│                 ▼                                                    ▼                         │
-│  ┌─────────────────────────────────────┐      ┌─────────────────────────────────────┐        │
-│  │      Security Control Set          │      │      Threat Pattern Set             │        │
-│  │      (What to do & How to do)      │      │      (What to know & Validate)      │        │
-│  ├─────────────────────────────────────┤      ├─────────────────────────────────────┤        │
-│  │  Security Domains (16)              │      │  CWE Weakness Types (974)           │        │
-│  │      │                              │      │      │                              │        │
-│  │      ▼                              │      │      ▼                              │        │
-│  │  Control Sets (18 files, 107)       │      │  CAPEC Attack Patterns (615)        │        │
-│  │      │                              │      │      │                              │        │
-│  │      ▼                              │      │      ▼                              │        │
-│  │  OWASP References (74)              │      │  ATT&CK Techniques (835)            │        │
-│  │      │                              │      │      │                              │        │
-│  │      ▼                              │      │      ▼                              │        │
-│  │  Compliance Frameworks (14)         │      │  CVE/KEV Vulnerabilities (323K+)    │        │
-│  └──────────────┬──────────────────────┘      └──────────────┬──────────────────────┘        │
-│                 │                                             │                               │
-│                 │      ┌─────────────────────────────┐        │                               │
-│                 │      │    Verification Set         │        │                               │
-│                 │      │  (How to verify & test)     │        │                               │
-│                 └─────▶│                             │◀───────┘                               │
-│                        │  WSTG Tests (121)           │                                        │
-│                        │  MASTG Tests (206)          │                                        │
-│                        │  ASVS Requirements (345)    │                                        │
-│                        └─────────────────────────────┘                                        │
-│                                     │                                                          │
-│                                     ▼                                                          │
-│                        Used in: Phase 6 / Phase 7 / Phase 8                                   │
-│                                                                                                │
+│ │
+│ ┌───────────────────────────────────────────┐ │
+│ │ Security Principles │ │
+│ │ (Foundation - Guides All Phases) │ │
+│ │ DID │ LP │ ZT │ FS │ SOD │ SBD │ CM │ EOM │ OD │ IV │ LA │
+│ └───────────────────────────────────────────┘ │
+│ │ │
+│ ┌─────────────────────────┴─────────────────────────┐ │
+│ │ │ │
+│ ▼ ▼ │
+│ ┌─────────────────────────────────────┐ ┌─────────────────────────────────────┐ │
+│ │ Security Control Set │ │ Threat Pattern Set │ │
+│ │ (What to do & How to do) │ │ (What to know & Validate) │ │
+│ ├─────────────────────────────────────┤ ├─────────────────────────────────────┤ │
+│ │ Security Domains (16) │ │ CWE Weakness Types (974) │ │
+│ │ │ │ │ │ │ │
+│ │ ▼ │ │ ▼ │ │
+│ │ Control Sets (18 files, 107) │ │ CAPEC Attack Patterns (615) │ │
+│ │ │ │ │ │ │ │
+│ │ ▼ │ │ ▼ │ │
+│ │ OWASP References (74) │ │ ATT&CK Techniques (835) │ │
+│ │ │ │ │ │ │ │
+│ │ ▼ │ │ ▼ │ │
+│ │ Compliance Frameworks (14) │ │ CVE/KEV Vulnerabilities (323K+) │ │
+│ └──────────────┬──────────────────────┘ └──────────────┬──────────────────────┘ │
+│ │ │ │
+│ │ ┌─────────────────────────────┐ │ │
+│ │ │ Verification Set │ │ │
+│ │ │ (How to verify & test) │ │ │
+│ └─────▶│ │◀───────┘ │
+│ │ WSTG Tests (121) │ │
+│ │ MASTG Tests (206) │ │
+│ │ ASVS Requirements (345) │ │
+│ └─────────────────────────────┘ │
+│ │ │
+│ ▼ │
+│ Used in: Phase 6 / Phase 7 / Phase 8 │
+│ │
 └───────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -399,9 +361,9 @@ Defines "what to do" and "how to do it" from a defensive perspective.
 
 ```
 Security Domains ──▶ Control Sets ──▶ OWASP References ──▶ Compliance Frameworks
-       │                  │                  │                      │
-   security-         control-set-       reference-set-          YAML + SQLite
-   design.yaml         *.md               *.md              (compliance tables)
+ │ │ │ │
+ security- control-set- reference-set- YAML + SQLite
+ design.yaml *.md *.md (compliance tables)
 ```
 
 **Security Domains (16 total)**:
@@ -431,9 +393,9 @@ Defines "what to know" and "what to validate" from an offensive perspective.
 
 ```
 CWE Weaknesses ──▶ CAPEC Patterns ──▶ ATT&CK Techniques ──▶ CVE/KEV Vulnerabilities
-       │                 │                   │                       │
-   SQLite:cwe       SQLite:capec      SQLite:attack_*         SQLite:cve + API
-   (974 entries)    (615 entries)     (835 entries)           (323K+ entries)
+ │ │ │ │
+ SQLite:cwe SQLite:capec SQLite:attack_* SQLite:cve + API
+ (974 entries) (615 entries) (835 entries) (323K+ entries)
 ```
 
 **STRIDE to CWE Mapping**:
@@ -486,102 +448,102 @@ Bridges Security Control Set and Threat Pattern Set, providing test procedures f
 
 ---
 
-## Core Data Model (核心数据模型) ⚠️ CRITICAL
+## Core Data Model ⚠️ CRITICAL
 
-> **Design Principle**: 从数据流动和转换的本质出发，定义清晰的实体、关系和转换规则
+> **Design Principle**: Starting from data flow and transformation essence, define clear entities, relationships and transformation rules
 
-### Entity Definitions (实体定义)
+### Entity Definitions
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Core Entity Model                           │
+│ Core Entity Model │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  Finding (发现)                                          │   │
-│  │  ─────────────────                                       │   │
-│  │  来源: Phase 1-4                                         │   │
-│  │  ID: F-P{N}-{Seq}  例: F-P1-001, F-P4-003               │   │
-│  │  性质: 安全相关的观察、缺陷、风险点                         │   │
-│  │  数量: 通常 10-30 个                                      │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼ (输入 Phase 5)                   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  Threat (威胁)                                           │   │
-│  │  ─────────────────                                       │   │
-│  │  来源: Phase 5 STRIDE 分析                               │   │
-│  │  ID: T-{STRIDE}-{ElementID}-{Seq}  例: T-T-P13-002       │   │
-│  │  性质: 针对 DFD 元素的潜在攻击向量                         │   │
-│  │  数量: 通常 50-200 个 (每元素多个)                         │   │
-│  │  状态: identified (已识别)                                │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼ (验证 Phase 6)                   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  ValidatedRisk (验证风险)                                │   │
-│  │  ─────────────────                                       │   │
-│  │  来源: Phase 6 风险验证                                   │   │
-│  │  ID: VR-{Seq}  例: VR-001                                │   │
-│  │  性质: 经过验证的、可利用的风险                            │   │
-│  │  数量: 通常 5-30 个 (威胁合并/过滤后)                      │   │
-│  │  ⚠️ 必填: threat_refs[] 追溯到原始威胁                   │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼ (缓解 Phase 7)                   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  Mitigation (缓解措施)                                   │   │
-│  │  ─────────────────                                       │   │
-│  │  来源: Phase 7 缓解规划                                   │   │
-│  │  ID: M-{Seq}  例: M-001                                  │   │
-│  │  性质: 针对验证风险的修复方案                              │   │
-│  │  数量: 通常 5-20 个 (可一对多)                            │   │
-│  │  包含: risk_refs[] 追溯到验证风险                         │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                                                                  │
+│ │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ Finding (Finding) │ │
+│ │ ───────────────── │ │
+│ │ Source: Phase 1-4 │ │
+│ │ ID: F-P{N}-{Seq} Example: F-P1-001, F-P4-003 │ │
+│ │ Nature: Securityrelatedobservation、defect、Riskpoint │ │
+│ │ Quantity: Usually 10-30 │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ (Input Phase 5) │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ Threat (Threat) │ │
+│ │ ───────────────── │ │
+│ │ Source: Phase 5 STRIDE Analysis │ │
+│ │ ID: T-{STRIDE}-{ElementID}-{Seq} Example: T-T-P13-002 │ │
+│ │ Nature: For DFD ElementpotentialAttackvector │ │
+│ │ Quantity: Usually 50-200 (perElementmultiple) │ │
+│ │ Status: identified (identified) │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ (Validation Phase 6) │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ ValidatedRisk (ValidationRisk) │ │
+│ │ ───────────────── │ │
+│ │ Source: Phase 6 Risk Validation │ │
+│ │ ID: VR-{Seq} Example: VR-001 │ │
+│ │ Nature: AfterValidation、exploitableRisk │ │
+│ │ Quantity: Usually 5-30 (Threatmerged/filtered) │ │
+│ │ ⚠️ Required: threat_refs[] Trace back to originalThreat │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ (Mitigation Phase 7) │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ Mitigation (Mitigation Measures) │ │
+│ │ ───────────────── │ │
+│ │ Source: Phase 7 Mitigation Planning │ │
+│ │ ID: M-{Seq} Example: M-001 │ │
+│ │ Nature: ForValidationRiskremediation plan │ │
+│ │ Quantity: Usually 5-20 (can be one-to-many) │ │
+│ │ Contains: risk_refs[] Traceability to Validated Risk │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Entity Relationships (实体关系)
+### Entity Relationships
 
 ```
-DFD Element              1:N                 ┌──────────┐
-(P01, DS01, DF01...)    ─────────────────────▶│  Threat  │
-                                             │ (T-xxx)  │
-                                             └────┬─────┘
-                                                  │
-                                                  │ N:1 (合并)
-                                                  ▼
-                                        ┌─────────────────┐
-Finding ────────────────────────────────▶│ ValidatedRisk   │
-(F-xxx)   合并                           │   (VR-xxx)      │
-                                        │                 │
-                                        │ threat_refs:    │
-                                        │ [T-T-P13-001,   │
-                                        │  T-T-P13-002,   │
-                                        │  T-E-P13-001]   │
-                                        └────────┬────────┘
-                                                 │
-                                                 │ N:1 (覆盖)
-                                                 ▼
-                                        ┌─────────────────┐
-                                        │   Mitigation    │
-                                        │    (M-xxx)      │
-                                        │                 │
-                                        │ risk_refs:      │
-                                        │ [VR-001,        │
-                                        │  VR-002]        │
-                                        └─────────────────┘
+DFD Element 1:N ┌──────────┐
+(P01, DS01, DF01...) ─────────────────────▶│ Threat │
+ │ (T-xxx) │
+ └────┬─────┘
+ │
+ │ N:1 (merged)
+ ▼
+ ┌─────────────────┐
+Finding ────────────────────────────────▶│ ValidatedRisk │
+(F-xxx) merged │ (VR-xxx) │
+ │ │
+ │ threat_refs: │
+ │ [T-T-P13-001, │
+ │ T-T-P13-002, │
+ │ T-E-P13-001] │
+ └────────┬────────┘
+ │
+ │ N:1 (coverage)
+ ▼
+ ┌─────────────────┐
+ │ Mitigation │
+ │ (M-xxx) │
+ │ │
+ │ risk_refs: │
+ │ [VR-001, │
+ │ VR-002] │
+ └─────────────────┘
 
-关键关系:
-• Threat N:1 ValidatedRisk (多威胁合并为一个风险)
-• ValidatedRisk N:1 Mitigation (多风险可被同一措施覆盖)
-• 所有关系通过 *_refs[] 显式追溯
+Key relationships:
+• Threat N:1 ValidatedRisk (MultipleThreatmergedto oneRisk)
+• ValidatedRisk N:1 Mitigation (MultipleRiskcan be covered by the same measure)
+• All relationships through *_refs[] explicit traceability
 ```
 
-### Unified ID Convention (统一ID规范)
+### Unified ID Convention
 
-| 实体类型 | ID 格式 | 示例 | 阶段 |
+| Entity Type | ID Format | Examples | Phase |
 |---------|--------|------|------|
 | Finding | F-P{N}-{Seq:03d} | F-P1-001 | P1-P4 |
 | Threat | T-{STRIDE}-{Element}-{Seq} | T-T-P13-002 | P5 |
@@ -591,123 +553,123 @@ Finding ────────────────────────
 | AttackPath | AP-{Seq:03d} | AP-001 | P6 |
 | AttackChain | AC-{Seq:03d} | AC-001 | P6 |
 
-**❌ 禁止的 ID 格式** (不再使用):
-- `RISK-{Seq}` → 改用 `VR-{Seq}`
-- `T-E-RCE-001` → 改用 `T-E-P13-001` (保留 ElementID)
-- `SD-{Seq}` → 改用 `F-P4-{Seq}`
+**❌ Prohibited ID Format** (no longer used):
+- `RISK-{Seq}` → use instead `VR-{Seq}`
+- `T-E-RCE-001` → use instead `T-E-P13-001` (Keep ElementID)
+- `SD-{Seq}` → use instead `F-P4-{Seq}`
 
-### Count Conservation Rules (数量守恒规则) ⚠️ CRITICAL
+### Count Conservation Rules ⚠️ CRITICAL
 
 ```yaml
-# 威胁处理守恒公式
+# Threatprocessing conservation formula
 count_conservation:
-  p5_output: "threat_inventory.total = T"  # 例: 120
-  p6_processing:
-    verified: V      # 验证确认的威胁数
-    theoretical: Th  # 理论可行的威胁数
-    pending: P       # 待验证的威胁数
-    excluded: E      # 排除的威胁数 (有理由)
+ p5_output: "threat_inventory.total = T" # Example: 120
+ p6_processing:
+ verified: V # ValidationconfirmedThreatcount
+ theoretical: Th # theoretically feasibleThreatcount
+ pending: P # pendingValidationThreatcount
+ excluded: E # excludedThreatcount (with reason)
 
-  conservation_formula: "V + Th + P + E = T"
+ conservation_formula: "V + Th + P + E = T"
 
-  traceability_rule: |
-    FOR each threat T in p5_output:
-      T MUST appear in exactly one VR.threat_refs[]
-      OR T.status = 'excluded' with documented reason
+ traceability_rule: |
+ FOR each threat T in p5_output:
+ T MUST appear in exactly one VR.threat_refs[]
+ OR T.status = 'excluded' with documented reason
 
-  report_consistency:
-    RISK-INVENTORY.count = "len(VR where status != 'excluded')"
-    MAIN-REPORT.risk_count = "RISK-INVENTORY.count"
+ report_consistency:
+ RISK-INVENTORY.count = "len(VR where status != 'excluded')"
+ MAIN-REPORT.risk_count = "RISK-INVENTORY.count"
 
-# 验证检查点
+# Validationcheckpoint
 checkpoints:
-  cp1_p5_to_p6: "P6.input_count = P5.threat_inventory.summary.total"
-  cp2_p6_output: "sum(verified, theoretical, pending, excluded) = input_count"
-  cp3_report_gen: "RISK-INVENTORY.count = P6.final_risk_count"
+ cp1_p5_to_p6: "P6.input_count = P5.threat_inventory.summary.total"
+ cp2_p6_output: "sum(verified, theoretical, pending, excluded) = input_count"
+ cp3_report_gen: "RISK-INVENTORY.count = P6.final_risk_count"
 ```
 
-### ValidatedRisk Structure (验证风险数据结构)
+### ValidatedRisk Structure
 
 ```yaml
 ValidatedRisk:
-  # === 标识 ===
-  id:
-    format: "VR-{Seq:03d}"
-    example: "VR-001"
+ # === Identifier ===
+ id:
+ format: "VR-{Seq:03d}"
+ example: "VR-001"
 
-  # === 追溯 (MANDATORY!) ===
-  threat_refs:
-    type: array[Threat.id]
-    description: "此风险来源的所有威胁 ID"
-    example: ["T-T-P13-001", "T-T-P13-002", "T-E-P13-001"]
-    requirement: "MANDATORY - 必须列出所有源威胁"
+ # === Traceability (MANDATORY!) ===
+ threat_refs:
+ type: array[Threat.id]
+ description: "ThisRiskSourceallThreat ID"
+ example: ["T-T-P13-001", "T-T-P13-002", "T-E-P13-001"]
+ requirement: "MANDATORY - must list all source Threats"
 
-  finding_refs:
-    type: array[Finding.id]
-    description: "此风险来源的 P1-P4 发现"
-    example: ["F-P4-003"]
-    requirement: "OPTIONAL - 如有关联发现"
+ finding_refs:
+ type: array[Finding.id]
+ description: "ThisRiskSource P1-P4 Finding"
+ example: ["F-P4-003"]
+ requirement: "OPTIONAL - if relatedFinding"
 
-  # === 风险评估 ===
-  severity:
-    cvss_score: float  # 0.0-10.0
-    priority: "P0|P1|P2|P3"
-    stride_types: ["T", "E"]  # 可包含多个 STRIDE 类型
+ # === RiskAssessment ===
+ severity:
+ cvss_score: float # 0.0-10.0
+ priority: "P0|P1|P2|P3"
+ stride_types: ["T", "E"] # can contain multiple STRIDE Type
 
-  # === 验证状态 ===
-  validation:
-    status: "verified|theoretical|pending|excluded"
-    poc_available: boolean
-    poc_id: "POC-{Seq}"  # 如有 POC
+ # === ValidationStatus ===
+ validation:
+ status: "verified|theoretical|pending|excluded"
+ poc_available: boolean
+ poc_id: "POC-{Seq}" # if POC exists
 ```
 
-> **详细设计**: 见 `tmp_data/DATA-ARCHITECTURE-DESIGN.md`
+> **Detailed Design**: See `tmp_data/DATA-ARCHITECTURE-DESIGN.md`
 
 ### Phase Data Flow
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                              Phase Data Flow Architecture                                            │
+│ Phase Data Flow Architecture │
 ├─────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                                      │
-│  Phase 1          Phase 2          Phase 3          Phase 4          Phase 5                        │
-│  ┌─────┐          ┌─────┐          ┌─────┐          ┌─────┐          ┌─────┐                        │
-│  │ P1  │─findings1─▶│ P2  │─findings2─▶│ P3  │─findings3─▶│ P4  │─findings4─▶│ P5  │                        │
-│  └──┬──┘          └──┬──┘          └──┬──┘          └──┬──┘          └──┬──┘                        │
-│     │                ▼                ▼                │                │                           │
-│     │           security-        security-             │                │                           │
-│     │           design.yaml      design.yaml           │                │                           │
-│     │                                                  ▼                ▼                           │
-│     │                                          control-set-*.md    CWE → CAPEC                     │
-│     │                                          reference-set-*.md                                   │
-│     ▼                                                                   │                           │
-│  ┌────────────────────────────────────────────────────────────────────────────────────────┐        │
-│  │                              Phase 6: Risk Validation                                  │        │
-│  │  INPUT: findings_1 + findings_2 + findings_3 + findings_4 + findings_5                │        │
-│  │         (ALL issues consolidated and deduplicated)                                     │        │
-│  │  KNOWLEDGE: CAPEC → ATT&CK → CVE/KEV + WSTG + MASTG                                   │        │
-│  │  OUTPUT: validated_risks                                                              │        │
-│  │    ├── risk_summary (counts, categorization)                                          │        │
-│  │    ├── risk_details (per-item: location, analysis, root cause, test cases)           │        │
-│  │    └── attack_paths (chains, step-by-step with commands/POC)                          │        │
-│  └───────────────────────────────────────────────────────────────────────────────────────┘        │
-│                                             │                                                       │
-│                                             ▼                                                       │
-│  ┌───────────────────────────────────────────────────────────────────────────────────────┐        │
-│  │                              Phase 7: Mitigation Planning                              │        │
-│  │  INPUT: validated_risks (complete Phase 6 output)                                     │        │
-│  │  KNOWLEDGE: Control Sets + OWASP References + CWE Mitigations + ASVS                  │        │
-│  │  OUTPUT: mitigation_plan (per-risk: immediate, short-term, long-term)                 │        │
-│  └───────────────────────────────────────────────────────────────────────────────────────┘        │
-│                                             │                                                       │
-│                                             ▼                                                       │
-│  ┌───────────────────────────────────────────────────────────────────────────────────────┐        │
-│  │                              Phase 8: Report Generation                                │        │
-│  │  INPUT: ALL phase outputs (findings_1 → mitigation_plan)                              │        │
-│  │  KNOWLEDGE: Compliance Frameworks + ASVS                                              │        │
-│  │  CRITICAL: Must include COMPLETE Phase 6 and Phase 7 outputs (no omission)           │        │
-│  └───────────────────────────────────────────────────────────────────────────────────────┘        │
-│                                                                                                      │
+│ │
+│ Phase 1 Phase 2 Phase 3 Phase 4 Phase 5 │
+│ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ │
+│ │ P1 │─findings1─▶│ P2 │─findings2─▶│ P3 │─findings3─▶│ P4 │─findings4─▶│ P5 │ │
+│ └──┬──┘ └──┬──┘ └──┬──┘ └──┬──┘ └──┬──┘ │
+│ │ ▼ ▼ │ │ │
+│ │ security- security- │ │ │
+│ │ design.yaml design.yaml │ │ │
+│ │ ▼ ▼ │
+│ │ control-set-*.md CWE → CAPEC │
+│ │ reference-set-*.md │
+│ ▼ │ │
+│ ┌────────────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ Phase 6: Risk Validation │ │
+│ │ INPUT: findings_1 + findings_2 + findings_3 + findings_4 + findings_5 │ │
+│ │ (ALL issues consolidated and deduplicated) │ │
+│ │ KNOWLEDGE: CAPEC → ATT&CK → CVE/KEV + WSTG + MASTG │ │
+│ │ OUTPUT: validated_risks │ │
+│ │ ├── risk_summary (counts, categorization) │ │
+│ │ ├── risk_details (per-item: location, analysis, root cause, test cases) │ │
+│ │ └── attack_paths (chains, step-by-step with commands/POC) │ │
+│ └───────────────────────────────────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ │
+│ ┌───────────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ Phase 7: Mitigation Planning │ │
+│ │ INPUT: validated_risks (complete Phase 6 output) │ │
+│ │ KNOWLEDGE: Control Sets + OWASP References + CWE Mitigations + ASVS │ │
+│ │ OUTPUT: mitigation_plan (per-risk: immediate, short-term, long-term) │ │
+│ └───────────────────────────────────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ │
+│ ┌───────────────────────────────────────────────────────────────────────────────────────┐ │
+│ │ Phase 8: Report Generation │ │
+│ │ INPUT: ALL phase outputs (findings_1 → mitigation_plan) │ │
+│ │ KNOWLEDGE: Compliance Frameworks + ASVS │ │
+│ │ CRITICAL: Must include COMPLETE Phase 6 and Phase 7 outputs (no omission) │ │
+│ └───────────────────────────────────────────────────────────────────────────────────────┘ │
+│ │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -907,9 +869,9 @@ $SKILL_PATH/kb --stride-controls S
 
 **Query Commands**:
 ```bash
-$SKILL_PATH/kb --stride spoofing           # STRIDE category details
-$SKILL_PATH/kb --full-chain CWE-XXX        # Complete chain: STRIDE→CWE→CAPEC→ATT&CK
-$SKILL_PATH/kb --all-llm                    # LLM threats (AI components)
+$SKILL_PATH/kb --stride spoofing # STRIDE category details
+$SKILL_PATH/kb --full-chain CWE-XXX # Complete chain: STRIDE→CWE→CAPEC→ATT&CK
+$SKILL_PATH/kb --all-llm # LLM threats (AI components)
 ```
 
 #### 5.4 STRIDE per Element Matrix
@@ -953,9 +915,9 @@ $SKILL_PATH/kb --attack-technique TXXX
 $SKILL_PATH/kb --check-kev CVE-XXXX
 
 # Verification tests
-$SKILL_PATH/kb --stride-tests S              # STRIDE category tests
-$SKILL_PATH/kb --cwe-tests CWE-89            # CWE-specific tests
-$SKILL_PATH/kb --wstg-category ATHN          # WSTG tests by category
+$SKILL_PATH/kb --stride-tests S # STRIDE category tests
+$SKILL_PATH/kb --cwe-tests CWE-89 # CWE-specific tests
+$SKILL_PATH/kb --wstg-category ATHN # WSTG tests by category
 ```
 
 #### 6.4 Output Structure (5 Parts)
@@ -965,161 +927,161 @@ $SKILL_PATH/kb --wstg-category ATHN          # WSTG tests by category
 
 **Priority Mapping** (from schema):
 
-| CVSS 评分 | 严重程度 | 优先级 | 行动要求 |
+| CVSS Score | Severity | Priority | Action Required |
 |-----------|---------|--------|----------|
-| 9.0 - 10.0 | Critical | P0 | 立即修复 |
-| 7.0 - 8.9 | High | P1 | 紧急处理 (24h) |
-| 4.0 - 6.9 | Medium | P2 | 高优先级 (7d) |
-| 0.1 - 3.9 | Low | P3 | 计划中 (30d) |
+| 9.0 - 10.0 | Critical | P0 | Immediate fix |
+| 7.0 - 8.9 | High | P1 | Urgent handling (24h) |
+| 4.0 - 6.9 | Medium | P2 | HighPriority (7d) |
+| 0.1 - 3.9 | Low | P3 | Planned (30d) |
 
 **POC Verification Status Types**:
 
-| 状态标识 | 含义 | 判定标准 |
+| Status Indicator | Meaning | Criteria |
 |---------|------|---------|
-| ✅ **已验证** | POC 执行成功 | 成功复现攻击行为并获得预期结果 |
-| ⚠️ **需验证** | 理论可行但需手动验证 | 需要特定环境或权限才能验证 |
-| 📋 **理论可行** | 基于代码分析推导 | 代码路径存在但未实际测试 |
-| ❌ **已排除** | 验证后确认不可利用 | 存在缓解措施或条件不满足 |
+| ✅ **Validated** | POC executed successfully | successfully reproducedAttackbehavior and obtained expected results |
+| ⚠️ **Needs Validation** | theoretically feasiblebut requires manualValidation | requires specific environmentorpermission toValidation |
+| 📋 **theoretically feasible** | Based on codeAnalysisderivation | Code path exists but not actually tested |
+| ❌ **excluded** | Validationconfirmed not exploitable after | existsMitigation Measuresorconditions not met |
 
 ```yaml
 validated_risks:
-  # Part 1: Risk Summary (验证覆盖统计)
-  risk_summary:
-    total_identified: N
-    total_verified: N                           # ✅ 已验证
-    total_pending: N                            # ⚠️ 需验证
-    total_theoretical: N                        # 📋 理论可行
-    total_excluded: N                           # ❌ 已排除
-    verification_rate: "N%"
-    risk_by_severity: {critical: N, high: N, medium: N, low: N}
-    risk_by_stride: {S: N, T: N, R: N, I: N, D: N, E: N}
+ # Part 1: Risk Summary (Validation Coverage Statistics)
+ risk_summary:
+ total_identified: N
+ total_verified: N # ✅ Validated
+ total_pending: N # ⚠️ Needs Validation
+ total_theoretical: N # 📋 theoretically feasible
+ total_excluded: N # ❌ excluded
+ verification_rate: "N%"
+ risk_by_severity: {critical: N, high: N, medium: N, low: N}
+ risk_by_stride: {S: N, T: N, R: N, I: N, D: N, E: N}
 
-  # Part 2: POC Details (每个 Critical/High 威胁一个完整块)
-  poc_details:
-    - poc_id: "POC-001"                         # Format: POC-{SEQ:03d}
-      threat_ref: "T-S-P01-001"                 # 关联威胁ID
-      stride_type: "S"                          # STRIDE类型
-      verification_status: "verified"           # verified|pending|theoretical|excluded
-      exploitation_difficulty: "medium"         # low|medium|high
-      prerequisites:                            # 前置条件
-        - "有效的用户会话"
-        - "知道目标用户ID"
-      vulnerability_location:
-        file_path: "src/api/auth.py"
-        function_name: "verify_token"
-        line_number: 45
-      vulnerable_code: |                        # 漏洞代码片段
-        def verify_token(token):
-            # 缺少签名验证
-            return jwt.decode(token, options={"verify_signature": False})
-      exploitation_steps:                       # 利用步骤
-        - "构造恶意JWT Token"
-        - "发送请求到认证端点"
-        - "绕过身份验证"
-      poc_code: |                               # POC代码 (完整可执行)
-        import jwt
-        # 构造恶意token
-        malicious_token = jwt.encode({"user_id": "admin"}, "any_key", algorithm="HS256")
-        # 发送请求...
-      expected_result: |                        # 预期结果
-        {"status": "authenticated", "user": "admin"}
-      verification_log: "..."                   # 验证日志/截图
-      risk_assessment:
-        complexity: "medium"
-        attack_vector: "network"
-        impact_scope: "user_data"
-        data_sensitivity: "high"
+ # Part 2: POC Details (Each Critical/High Threatone complete block)
+ poc_details:
+ - poc_id: "POC-001" # Format: POC-{SEQ:03d}
+ threat_ref: "T-S-P01-001" # RelatedThreatID
+ stride_type: "S" # STRIDEType
+ verification_status: "verified" # verified|pending|theoretical|excluded
+ exploitation_difficulty: "medium" # low|medium|high
+ prerequisites: # Prerequisites
+ - "ValidUser session"
+ - "Know target userID"
+ vulnerability_location:
+ file_path: "src/api/auth.py"
+ function_name: "verify_token"
+ line_number: 45
+ vulnerable_code: | # VulnerabilityCode snippet
+ def verify_token(token):
+ # Missing signatureValidation
+ return jwt.decode(token, options={"verify_signature": False})
+ exploitation_steps: # Exploitation steps
+ - "Construct maliciousJWT Token"
+ - "Send request to authentication endpoint"
+ - "Bypass identity files Validation"
+ poc_code: | # POCCode (Complete executable)
+ import jwt
+ # Construct malicioustoken
+ malicious_token = jwt.encode({"user_id": "admin"}, "any_key", algorithm="HS256")
+ # SendRequest...
+ expected_result: | # Expected result
+ {"status": "authenticated", "user": "admin"}
+ verification_log: "..." # ValidationLog/Screenshot
+ risk_assessment:
+ complexity: "medium"
+ attack_vector: "network"
+ impact_scope: "user_data"
+ data_sensitivity: "high"
 
-  # Part 3: Risk Details (per item) - See assets/schemas/risk-detail.schema.md
-  risk_details:
-    - risk_id: "VR-001"                         # Format: VR-{SEQ:03d}
-      original_refs: ["T-S-P01-001", "SD-001"]  # From multiple phases
-      priority: "P1"                             # P0/P1/P2/P3
-      location: {files: [], elements: [], trust_boundary: ""}
-      detailed_analysis: {...}
-      root_cause: {...}
-      related_cwe: "CWE-XXX"                     # Required field
-      related_poc: "POC-001"                     # Link to POC detail
-      validation:
-        test_cases: []
-        poc_available: true
-        cvss_score: 8.8
-        verification_status: "verified"
+ # Part 3: Risk Details (per item) - See assets/schemas/risk-detail.schema.md
+ risk_details:
+ - risk_id: "VR-001" # Format: VR-{SEQ:03d}
+ original_refs: ["T-S-P01-001", "SD-001"] # From multiple phases
+ priority: "P1" # P0/P1/P2/P3
+ location: {files: [], elements: [], trust_boundary: ""}
+ detailed_analysis: {...}
+ root_cause: {...}
+ related_cwe: "CWE-XXX" # Required field
+ related_poc: "POC-001" # Link to POC detail
+ validation:
+ test_cases: []
+ poc_available: true
+ cvss_score: 8.8
+ verification_status: "verified"
 
-  # Part 4: Attack Path Feasibility Matrix (可行性评分)
-  attack_path_matrix:
-    - path_id: "AP-001"
-      path_name: "认证绕过→数据库访问"
-      entry_point: "API Gateway"
-      key_nodes: ["Auth Service"]
-      final_target: "数据库"
-      feasibility_score: 8.5                    # 0.0-10.0
-      detection_difficulty: "low"               # low|medium|high
-      priority_fix: true
+ # Part 4: Attack Path Feasibility Matrix (Feasibility score)
+ attack_path_matrix:
+ - path_id: "AP-001"
+ path_name: "authentication Bypass→DatabaseAccess"
+ entry_point: "API Gateway"
+ key_nodes: ["Auth Service"]
+ final_target: "Database"
+ feasibility_score: 8.5 # 0.0-10.0
+ detection_difficulty: "low" # low|medium|high
+ priority_fix: true
 
-  # Part 5: Attack Chains (完整攻击链分析)
-  attack_chains:
-    - chain_id: "AC-001"
-      chain_name: "权限提升攻击链"
-      entry_point: "公共API端点"
-      target: "管理员权限"
-      impact_scope: "完全系统控制"
-      difficulty: "medium"
-      related_threats: ["T-E-P01-001", "T-S-P02-001"]
-      steps:
-        - step: 1
-          title: "初始访问"
-          source: "攻击者"
-          target: "API网关"
-          action: "发送恶意请求"
-          code_location: "api/routes.py:120"
-          data_change: "获得会话token"
-        - step: 2
-          title: "权限提升"
-          source: "API网关"
-          target: "认证服务"
-          action: "利用JWT漏洞"
-          code_location: "auth/jwt.py:45"
-          data_change: "获得管理员角色"
-      # ASCII 攻击链图 (必须在报告中展示)
-      attack_flow_diagram: |
-        ┌─────────────────────────────────────────────────────────────────┐
-        │                     攻击链: 权限提升攻击                         │
-        ├─────────────────────────────────────────────────────────────────┤
-        │  Step 1: 初始访问                                               │
-        │  ┌─────────────────────────────────────────────────────────┐   │
-        │  │  攻击者 ──→ API网关                                       │   │
-        │  │  动作: 发送恶意请求                                        │   │
-        │  │  代码位置: api/routes.py:120                              │   │
-        │  └─────────────────────────────────────────────────────────┘   │
-        │                              │                                   │
-        │                              ▼                                   │
-        │  Step 2: 权限提升                                               │
-        │  ┌─────────────────────────────────────────────────────────┐   │
-        │  │  API网关 ──→ 认证服务                                     │   │
-        │  │  动作: 利用JWT漏洞获得管理员角色                           │   │
-        │  │  代码位置: auth/jwt.py:45                                 │   │
-        │  └─────────────────────────────────────────────────────────┘   │
-        │                              │                                   │
-        │                              ▼                                   │
-        │  结果: 获得管理员权限，完全系统控制                              │
-        └─────────────────────────────────────────────────────────────────┘
-      prerequisites:
-        - "网络访问权限"
-        - "基础用户账户"
-      exploitation_commands: |
-        # Step 1: 获取初始token
-        curl -X POST https://target/api/login -d '{"user":"test","pass":"test"}'
-        # Step 2: 构造提权token
-        python3 jwt_exploit.py --token $TOKEN --role admin
-      ioc_indicators:
-        - "异常的JWT token结构"
-        - "短时间内角色变更"
-      defense_recommendations:
-        - cutpoint: "Step 1"
-          recommendation: "实施请求速率限制和异常检测"
-        - cutpoint: "Step 2"
-          recommendation: "启用JWT签名验证，使用强密钥"
+ # Part 5: Attack Chains (Complete Attack Chain Analysis)
+ attack_chains:
+ - chain_id: "AC-001"
+ chain_name: "Privilege escalationAttackChain"
+ entry_point: "PublicAPIEndpoint"
+ target: "AdministratorPermission"
+ impact_scope: "CompleteSystemControl"
+ difficulty: "medium"
+ related_threats: ["T-E-P01-001", "T-S-P02-001"]
+ steps:
+ - step: 1
+ title: "InitialAccess"
+ source: "AttackActor"
+ target: "APIGateway"
+ action: "SendMaliciousRequest"
+ code_location: "api/routes.py:120"
+ data_change: "Obtain sessiontoken"
+ - step: 2
+ title: "Privilege escalation"
+ source: "APIGateway"
+ target: "authentication Service"
+ action: "ExploitJWTVulnerability"
+ code_location: "auth/jwt.py:45"
+ data_change: "ObtainAdministratorRole"
+ # ASCII AttackChainDiagram (Must be displayed in report)
+ attack_flow_diagram: |
+ ┌─────────────────────────────────────────────────────────────────┐
+ │ AttackChain: Privilege escalationAttack │
+ ├─────────────────────────────────────────────────────────────────┤
+ │ Step 1: InitialAccess │
+ │ ┌─────────────────────────────────────────────────────────┐ │
+ │ │ AttackActor ──→ APIGateway │ │
+ │ │ Action: SendMaliciousRequest │ │
+ │ │ CodeLocation: api/routes.py:120 │ │
+ │ └─────────────────────────────────────────────────────────┘ │
+ │ │ │
+ │ ▼ │
+ │ Step 2: Privilege escalation │
+ │ ┌─────────────────────────────────────────────────────────┐ │
+ │ │ APIGateway ──→ authentication Service │ │
+ │ │ Action: ExploitJWTVulnerabilityObtainAdministratorRole │ │
+ │ │ CodeLocation: auth/jwt.py:45 │ │
+ │ └─────────────────────────────────────────────────────────┘ │
+ │ │ │
+ │ ▼ │
+ │ Result: ObtainAdministratorPermission，CompleteSystemControl │
+ └─────────────────────────────────────────────────────────────────┘
+ prerequisites:
+ - "NetworkAccessPermission"
+ - "basic user account"
+ exploitation_commands: |
+ # Step 1: ObtainInitialtoken
+ curl -X POST https://target/api/login -d '{"user":"test","pass":"test"}'
+ # Step 2: constructPrivilege elevationtoken
+ python3 jwt_exploit.py --token $TOKEN --role admin
+ ioc_indicators:
+ - "AbnormalJWT tokenStructure"
+ - "In short timeRoleChange"
+ defense_recommendations:
+ - cutpoint: "Step 1"
+ recommendation: "ImplementRequestRateLimit andAbnormaldetection"
+ - cutpoint: "Step 2"
+ recommendation: "EnableJWTsignature Validation，Use strong keys"
 ```
 
 #### 6.5 Output Quality Requirements
@@ -1152,10 +1114,10 @@ validated_risks:
 
 **Query Commands**:
 ```bash
-$SKILL_PATH/kb --cwe CWE-XXX --mitigations    # CWE mitigations
-$SKILL_PATH/kb --control authentication        # Security controls
-$SKILL_PATH/kb --asvs-level L2                 # ASVS requirements
-$SKILL_PATH/kb --asvs-chapter V4               # ASVS by chapter
+$SKILL_PATH/kb --cwe CWE-XXX --mitigations # CWE mitigations
+$SKILL_PATH/kb --control authentication # Security controls
+$SKILL_PATH/kb --asvs-level L2 # ASVS requirements
+$SKILL_PATH/kb --asvs-chapter V4 # ASVS by chapter
 ```
 
 #### 7.4 Output Context
@@ -1195,23 +1157,23 @@ $SKILL_PATH/kb --asvs-level L2 --chapter V1
 
 #### 8.4 ⚠️ MANDATORY: Output Directory Setup
 
-**在生成任何报告之前，必须执行以下步骤**:
+**Before generating any reports，Must execute the followingStep**:
 
-1. **确定 PROJECT 名称**: 从项目名提取，转换为大写
-   - 示例: `open-webui` → `OPEN-WEBUI`
-   - 格式: `^[A-Z][A-Z0-9-]{0,29}$`
+1. **Determine PROJECT Name**: Extracted from project name，transformationasUppercase
+ - Examples: `open-webui` → `OPEN-WEBUI`
+ - Format: `^[A-Z][A-Z0-9-]{0,29}$`
 
-2. **创建输出目录**:
-   ```bash
-   mkdir -p {PROJECT_ROOT}/Risk_Assessment_Report/
-   ```
+2. **Create output directory**:
+ ```bash
+ mkdir -p {PROJECT_ROOT}/Risk_Assessment_Report/
+ ```
 
-3. **所有报告必须输出到此目录**:
-   - 主报告: `Risk_Assessment_Report/{PROJECT}-RISK-ASSESSMENT-REPORT.md`
-   - 风险清单: `Risk_Assessment_Report/{PROJECT}-RISK-INVENTORY.md`
-   - 缓解措施: `Risk_Assessment_Report/{PROJECT}-MITIGATION-MEASURES.md`
+3. **All reports must output to this directory**:
+ - Main Report: `Risk_Assessment_Report/{PROJECT}-RISK-ASSESSMENT-REPORT.md`
+ - Risk Inventory: `Risk_Assessment_Report/{PROJECT}-RISK-INVENTORY.md`
+ - Mitigation Measures: `Risk_Assessment_Report/{PROJECT}-MITIGATION-MEASURES.md`
 
-⚠️ **禁止**: 直接在项目根目录创建报告文件！
+⚠️ **Prohibited**: Create report files directly in project root！
 
 #### 8.5 Report Structure (9 Sections + Appendix)
 **CRITICAL**: Sections 5, 6, and 8 must include COMPLETE Phase 6 and Phase 7 outputs without omission.
@@ -1221,96 +1183,96 @@ $SKILL_PATH/kb --asvs-level L2 --chapter V1
 ```markdown
 # {PROJECT}-RISK-ASSESSMENT-REPORT.md
 
-## 1. 执行摘要 (Executive Summary)
-- 威胁统计、STRIDE分布、关键发现、立即行动建议
+## 1. Executive Summary
+- Threat Statistics、STRIDE Distribution、Key Findings、Immediate Action Recommendations
 
-## 2. 系统架构概览 (System Architecture)
-- 组件拓扑ASCII图、数据流图DFD、信任边界、技术栈
+## 2. System Architecture
+- Component Topology ASCII Diagram、Data Flow Diagram (DFD)、Trust Boundaries、Technology Stack
 - (from findings_1, findings_2, findings_3)
 
-## 3. 安全功能设计评估 (Security Design Assessment)
-- 9安全域评估矩阵、关键安全发现详情
+## 3. Security Design Assessment
+- 9Security Domain Assessment Matrix、Key Security Findings Details
 - (from findings_4)
 
-## 4. STRIDE 威胁分析 (STRIDE Threat Analysis)
-- 威胁汇总表、按STRIDE分类表、威胁详细分析
+## 4. STRIDE Threat Analysis
+- Threat Summary Table、STRIDE Classification Table、Detailed Threat Analysis
 - (from findings_5)
 
-## 5. 风险验证与POC设计 (Risk Validation & POC) ← CRITICAL
-- POC验证方法论、验证覆盖统计、POC验证详情、POC汇总表
-- 每个Critical/High威胁必须有完整POC代码块
+## 5. Risk Validation & POC ← CRITICAL
+- POC Validation Methodology、Validation Coverage Statistics、POC Validation Details、POC Summary Table
+- EachCritical/HighThreatMust have completePOCCode block
 - (from validated_risks.poc_details)
 
-## 6. 攻击路径分析 (Attack Path Analysis) ← CRITICAL
-- 攻击路径可行性矩阵、攻击链详细分析、攻击面热力图、优先级排序
-- 每条高危攻击路径必须有ASCII攻击链图
+## 6. Attack Path Analysis ← CRITICAL
+- Attack Path Feasibility Matrix、Attack Chain Detailed Analysis、Attack Surface Heatmap、Priority Ranking
+- Each high-riskAttack PathsMust haveASCIIAttackChainDiagram
 - (from validated_risks.attack_chains, validated_risks.attack_path_matrix)
 
-## 7. 威胁优先级矩阵 (Threat Priority Matrix)
-- 风险评估矩阵、威胁分布矩阵、攻击面热力图
+## 7. Threat Priority Matrix
+- Risk Assessment Matrix、Threat Distribution Matrix、Attack Surface Heatmap
 
-## 8. 缓解措施建议 (Mitigation Recommendations) ← CRITICAL
-- P0/P1/P2分级措施、实施路线图、防御纵深架构
+## 8. Mitigation Recommendations ← CRITICAL
+- P0/P1/P2Tiered Measures、Implementation Roadmap、Defense-in-Depth Architecture
 - (from mitigation_plan)
 
-## 9. 合规性映射 (Compliance Mapping)
-- OWASP Top 10映射、OWASP LLM Top 10映射(如适用)
+## 9. Compliance Mapping
+- OWASP Top 10Mapping、OWASP LLM Top 10Mapping(if applicable)
 
-## 附录 (Appendices)
-- A: DFD元素完整清单
-- B: Mermaid DFD源码
-- C: 威胁完整清单
-- D: 知识库查询记录
-- E: 参考资料
+## Appendices
+- A: DFD ElementsComplete List
+- B: Mermaid DFDSource Code
+- C: Complete Threat List
+- D: Knowledge Base Query Records
+- E: References
 ```
 
 #### 8.6 Output Files
 
-**输出目录**: `{PROJECT_ROOT}/Risk_Assessment_Report/`
+**Output directory**: `{PROJECT_ROOT}/Risk_Assessment_Report/`
 
-**必需报告** (始终生成):
-| 序号 | 报告文件 | 说明 |
+**Required Reports** (AlwaysGenerate):
+| Number | Report file | Description |
 |------|---------|------|
-| 1 | `{PROJECT}-RISK-ASSESSMENT-REPORT.md` | 风险评估报告 (主报告) |
-| 2 | `{PROJECT}-RISK-INVENTORY.md` | 风险清单 |
-| 3 | `{PROJECT}-MITIGATION-MEASURES.md` | 缓解措施 |
-| 4 | `{PROJECT}-PENETRATION-TEST-PLAN.md` | 渗透测试方案 |
+| 1 | `{PROJECT}-RISK-ASSESSMENT-REPORT.md` | Risk Assessment Report (Main Report) |
+| 2 | `{PROJECT}-RISK-INVENTORY.md` | Risk Inventory |
+| 3 | `{PROJECT}-MITIGATION-MEASURES.md` | Mitigation Measures |
+| 4 | `{PROJECT}-PENETRATION-TEST-PLAN.md` | Penetration Test Plan |
 
 #### 8.7 ⚠️ MANDATORY: Phase Output Publication
 
-**在生成所有报告后，必须执行阶段过程文档发布**:
+**After generating all reports，Must executePhase DocumentationPublication**:
 
-将 `.phase_working/` 中的阶段产物复制到 `Risk_Assessment_Report/` 目录，**保留英文文件名**:
+Copy `.phase_working/` inphase outputs to `Risk_Assessment_Report/` Directory，**KeepEnglish filenames**:
 
 ```yaml
 phase_output_publication:
-  source_dir: ".phase_working/"
-  target_dir: "Risk_Assessment_Report/"
-  files:  # 直接复制，保留原文件名
-    - P1-PROJECT-UNDERSTANDING.md    # Phase 1 项目理解
-    - P2-DFD-ANALYSIS.md             # Phase 2 DFD分析
-    - P3-TRUST-BOUNDARY.md           # Phase 3 信任边界
-    - P4-SECURITY-DESIGN-REVIEW.md   # Phase 4 安全设计评估
-    - P5-STRIDE-THREATS.md           # Phase 5 STRIDE威胁分析
-    - P6-RISK-VALIDATION.md          # Phase 6 风险验证
+ source_dir: ".phase_working/"
+ target_dir: "Risk_Assessment_Report/"
+ files: # Direct copy，KeepOriginal filenames
+ - P1-PROJECT-UNDERSTANDING.md # Phase 1 Project Understanding
+ - P2-DFD-ANALYSIS.md # Phase 2 DFD Analysis
+ - P3-TRUST-BOUNDARY.md # Phase 3 Trust Boundaries
+ - P4-SECURITY-DESIGN-REVIEW.md # Phase 4 Security Design Assessment
+ - P5-STRIDE-THREATS.md # Phase 5 STRIDE Threat Analysis
+ - P6-RISK-VALIDATION.md # Phase 6 Risk Validation
 ```
 
-**执行命令** (示例):
+**Execute commands** (Examples):
 ```bash
-# 复制阶段过程文档到报告目录 (保留英文名)
-cp .phase_working/P1-PROJECT-UNDERSTANDING.md Risk_Assessment_Report/
-cp .phase_working/P2-DFD-ANALYSIS.md Risk_Assessment_Report/
-cp .phase_working/P3-TRUST-BOUNDARY.md Risk_Assessment_Report/
-cp .phase_working/P4-SECURITY-DESIGN-REVIEW.md Risk_Assessment_Report/
-cp .phase_working/P5-STRIDE-THREATS.md Risk_Assessment_Report/
-cp .phase_working/P6-RISK-VALIDATION.md Risk_Assessment_Report/
+# CopyPhase Documentationto report directory (Keep English names)
+cp.phase_working/P1-PROJECT-UNDERSTANDING.md Risk_Assessment_Report/
+cp.phase_working/P2-DFD-ANALYSIS.md Risk_Assessment_Report/
+cp.phase_working/P3-TRUST-BOUNDARY.md Risk_Assessment_Report/
+cp.phase_working/P4-SECURITY-DESIGN-REVIEW.md Risk_Assessment_Report/
+cp.phase_working/P5-STRIDE-THREATS.md Risk_Assessment_Report/
+cp.phase_working/P6-RISK-VALIDATION.md Risk_Assessment_Report/
 ```
 
-**价值说明**:
-- 阶段过程文档记录完整分析过程
-- 支持审计追溯和质量验证
-- 便于团队理解威胁建模推导逻辑
-- 保留英文名确保命名规范一致性
+**Value explanation**:
+- Phase DocumentationRecord completeAnalysisProcess
+- Support auditTraceabilityand qualityValidation
+- Facilitate team understandingThreatModeling derivation logic
+- Keep English namesEnsure naming convention consistency
 
 ---
 
@@ -1327,59 +1289,59 @@ cp .phase_working/P6-RISK-VALIDATION.md Risk_Assessment_Report/
 #### STRIDE Queries
 ```bash
 --stride {spoofing|tampering|repudiation|information_disclosure|denial_of_service|elevation_of_privilege}
---all-stride                    # All STRIDE categories overview
+--all-stride # All STRIDE categories overview
 --element {process|data_store|data_flow|external_interactor}
 ```
 
 #### CWE Queries
 ```bash
---cwe CWE-XXX                   # Query specific CWE
---cwe CWE-XXX --mitigations     # Include detailed mitigations
---full-chain CWE-XXX            # Complete chain: STRIDE→CWE→CAPEC→ATT&CK
+--cwe CWE-XXX # Query specific CWE
+--cwe CWE-XXX --mitigations # Include detailed mitigations
+--full-chain CWE-XXX # Complete chain: STRIDE→CWE→CAPEC→ATT&CK
 ```
 
 #### CAPEC Attack Patterns
 ```bash
---capec CAPEC-XXX               # Query specific CAPEC
---capec CAPEC-XXX --attack-chain  # Include ATT&CK technique mapping
+--capec CAPEC-XXX # Query specific CAPEC
+--capec CAPEC-XXX --attack-chain # Include ATT&CK technique mapping
 ```
 
 #### ATT&CK Techniques
 ```bash
---attack-technique TXXX         # Query ATT&CK technique
---attack-mitigation MXXX        # Query ATT&CK mitigation
---attack-search "keyword"       # Search ATT&CK techniques
+--attack-technique TXXX # Query ATT&CK technique
+--attack-mitigation MXXX # Query ATT&CK mitigation
+--attack-search "keyword" # Search ATT&CK techniques
 ```
 
 #### CVE Queries
 ```bash
---cve CVE-XXXX-XXXXX            # Direct CVE query
---cve-for-cwe CWE-XXX           # CVEs by CWE
+--cve CVE-XXXX-XXXXX # Direct CVE query
+--cve-for-cwe CWE-XXX # CVEs by CWE
 --cve-severity {CRITICAL|HIGH|MEDIUM|LOW}
---check-kev CVE-XXXX            # Check Known Exploited Vulnerability
+--check-kev CVE-XXXX # Check Known Exploited Vulnerability
 ```
 
 #### Verification Set Queries (NEW)
 ```bash
---stride-tests {S|T|R|I|D|E}    # Get verification tests for STRIDE category
---cwe-tests CWE-XXX             # Get verification tests for CWE
---asvs-level {L1|L2|L3}         # Get ASVS requirements by level
---asvs-chapter {V1|V2|...}      # Get ASVS requirements by chapter
---wstg-category {ATHN|AUTHZ|...}  # Get WSTG tests by category
+--stride-tests {S|T|R|I|D|E} # Get verification tests for STRIDE category
+--cwe-tests CWE-XXX # Get verification tests for CWE
+--asvs-level {L1|L2|L3} # Get ASVS requirements by level
+--asvs-chapter {V1|V2|...} # Get ASVS requirements by chapter
+--wstg-category {ATHN|AUTHZ|...} # Get WSTG tests by category
 ```
 
 #### Cloud & LLM Extensions
 ```bash
 --cloud {aws|azure|gcp|alibaba|tencent}
 --category {compute|storage|database|networking|identity|serverless}
---llm LLM01                     # Query OWASP LLM Top 10
---all-llm                       # All OWASP LLM Top 10 threats
+--llm LLM01 # Query OWASP LLM Top 10
+--all-llm # All OWASP LLM Top 10 threats
 --ai-component {llm_inference_service|rag_retrieval|...}
 ```
 
 #### Semantic Search
 ```bash
---semantic-search "query"       # Natural language search
+--semantic-search "query" # Natural language search
 --search-type {cwe|capec|all}
 ```
 
@@ -1402,18 +1364,18 @@ cp .phase_working/P6-RISK-VALIDATION.md Risk_Assessment_Report/
 For Phases 5/6/7 with multiple risks:
 
 ```
-Main Agent                    Sub-Agents (Parallel)
-    │                         ┌─────────────────┐
-    │──► Risk 1 ──────────────► Agent 1 ──► KB Query ──► Result 1
-    │                         └─────────────────┘
-    │                         ┌─────────────────┐
-    │──► Risk 2 ──────────────► Agent 2 ──► KB Query ──► Result 2
-    │                         └─────────────────┘
-    │                         ┌─────────────────┐
-    │──► Risk N ──────────────► Agent N ──► KB Query ──► Result N
-    │                         └─────────────────┘
-    │
-    ◄───────────────── Aggregate Results ──────────────────
+Main Agent Sub-Agents (Parallel)
+ │ ┌─────────────────┐
+ │──► Risk 1 ──────────────► Agent 1 ──► KB Query ──► Result 1
+ │ └─────────────────┘
+ │ ┌─────────────────┐
+ │──► Risk 2 ──────────────► Agent 2 ──► KB Query ──► Result 2
+ │ └─────────────────┘
+ │ ┌─────────────────┐
+ │──► Risk N ──────────────► Agent N ──► KB Query ──► Result N
+ │ └─────────────────┘
+ │
+ ◄───────────────── Aggregate Results ──────────────────
 ```
 
 ---

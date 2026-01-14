@@ -1,86 +1,86 @@
 <!-- Code-First Deep Threat Modeling Workflow | Version 2.1.0 | https://github.com/fr33d3m0n/skill-threat-modeling | License: BSD-3-Clause | Welcome to cite but please retain all sources and declarations -->
 
-# 风险评估报告: {PROJECT_NAME}
+# Risk Assessment Report: {PROJECT_NAME}
 
-> **评估时间**: {ASSESSMENT_DATETIME}
-> **分析师**: Claude (Deep Risk Analysis)
-> **框架版本**: STRIDE-TM v2.0.2
-> **报告版本**: {REPORT_VERSION}
+> **Assessment Time**: {ASSESSMENT_DATETIME}
+> **AnalysisAnalyst**: Claude (Deep Risk Analysis)
+> **FrameworkVersion**: STRIDE-TM v2.0.2
+> **ReportVersion**: {REPORT_VERSION}
 
 ---
 
-## 1. 执行摘要
+## 1. Executive Summary
 
-### 1.1 项目概述
+### 1.1 Project Overview
 
-#### 基本信息
+#### Basic Information
 
-| 属性 | 值 |
+| Property | Value |
 |------|-----|
-| **项目名称** | {PROJECT_NAME} |
-| **项目类型** | {PROJECT_TYPE} |
-| **技术栈** | {TECH_STACK} |
-| **评估范围** | {ASSESSMENT_SCOPE} |
-| **项目仓库** | {PROJECT_REPO} |
+| **Project Name** | {PROJECT_NAME} |
+| **Project Type** | {PROJECT_TYPE} |
+| **Technology Stack** | {TECH_STACK} |
+| **Assessment Scope** | {ASSESSMENT_SCOPE} |
+| **Project Repository** | {PROJECT_REPO} |
 
-#### 项目规模指标
+#### Project Scale Metrics
 
-| 指标 | 数值 | 说明 |
+| Metric | Value | Description |
 |------|------|------|
-| **代码总行数** | {TOTAL_LOC} | 不含空行和注释 |
-| **文件总数** | {TOTAL_FILES} | 源代码文件 |
-| **目录数** | {TOTAL_DIRS} | 代码目录 |
-| **主要模块数** | {MODULE_COUNT} | 顶层功能模块 |
-| **依赖数量** | {DEPENDENCY_COUNT} | 直接依赖 |
+| **Total Lines of Code** | {TOTAL_LOC} | NotContainNullAction and Comment |
+| **Total Files** | {TOTAL_FILES} | SourceCodeFile |
+| **Directory Count** | {TOTAL_DIRS} | CodeDirectory |
+| **Main Module Count** | {MODULE_COUNT} | TopLayerFunctionModule |
+| **Dependency Count** | {DEPENDENCY_COUNT} | DirectDependency |
 
-#### 语言分布
+#### Language Distribution
 
-| 语言 | 文件数 | 代码行数 | 占比 |
+| Language | File Count | Lines of Code | Percentage |
 |------|--------|---------|------|
 | {LANG_1} | {LANG_1_FILES} | {LANG_1_LOC} | {LANG_1_PCT}% |
 | {LANG_2} | {LANG_2_FILES} | {LANG_2_LOC} | {LANG_2_PCT}% |
 | {LANG_3} | {LANG_3_FILES} | {LANG_3_LOC} | {LANG_3_PCT}% |
-| **合计** | **{TOTAL_FILES}** | **{TOTAL_LOC}** | **100%** |
+| **Total** | **{TOTAL_FILES}** | **{TOTAL_LOC}** | **100%** |
 
 <!--
-语言统计示例:
+LanguageStatisticsExample:
 | TypeScript | 523 | 45,230 | 58% |
-| Python     | 87  | 12,450 | 16% |
-| JavaScript | 156 | 8,320  | 11% |
-| Go         | 45  | 6,780  | 9%  |
-| Other      | 89  | 4,670  | 6%  |
+| Python | 87 | 12,450 | 16% |
+| JavaScript | 156 | 8,320 | 11% |
+| Go | 45 | 6,780 | 9% |
+| Other | 89 | 4,670 | 6% |
 
-使用工具获取: cloc, tokei, scc
+Obtain using tools: cloc, tokei, scc
 -->
 
-#### 安全相关模块
+#### Security-Related Modules
 
-| 模块路径 | 功能 | 文件数 | 安全等级 |
+| Module Path | Function | File Count | Security Level |
 |---------|------|--------|---------|
 | {SEC_MODULE_1_PATH} | {SEC_MODULE_1_FUNC} | {SEC_MODULE_1_FILES} | {SEC_MODULE_1_LEVEL} |
 | {SEC_MODULE_2_PATH} | {SEC_MODULE_2_FUNC} | {SEC_MODULE_2_FILES} | {SEC_MODULE_2_LEVEL} |
 | {SEC_MODULE_3_PATH} | {SEC_MODULE_3_FUNC} | {SEC_MODULE_3_FILES} | {SEC_MODULE_3_LEVEL} |
 
 <!--
-安全模块识别关键词: auth, security, crypto, session, token, access, permission
-安全等级: 🔴 Critical | 🟠 High | 🟡 Medium | 🟢 Low
+SecurityModule identification keywords: auth, security, crypto, session, token, access, permission
+Security Level: 🔴 Critical | 🟠 High | 🟡 Medium | 🟢 Low
 -->
 
-### 1.2 评估结论
+### 1.2 Assessment Conclusion
 
-#### 威胁统计
+#### Threat Statistics
 
-| 严重程度 | 数量 | 百分比 | 说明 |
+| Severity | Count | Percentage | Description |
 |---------|------|--------|------|
-| 🔴 **Critical** | {CRITICAL_COUNT} | {CRITICAL_PCT}% | 需立即修复 |
-| 🟠 **High** | {HIGH_COUNT} | {HIGH_PCT}% | 7天内修复 |
-| 🟡 **Medium** | {MEDIUM_COUNT} | {MEDIUM_PCT}% | 30天内修复 |
-| 🟢 **Low** | {LOW_COUNT} | {LOW_PCT}% | 计划中修复 |
-| **总计** | **{TOTAL_COUNT}** | **100%** | |
+| 🔴 **Critical** | {CRITICAL_COUNT} | {CRITICAL_PCT}% | Requires immediate fix |
+| 🟠 **High** | {HIGH_COUNT} | {HIGH_PCT}% | 7Fix within days |
+| 🟡 **Medium** | {MEDIUM_COUNT} | {MEDIUM_PCT}% | 30Fix within days |
+| 🟢 **Low** | {LOW_COUNT} | {LOW_PCT}% | Planned fix |
+| **Total** | **{TOTAL_COUNT}** | **100%** | |
 
-#### STRIDE 分布
+#### STRIDE Distribution
 
-| STRIDE 类型 | 数量 | Critical | High | Medium | Low |
+| STRIDE Type | Count | Critical | High | Medium | Low |
 |-------------|------|----------|------|--------|-----|
 | **S** - Spoofing | {S_COUNT} | {S_CRITICAL} | {S_HIGH} | {S_MEDIUM} | {S_LOW} |
 | **T** - Tampering | {T_COUNT} | {T_CRITICAL} | {T_HIGH} | {T_MEDIUM} | {T_LOW} |
@@ -89,38 +89,38 @@
 | **D** - DoS | {D_COUNT} | {D_CRITICAL} | {D_HIGH} | {D_MEDIUM} | {D_LOW} |
 | **E** - EoP | {E_COUNT} | {E_CRITICAL} | {E_HIGH} | {E_MEDIUM} | {E_LOW} |
 
-### 1.3 Critical 风险清单
+### 1.3 Critical Risk Inventory
 
-> **说明**: 以下列出所有 Critical 级别风险，需立即处理。
+> **Description**: The following lists all Critical level risks，Requires immediate handling。
 
-| 序号 | 风险ID | 风险名称 | STRIDE | 元素 | CWE | CVSS | 修复状态 |
+| Number | Risk ID | Risk Name | STRIDE | Element | CWE | CVSS | Fix Status |
 |------|--------|---------|--------|------|-----|------|---------|
 {ALL_CRITICAL_RISKS_TABLE}
 <!--
-格式 (列出所有 Critical 风险，不限数量):
-| 1 | VR-001 | JWT Token 未验证签名 | S | P01 | CWE-347 | 9.8 | 待修复 |
-| 2 | VR-002 | SQL 注入漏洞 | T | DS01 | CWE-89 | 9.8 | 待修复 |
-| 3 | VR-003 | 命令注入漏洞 | E | P03 | CWE-78 | 9.8 | 待修复 |
-| ... | ... | ... | ... | ... | ... | ... | ... |
+Format (ListsAll Critical Risk，NotLimitCount):
+| 1 | VR-001 | JWT Token NotValidationSignature | S | P01 | CWE-347 | 9.8 | PendingFix |
+| 2 | VR-002 | SQL InjectionVulnerability | T | DS01 | CWE-89 | 9.8 | PendingFix |
+| 3 | VR-003 | CommandInjectionVulnerability | E | P03 | CWE-78 | 9.8 | PendingFix |
+|... |... |... |... |... |... |... |... |
 
-⚠️ 必须列出所有 Critical 风险，不限于 Top 5
+⚠️ MustListsAll Critical Risk，NotLimitIn Top 5
 -->
 
-### 1.4 关键发现
+### 1.4 Key Findings
 
 {KEY_FINDINGS_SECTION}
 <!--
-格式:
-#### 发现 1: {FINDING_TITLE}
-- **威胁ID**: {THREAT_ID}
-- **严重程度**: {SEVERITY}
-- **影响**: {IMPACT_DESCRIPTION}
-- **位置**: `{FILE_PATH}`
+Format:
+#### Finding 1: {FINDING_TITLE}
+- **Threat ID**: {THREAT_ID}
+- **Severity**: {SEVERITY}
+- **Impact**: {IMPACT_DESCRIPTION}
+- **Location**: `{FILE_PATH}`
 -->
 
-### 1.5 立即行动建议
+### 1.5 ImmediateActionActionRecommendation
 
-| 优先级 | 措施 | 目标威胁 | 风险降低 |
+| Priority | Measure | TargetThreat | Risk Reduction |
 |--------|------|---------|---------|
 | P0 | {P0_ACTION_1} | {P0_TARGET_1} | {P0_REDUCTION_1}% |
 | P0 | {P0_ACTION_2} | {P0_TARGET_2} | {P0_REDUCTION_2}% |
@@ -128,407 +128,407 @@
 
 ---
 
-## 2. 系统架构概览
+## 2. System Architecture Overview
 
-### 2.1 组件拓扑
+### 2.1 ComponentTopology
 
 ```
 {COMPONENT_TOPOLOGY_ASCII}
 ```
 <!--
-示例:
+Example:
 ┌─────────────────────────────────────────────────────────────┐
-│                        Internet                              │
+│ Internet │
 └─────────────────────────┬───────────────────────────────────┘
-                          │
-                          ▼
+ │
+ ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                    Load Balancer                             │
+│ Load Balancer │
 └─────────────────────────┬───────────────────────────────────┘
-                          │
-           ┌──────────────┼──────────────┐
-           ▼              ▼              ▼
-      ┌─────────┐    ┌─────────┐    ┌─────────┐
-      │  Web UI │    │   API   │    │ Worker  │
-      └────┬────┘    └────┬────┘    └────┬────┘
-           │              │              │
-           └──────────────┼──────────────┘
-                          ▼
-                   ┌─────────────┐
-                   │  Database   │
-                   └─────────────┘
+ │
+ ┌──────────────┼──────────────┐
+ ▼ ▼ ▼
+ ┌─────────┐ ┌─────────┐ ┌─────────┐
+ │ Web UI │ │ API │ │ Worker │
+ └────┬────┘ └────┬────┘ └────┬────┘
+ │ │ │
+ └──────────────┼──────────────┘
+ ▼
+ ┌─────────────┐
+ │ Database │
+ └─────────────┘
 -->
 
-### 2.2 数据流图 (Level 1)
+### 2.2 Data Flow Diagram (Level 1)
 
 ```
 {DFD_ASCII}
 ```
 <!--
-示例:
-                    ┌─────────┐
-                    │   EI01  │
-                    │  User   │
-                    └────┬────┘
-                         │ DF01: HTTP Request
-                         ▼
-   ┌─────────────────────────────────────────┐
-   │              Trust Boundary              │
-   │  ┌─────────┐    DF02     ┌─────────┐   │
-   │  │   P01   │────────────→│   P02   │   │
-   │  │ Frontend│             │   API   │   │
-   │  └─────────┘             └────┬────┘   │
-   │                               │ DF03   │
-   │                               ▼        │
-   │                         ┌─────────┐   │
-   │                         │  DS01   │   │
-   │                         │Database │   │
-   │                         └─────────┘   │
-   └─────────────────────────────────────────┘
+Example:
+ ┌─────────┐
+ │ EI01 │
+ │ User │
+ └────┬────┘
+ │ DF01: HTTP Request
+ ▼
+ ┌─────────────────────────────────────────┐
+ │ Trust Boundary │
+ │ ┌─────────┐ DF02 ┌─────────┐ │
+ │ │ P01 │────────────→│ P02 │ │
+ │ │ Frontend│ │ API │ │
+ │ └─────────┘ └────┬────┘ │
+ │ │ DF03 │
+ │ ▼ │
+ │ ┌─────────┐ │
+ │ │ DS01 │ │
+ │ │Database │ │
+ │ └─────────┘ │
+ └─────────────────────────────────────────┘
 -->
 
-### 2.3 信任边界
+### 2.3 TrustBoundary
 
-| 边界ID | 边界名称 | 类型 | 包含元素 | 穿越数据流 |
+| BoundaryID | Boundary Name | Type | IncludeElement | CrossingDataFlow |
 |--------|---------|------|---------|-----------|
 | {TB_ID_1} | {TB_NAME_1} | {TB_TYPE_1} | {TB_ELEMENTS_1} | {TB_FLOWS_1} |
 | {TB_ID_2} | {TB_NAME_2} | {TB_TYPE_2} | {TB_ELEMENTS_2} | {TB_FLOWS_2} |
 
-### 2.4 技术栈
+### 2.4 Technology Stack
 
-| 层级 | 技术 | 版本 | 安全相关性 |
+| LayerLevel | Technology | Version | SecurityRelevance |
 |------|-----|------|-----------|
-| **语言** | {LANG} | {LANG_VER} | {LANG_SECURITY} |
-| **框架** | {FRAMEWORK} | {FRAMEWORK_VER} | {FRAMEWORK_SECURITY} |
-| **数据库** | {DATABASE} | {DB_VER} | {DB_SECURITY} |
-| **认证** | {AUTH_TECH} | {AUTH_VER} | {AUTH_SECURITY} |
+| **Language** | {LANG} | {LANG_VER} | {LANG_SECURITY} |
+| **Framework** | {FRAMEWORK} | {FRAMEWORK_VER} | {FRAMEWORK_SECURITY} |
+| **Database** | {DATABASE} | {DB_VER} | {DB_SECURITY} |
+| **Authentication** | {AUTH_TECH} | {AUTH_VER} | {AUTH_SECURITY} |
 
 ---
 
-## 4. 安全功能设计评估 (Security Control Assessment)
+## 4. Security Design Assessment (Security Control Assessment)
 
-### 4.1 评估矩阵 (9 安全域)
+### 4.1 AssessmentMatrix (9 Security Domain)
 
-| 安全域 | 状态 | 发现数 | 关键问题 |
+| Security Domain | Status | FindingCount | KeyIssue |
 |--------|------|--------|---------|
-| 1. 认证 (Authentication) | {AUTH_STATUS} | {AUTH_FINDINGS} | {AUTH_ISSUES} |
-| 2. 授权 (Authorization) | {AUTHZ_STATUS} | {AUTHZ_FINDINGS} | {AUTHZ_ISSUES} |
-| 3. 输入验证 | {INPUT_STATUS} | {INPUT_FINDINGS} | {INPUT_ISSUES} |
-| 4. 输出编码 | {OUTPUT_STATUS} | {OUTPUT_FINDINGS} | {OUTPUT_ISSUES} |
-| 5. 加密 (Cryptography) | {CRYPTO_STATUS} | {CRYPTO_FINDINGS} | {CRYPTO_ISSUES} |
-| 6. 密钥管理 | {KEY_STATUS} | {KEY_FINDINGS} | {KEY_ISSUES} |
-| 7. 错误处理 | {ERROR_STATUS} | {ERROR_FINDINGS} | {ERROR_ISSUES} |
-| 8. 日志审计 | {LOG_STATUS} | {LOG_FINDINGS} | {LOG_ISSUES} |
-| 9. 通信安全 | {COMM_STATUS} | {COMM_FINDINGS} | {COMM_ISSUES} |
+| 1. Authentication (Authentication) | {AUTH_STATUS} | {AUTH_FINDINGS} | {AUTH_ISSUES} |
+| 2. Authorization (Authorization) | {AUTHZ_STATUS} | {AUTHZ_FINDINGS} | {AUTHZ_ISSUES} |
+| 3. InputValidation | {INPUT_STATUS} | {INPUT_FINDINGS} | {INPUT_ISSUES} |
+| 4. OutputEncoding | {OUTPUT_STATUS} | {OUTPUT_FINDINGS} | {OUTPUT_ISSUES} |
+| 5. Encryption (Cryptography) | {CRYPTO_STATUS} | {CRYPTO_FINDINGS} | {CRYPTO_ISSUES} |
+| 6. KeyManagement | {KEY_STATUS} | {KEY_FINDINGS} | {KEY_ISSUES} |
+| 7. ErrorProcessing | {ERROR_STATUS} | {ERROR_FINDINGS} | {ERROR_ISSUES} |
+| 8. LogAudit | {LOG_STATUS} | {LOG_FINDINGS} | {LOG_ISSUES} |
+| 9. CommunicationSecurity | {COMM_STATUS} | {COMM_FINDINGS} | {COMM_ISSUES} |
 
-**状态说明**: ✅ 已实现 | ⚠️ 部分实现 | ❌ 缺失 | ➖ 不适用
+**StatusDescription**: ✅ Implemented | ⚠️ Partially Implemented | ❌ Missing | ➖ Not Applicable
 
-### 4.2 关键安全发现详情
+### 4.2 KeySecurityFindingDetails
 
 {SECURITY_DESIGN_FINDINGS_SECTION}
 <!--
-格式:
+Format:
 #### SF-P4-{SEQ}: {FINDING_TITLE}
-- **安全域**: {DOMAIN}
-- **发现类型**: {TYPE}
-- **当前状态**: {CURRENT_STATE}
-- **推荐改进**: {RECOMMENDATION}
+- **Security Domain**: {DOMAIN}
+- **FindingType**: {TYPE}
+- ** when BeforeStatus**: {CURRENT_STATE}
+- **RecommendedImprovement**: {RECOMMENDATION}
 -->
 
-### 4.3 详细文档参考
+### 4.3 DetailedDocumentation Reference
 
-> 📄 **完整安全功能设计评估详情请参见阶段文档**:
-> - 📁 `P2-DFD-ANALYSIS.md` — 数据流图分析、数据流转路径、关键模块识别
-> - 📁 `P3-TRUST-BOUNDARY.md` — 信任边界划分、安全域定义、边界穿越分析
-> - 📁 `P4-SECURITY-DESIGN-REVIEW.md` — 9大安全域评估详情、认证/授权/加密等安全功能实现分析
+> 📄 **CompleteSecurity Design AssessmentDetailsPlease refer toPhaseDocumentation**:
+> - 📁 `P2-DFD-ANALYSIS.md` — Data Flow Diagram Analysis、DataFlowTransformPath、KeyModuleIdentification
+> - 📁 `P3-TRUST-BOUNDARY.md` — TrustBoundaryDivision、Security DomainDefinition、BoundaryCrossingAnalysis
+> - 📁 `P4-SECURITY-DESIGN-REVIEW.md` — 9MajorSecurity DomainAssessmentDetails、Authentication/Authorization/EncryptionetcSecurityFunctionImplementationAnalysis
 
 ---
 
-## 3. STRIDE 威胁分析 (Threat Summary)
+## 3. STRIDE Threat Analysis (Threat Summary)
 
-### 3.1 威胁汇总表
+### 3.1 Threat SummaryTable
 
-| 威胁ID | STRIDE | 元素 | 威胁名称 | CWE | CVSS | 严重程度 | 状态 |
+| Threat ID | STRIDE | Element | ThreatName | CWE | CVSS | Severity | Status |
 |--------|--------|------|---------|-----|------|---------|------|
 {THREAT_SUMMARY_TABLE}
 <!--
-格式:
-| T-S-P01-001 | S | P01 | JWT Token 伪造 | CWE-347 | 8.8 | 🔴 Critical | 待修复 |
-| T-T-DS01-001 | T | DS01 | SQL 注入 | CWE-89 | 9.8 | 🔴 Critical | 待修复 |
+Format:
+| T-S-P01-001 | S | P01 | JWT Token Forgery | CWE-347 | 8.8 | 🔴 Critical | PendingFix |
+| T-T-DS01-001 | T | DS01 | SQL Injection | CWE-89 | 9.8 | 🔴 Critical | PendingFix |
 -->
 
-### 3.2 Spoofing (欺骗) 威胁
+### 3.2 Spoofing (Deception) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {SPOOFING_THREATS_TABLE}
 
-### 3.3 Tampering (篡改) 威胁
+### 3.3 Tampering (Tampering) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {TAMPERING_THREATS_TABLE}
 
-### 3.4 Repudiation (抵赖) 威胁
+### 3.4 Repudiation (Repudiation) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {REPUDIATION_THREATS_TABLE}
 
-### 3.5 Information Disclosure (信息泄露) 威胁
+### 3.5 Information Disclosure (InformationDisclosure) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {INFO_DISCLOSURE_THREATS_TABLE}
 
-### 3.6 Denial of Service (拒绝服务) 威胁
+### 3.6 Denial of Service (DenialService) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {DOS_THREATS_TABLE}
 
-### 3.7 Elevation of Privilege (权限提升) 威胁
+### 3.7 Elevation of Privilege (PermissionElevation) Threat
 
-| 威胁ID | 元素 | 威胁名称 | CWE | CVSS | 严重程度 |
+| Threat ID | Element | ThreatName | CWE | CVSS | Severity |
 |--------|------|---------|-----|------|---------|
 {EOP_THREATS_TABLE}
 
-### 3.8 威胁详细分析
+### 3.8 ThreatDetailedAnalysis
 
 {THREAT_DETAILS_SECTION}
 <!--
-使用 risk-detail.schema.md 定义的完整格式
-每个 Critical/High 威胁一个完整详情块
+Usage risk-detail.schema.md DefinitionCompleteFormat
+Each Critical/High ThreatOneCompleteDetailsBlock
 -->
 
-### 3.9 详细文档参考
+### 3.9 DetailedDocumentation Reference
 
-> 📄 **完整威胁分析详情请参见阶段文档**:
-> - 📁 `P5-STRIDE-THREATS.md` — 包含完整的 STRIDE 威胁识别过程、威胁枚举、CWE/CAPEC 映射详情
+> 📄 **CompleteThreat AnalysisDetailsPlease refer toPhaseDocumentation**:
+> - 📁 `P5-STRIDE-THREATS.md` — IncludeComplete STRIDE ThreatIdentificationProcedure、ThreatEnum、CWE/CAPEC MappingDetails
 
 ---
 
-## 5. 风险验证与POC设计 (Critical Vulnerabilities)
+## 5. Risk Validation and POCDesign (Critical Vulnerabilities)
 
-> ⚡ **本章节基于 Phase 6 风险验证工作流输出**
+> ⚡ **ThisSection based on Phase 6 Risk ValidationWorkflowOutput**
 
-### 5.1 POC 验证方法论
+### 5.1 POC Validation MethodTheory
 
-#### 验证状态说明
+#### Validation StatusDescription
 
-| 状态标识 | 含义 | 判定标准 |
+| StatusIdentifier | ContainDefinition | DeterminationStandard |
 |---------|------|---------|
-| ✅ **已验证** | POC 执行成功，漏洞真实可利用 | 成功复现攻击行为并获得预期结果 |
-| ⚠️ **需验证** | 理论可行但需手动验证 | 需要特定环境或权限才能验证 |
-| 📋 **理论可行** | 基于代码分析推导，未执行 | 代码路径存在但未实际测试 |
-| ❌ **已排除** | 验证后确认不可利用 | 存在缓解措施或条件不满足 |
+| ✅ **Verified** | POC ExecutionSuccess，VulnerabilityRealExploitableUse | SuccessReproduceAttackActionAsAndobtain Expected Result |
+| ⚠️ **NeedValidation** | Theoretically Feasible but Need Manual Validation | NeedRequireSpecificEnvironment or PermissionAbilityValidation |
+| 📋 **Theoretically Feasible** | based on CodeAnalysisDerivation，NotExecution | CodePathExists but NotActualTesting |
+| ❌ **Excluded** | ValidationAfterConfirmNotExploitableUse | ExistsMitigation Measures or ConditionNotSatisfy |
 
-#### 验证覆盖统计
+#### Validation Coverage Statistics
 
-| 威胁级别 | 已识别 | 已验证 | 待验证 | 已排除 | 验证率 |
+| ThreatLevel | Identified | Verified | Pending Verification | Excluded | Verification Rate |
 |---------|--------|--------|--------|--------|--------|
 | 🔴 Critical | {CRITICAL_IDENTIFIED} | {CRITICAL_VERIFIED} | {CRITICAL_PENDING} | {CRITICAL_EXCLUDED} | {CRITICAL_RATE}% |
 | 🟠 High | {HIGH_IDENTIFIED} | {HIGH_VERIFIED} | {HIGH_PENDING} | {HIGH_EXCLUDED} | {HIGH_RATE}% |
 | 🟡 Medium | {MEDIUM_IDENTIFIED} | {MEDIUM_VERIFIED} | {MEDIUM_PENDING} | {MEDIUM_EXCLUDED} | {MEDIUM_RATE}% |
-| **总计** | {TOTAL_IDENTIFIED} | {TOTAL_VERIFIED} | {TOTAL_PENDING} | {TOTAL_EXCLUDED} | {TOTAL_RATE}% |
+| **Total** | {TOTAL_IDENTIFIED} | {TOTAL_VERIFIED} | {TOTAL_PENDING} | {TOTAL_EXCLUDED} | {TOTAL_RATE}% |
 
-### 5.2 POC 验证详情
+### 5.2 POC ValidationDetails
 
 {POC_DETAILS_SECTION}
 <!--
-每个 Critical/High 威胁一个 POC 块，格式如下:
+Each Critical/High ThreatOne POC Block，FormatAs follows:
 
 #### POC-{SEQ}: {POC_TITLE}
 
-| 属性 | 值 |
+| Property | Value |
 |------|-----|
-| **关联威胁** | {THREAT_ID} |
-| **威胁类型** | {STRIDE_TYPE} |
-| **验证状态** | {VERIFICATION_STATUS} |
-| **利用难度** | {EXPLOITATION_DIFFICULTY} |
-| **前置条件** | {PREREQUISITES} |
+| **Related Threats** | {THREAT_ID} |
+| **ThreatType** | {STRIDE_TYPE} |
+| **Validation Status** | {VERIFICATION_STATUS} |
+| **Exploitation Difficulty** | {EXPLOITATION_DIFFICULTY} |
+| **Prerequisites** | {PREREQUISITES} |
 
-**漏洞位置**:
+**Vulnerability Location**:
 ```
-文件: {FILE_PATH}
-函数: {FUNCTION_NAME}
-行号: {LINE_NUMBER}
+File: {FILE_PATH}
+Function: {FUNCTION_NAME}
+Line Number: {LINE_NUMBER}
 ```
 
-**漏洞代码片段**:
+**Vulnerable CodeSnippet**:
 ```{LANGUAGE}
 {VULNERABLE_CODE_SNIPPET}
 ```
 
-**利用步骤**:
+**Exploitation Steps**:
 1. {STEP_1}
 2. {STEP_2}
 3. {STEP_3}
 
-**POC 代码**:
+**POC Code**:
 ```{LANGUAGE}
 {POC_CODE}
 ```
 
-**预期结果**:
+**Expected Result**:
 ```
 {EXPECTED_OUTPUT}
 ```
 
-**验证截图/日志** (如有):
+**ValidationCutoffDiagram/Log** (Such asHave):
 ```
 {VERIFICATION_LOG}
 ```
 
-**风险评估**:
-- 利用复杂度: {COMPLEXITY}
-- 攻击向量: {ATTACK_VECTOR}
-- 影响范围: {IMPACT_SCOPE}
-- 数据敏感性: {DATA_SENSITIVITY}
+**RiskAssessment**:
+- ExploitUseComplexity: {COMPLEXITY}
+- Attack Vector: {ATTACK_VECTOR}
+- Impact Scope: {IMPACT_SCOPE}
+- DataSensitiveCapability: {DATA_SENSITIVITY}
 -->
 
-### 5.3 POC 汇总表
+### 5.3 POC SummaryTable
 
-| POC-ID | 威胁ID | 漏洞名称 | 验证状态 | 利用难度 | CVSS | 优先级 |
+| POC-ID | Threat ID | VulnerabilityName | Validation Status | Exploitation Difficulty | CVSS | Priority |
 |--------|--------|---------|---------|---------|------|--------|
 {POC_SUMMARY_TABLE}
 <!--
-格式:
-| POC-001 | T-S-P01-001 | JWT Token 伪造 | ✅ 已验证 | 中 | 8.8 | P0 |
-| POC-002 | T-T-DS01-001 | SQL 注入 | ✅ 已验证 | 低 | 9.8 | P0 |
-| POC-003 | T-I-P02-001 | 敏感信息泄露 | ⚠️ 需验证 | 低 | 7.5 | P1 |
+Format:
+| POC-001 | T-S-P01-001 | JWT Token Forgery | ✅ Verified | Medium | 8.8 | P0 |
+| POC-002 | T-T-DS01-001 | SQL Injection | ✅ Verified | Low | 9.8 | P0 |
+| POC-003 | T-I-P02-001 | SensitiveInformationDisclosure | ⚠️ NeedValidation | Low | 7.5 | P1 |
 -->
 
-### 5.4 详细文档参考
+### 5.4 DetailedDocumentation Reference
 
-> 📄 **完整风险验证与POC设计详情请参见阶段文档**:
-> - 📁 `P6-RISK-VALIDATION.md` — 包含完整的风险验证过程、POC代码详情、验证结果记录、攻击路径可行性分析
+> 📄 **CompleteRisk Validation and POCDesignDetailsPlease refer toPhaseDocumentation**:
+> - 📁 `P6-RISK-VALIDATION.md` — IncludeCompleteRisk ValidationProcedure、POC CodeDetails、ValidationResultRecord、Attack PathCanActionCapabilityAnalysis
 
 ---
 
-## 6. 攻击路径分析
+## 6. Attack Path Analysis
 
-> ⚡ **本章节展示高危威胁的完整攻击链和利用路径**
+> ⚡ **ThisSectionDisplayHighRiskThreatCompleteAttack Chain and ExploitUsePath**
 
-### 6.1 攻击路径可行性矩阵
+### 6.1 Attack Path Feasibility Matrix
 
-| 攻击路径 | 入口点 | 关键节点 | 最终目标 | 可行性评分 | 检测难度 | 优先修复 |
+| Attack Path | Entry Point | Key Nodes | Final Target | Feasibility Score | Detection Difficulty | Priority Fix |
 |---------|--------|---------|---------|-----------|---------|---------|
 {ATTACK_PATH_MATRIX}
 <!--
-格式:
-| AP-001: 认证绕过→数据库访问 | API Gateway | Auth Service | 数据库 | 8.5/10 | 低 | ✅ |
-| AP-002: 配置注入→代码执行 | 配置文件 | Worker | 服务器 | 7.0/10 | 中 | ✅ |
-| AP-003: 信息泄露→权限提升 | 错误页面 | API | 管理后台 | 6.5/10 | 高 | ⚠️ |
+Format:
+| AP-001: AuthenticationBypass→DatabaseAccess | API Gateway | Auth Service | Database | 8.5/10 | Low | ✅ |
+| AP-002: ConfigurationInjection→CodeExecution | ConfigurationFile | Worker | ServiceTool | 7.0/10 | Medium | ✅ |
+| AP-003: InformationDisclosure→PermissionElevation | ErrorPage | API | ManagementAfterPlatform | 6.5/10 | High | ⚠️ |
 -->
 
-### 6.2 攻击链详细分析
+### 6.2 Attack Chain Detailed Analysis
 
 {ATTACK_CHAIN_DETAILS_SECTION}
 <!--
-每条高危攻击链一个详细分析块，格式如下:
+EachHighRiskAttack ChainOneDetailedAnalysisBlock，FormatAs follows:
 
-#### 攻击链 {SEQ}: {ATTACK_CHAIN_TITLE}
+#### Attack Chain {SEQ}: {ATTACK_CHAIN_TITLE}
 
-**攻击链概要**:
+**Attack ChainSummary**:
 
-| 属性 | 值 |
+| Property | Value |
 |------|-----|
-| **起始点** | {ENTRY_POINT} |
-| **攻击目标** | {TARGET} |
-| **影响范围** | {IMPACT_SCOPE} |
-| **利用难度** | {DIFFICULTY} |
-| **关联威胁** | {RELATED_THREATS} |
+| **Starting point** | {ENTRY_POINT} |
+| **AttackTarget** | {TARGET} |
+| **Impact Scope** | {IMPACT_SCOPE} |
+| **Exploitation Difficulty** | {DIFFICULTY} |
+| **Related Threats** | {RELATED_THREATS} |
 
-**攻击流程图**:
+**Attack Flow Diagram**:
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     攻击链: {ATTACK_CHAIN_NAME}                  │
+│ Attack Chain: {ATTACK_CHAIN_NAME} │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  Step 1: {STEP1_TITLE}                                          │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  攻击者 ──→ {TARGET1}                                     │   │
-│  │  动作: {ACTION1}                                          │   │
-│  │  代码位置: {CODE_LOC1}                                    │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼                                   │
-│  Step 2: {STEP2_TITLE}                                          │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  {SOURCE2} ──→ {TARGET2}                                  │   │
-│  │  动作: {ACTION2}                                          │   │
-│  │  代码位置: {CODE_LOC2}                                    │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                              │                                   │
-│                              ▼                                   │
-│  Step N: {STEPN_TITLE}                                          │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  结果: {FINAL_RESULT}                                     │   │
-│  │  影响: {FINAL_IMPACT}                                     │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│                                                                  │
+│ │
+│ Step 1: {STEP1_TITLE} │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ AttackActor ──→ {TARGET1} │ │
+│ │ Action: {ACTION1} │ │
+│ │ Code Location: {CODE_LOC1} │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ │
+│ Step 2: {STEP2_TITLE} │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ {SOURCE2} ──→ {TARGET2} │ │
+│ │ Action: {ACTION2} │ │
+│ │ Code Location: {CODE_LOC2} │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │ │
+│ ▼ │
+│ Step N: {STEPN_TITLE} │
+│ ┌─────────────────────────────────────────────────────────┐ │
+│ │ Result: {FINAL_RESULT} │ │
+│ │ Impact: {FINAL_IMPACT} │ │
+│ └─────────────────────────────────────────────────────────┘ │
+│ │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-**步骤分解**:
+**StepDecompose**:
 
-| 步骤 | 攻击动作 | 利用漏洞 | 数据/权限变化 |
+| Step | AttackAction | ExploitUseVulnerability | Data/PermissionChange |
 |------|---------|---------|--------------|
 | 1 | {ACTION_1} | {VULN_1} | {CHANGE_1} |
 | 2 | {ACTION_2} | {VULN_2} | {CHANGE_2} |
 | N | {ACTION_N} | {VULN_N} | {CHANGE_N} |
 
-**前置条件**:
+**Prerequisites**:
 1. {PREREQ_1}
 2. {PREREQ_2}
 
-**利用代码/命令**:
+**ExploitUseCode/Command**:
 ```{LANGUAGE}
 {EXPLOITATION_CODE}
 ```
 
-**检测指标 (IOC)**:
+**DetectionMetric (IOC)**:
 - {IOC_1}
 - {IOC_2}
 
-**防御建议**:
-1. **切断点 1**: {DEFENSE_1}
-2. **切断点 2**: {DEFENSE_2}
+**Defense Recommendations**:
+1. **Cutpoint 1**: {DEFENSE_1}
+2. **Cutpoint 2**: {DEFENSE_2}
 -->
 
-### 6.3 攻击面热力图
+### 6.3 Attack Surface Heatmap
 
 ```
 {ATTACK_SURFACE_HEATMAP_ASCII}
 ```
 <!--
-示例:
+Example:
 ┌─────────────────────────────────────────────────────────────────┐
-│                        攻击面热力分析                            │
+│ Attack SurfaceHeatmapAnalysis │
 ├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│  组件名称          威胁数   攻击路径   风险评分   热力等级       │
-│  ─────────────────────────────────────────────────────────────  │
-│  API Gateway         12        4        9.2      ████████████   │
-│  Auth Service         8        3        8.5      ██████████     │
-│  Database             6        2        7.8      ████████       │
-│  File Storage         5        2        7.0      ███████        │
-│  Worker Service       3        1        5.5      █████          │
-│  Frontend             2        1        4.0      ████           │
-│                                                                  │
-│  图例: █ = 1.0 风险单位                                          │
-│  ████████████ = Critical (9.0+)                                 │
-│  ██████████   = High (7.0-8.9)                                  │
-│  ████████     = Medium (5.0-6.9)                                │
-│  █████        = Low (< 5.0)                                     │
-│                                                                  │
+│ │
+│ Component Name ThreatCount Attack Path RiskScore HeatmapLevel │
+│ ───────────────────────────────────────────────────────────── │
+│ API Gateway 12 4 9.2 ████████████ │
+│ Auth Service 8 3 8.5 ██████████ │
+│ Database 6 2 7.8 ████████ │
+│ File Storage 5 2 7.0 ███████ │
+│ Worker Service 3 1 5.5 █████ │
+│ Frontend 2 1 4.0 ████ │
+│ │
+│ DiagramExample: █ = 1.0 RiskUnit │
+│ ████████████ = Critical (9.0+) │
+│ ██████████ = High (7.0-8.9) │
+│ ████████ = Medium (5.0-6.9) │
+│ █████ = Low (< 5.0) │
+│ │
 └─────────────────────────────────────────────────────────────────┘
 -->
 
-### 6.4 攻击路径优先级排序
+### 6.4 Attack PathPrioritySort
 
-| 优先级 | 攻击路径 | 风险评分 | 修复建议 | 预计工作量 |
+| Priority | Attack Path | RiskScore | FixRecommendation | EstimatedWorkload |
 |--------|---------|---------|---------|-----------|
 | P0 | {AP_P0_1} | {SCORE_P0_1} | {FIX_P0_1} | {EFFORT_P0_1} |
 | P0 | {AP_P0_2} | {SCORE_P0_2} | {FIX_P0_2} | {EFFORT_P0_2} |
@@ -537,87 +537,87 @@
 
 ---
 
-## 7. 威胁优先级矩阵
+## 7. Threat Priority Matrix
 
-### 7.1 风险评估矩阵
+### 7.1 Risk Assessment Matrix
 
 ```
-              ┌─────────────────────────────────────────────────┐
-    影响      │                    可利用性                      │
-              │  Very High     High        Medium      Low      │
-   ──────────┼─────────────────────────────────────────────────┤
-   Critical  │  🔴 P0        🔴 P0       🟠 P1      🟠 P1      │
-   High      │  🔴 P0        🟠 P1       🟠 P1      🟡 P2      │
-   Medium    │  🟠 P1        🟠 P1       🟡 P2      🟡 P2      │
-   Low       │  🟡 P2        🟡 P2       🟢 P3      🟢 P3      │
-              └─────────────────────────────────────────────────┘
+ ┌─────────────────────────────────────────────────┐
+ Impact │ ExploitableUseCapability │
+ │ Very High High Medium Low │
+ ──────────┼─────────────────────────────────────────────────┤
+ Critical │ 🔴 P0 🔴 P0 🟠 P1 🟠 P1 │
+ High │ 🔴 P0 🟠 P1 🟠 P1 🟡 P2 │
+ Medium │ 🟠 P1 🟠 P1 🟡 P2 🟡 P2 │
+ Low │ 🟡 P2 🟡 P2 🟢 P3 🟢 P3 │
+ └─────────────────────────────────────────────────┘
 ```
 
-### 7.2 威胁分布矩阵
+### 7.2 Threat Distribution Matrix
 
 {THREAT_DISTRIBUTION_MATRIX}
 <!--
-按上述矩阵格式展示每个威胁的分布位置
+ByAboveDescriptionMatrixFormatDisplayEachThreatDistributionLocation
 -->
 
-### 7.3 攻击面热力图
+### 7.3 Attack Surface Heatmap
 
 ```
 {ATTACK_SURFACE_HEATMAP}
 ```
 <!--
-示例:
-组件          威胁数  Critical  High   Medium   Low    风险等级
+Example:
+Component ThreatCount Critical High Medium Low RiskLevel
 ─────────────────────────────────────────────────────────────
-API Gateway     12      3        5       3       1     ████████ Critical
-Auth Service     8      2        3       2       1     ██████   High
-Database         6      1        2       2       1     █████    High
-Frontend         4      0        1       2       1     ███      Medium
-Worker           2      0        0       1       1     ██       Low
+API Gateway 12 3 5 3 1 ████████ Critical
+Auth Service 8 2 3 2 1 ██████ High
+Database 6 1 2 2 1 █████ High
+Frontend 4 0 1 2 1 ███ Medium
+Worker 2 0 0 1 1 ██ Low
 -->
 
 ---
 
-## 8. 缓解措施建议
+## 8. Mitigation Recommendations
 
-### 8.1 P0 - 立即修复
+### 8.1 P0 - Immediate Fix
 
 {P0_MITIGATIONS_SECTION}
 <!--
-格式:
+Format:
 #### M-001: {MITIGATION_TITLE}
-**针对威胁**: {THREAT_IDS}
-**风险降低**: {RISK_REDUCTION}%
+**ForThreat**: {THREAT_IDS}
+**Risk Reduction**: {RISK_REDUCTION}%
 
-**当前状态**:
+** when BeforeStatus**:
 {CURRENT_STATE}
 
-**推荐控制**:
+**RecommendedControl**:
 {RECOMMENDED_CONTROL}
 
 ```{LANGUAGE}
-// 实现代码示例
+// ImplementationCodeExample
 {CODE_EXAMPLE}
 ```
 -->
 
-### 8.2 P1 - 紧急
+### 8.2 P1 - Urgent
 
 {P1_MITIGATIONS_SECTION}
 
-### 8.3 P2 - 高优先级
+### 8.3 P2 - HighPriority
 
 {P2_MITIGATIONS_SECTION}
 
-### 8.4 实施路线图
+### 8.4 Implementation Roadmap
 
-| 阶段 | 措施 | 优先级 | 依赖 | 风险降低 |
+| Phase | Measure | Priority | Dependency | Risk Reduction |
 |------|------|--------|------|---------|
-| 阶段 1 | {PHASE1_MEASURES} | P0 | 无 | {PHASE1_REDUCTION}% |
-| 阶段 2 | {PHASE2_MEASURES} | P1 | 阶段 1 | {PHASE2_REDUCTION}% |
-| 阶段 3 | {PHASE3_MEASURES} | P2 | 阶段 2 | {PHASE3_REDUCTION}% |
+| Phase 1 | {PHASE1_MEASURES} | P0 | None | {PHASE1_REDUCTION}% |
+| Phase 2 | {PHASE2_MEASURES} | P1 | Phase 1 | {PHASE2_REDUCTION}% |
+| Phase 3 | {PHASE3_MEASURES} | P2 | Phase 2 | {PHASE3_REDUCTION}% |
 
-**防御纵深架构**:
+**Defense-in-Depth Architecture**:
 
 ```
 {DEFENSE_IN_DEPTH_ASCII}
@@ -625,11 +625,11 @@ Worker           2      0        0       1       1     ██       Low
 
 ---
 
-## 9. 合规性映射
+## 9. Compliance Mapping
 
-### 9.1 OWASP Top 10 (2021) 映射
+### 9.1 OWASP Top 10 (2021) Mapping
 
-| OWASP | 名称 | 相关威胁 | 状态 |
+| OWASP | Name | RelatedThreat | Status |
 |-------|------|---------|------|
 | A01 | Broken Access Control | {A01_THREATS} | {A01_STATUS} |
 | A02 | Cryptographic Failures | {A02_THREATS} | {A02_STATUS} |
@@ -642,61 +642,61 @@ Worker           2      0        0       1       1     ██       Low
 | A09 | Logging Failures | {A09_THREATS} | {A09_STATUS} |
 | A10 | SSRF | {A10_THREATS} | {A10_STATUS} |
 
-### 9.2 OWASP LLM Top 10 映射
+### 9.2 OWASP LLM Top 10 Mapping
 
-<!-- 仅当项目包含 AI/LLM 组件时生成 -->
+<!-- Only when ProjectInclude AI/LLM ComponentWhenGenerate -->
 {OWASP_LLM_MAPPING_SECTION}
 
 ---
 
-## 附录
+## Appendices
 
-### 附录 A: DFD 元素完整清单
+### Appendices A: DFD ElementCompleteList
 
-#### A.1 进程 (Processes)
+#### A.1 Process (Processes)
 
-| ID | 名称 | 描述 | 威胁数 |
+| ID | Name | Description | ThreatCount |
 |----|------|------|--------|
 {PROCESSES_TABLE}
 
-#### A.2 数据存储 (Data Stores)
+#### A.2 DataStorage (Data Stores)
 
-| ID | 名称 | 描述 | 敏感数据 | 威胁数 |
+| ID | Name | Description | SensitiveData | ThreatCount |
 |----|------|------|---------|--------|
 {DATA_STORES_TABLE}
 
-#### A.3 数据流 (Data Flows)
+#### A.3 DataFlow (Data Flows)
 
-| ID | 源 | 目标 | 协议 | 加密 | 威胁数 |
+| ID | Source | Target | Protocol | Encryption | ThreatCount |
 |----|-----|------|------|------|--------|
 {DATA_FLOWS_TABLE}
 
-#### A.4 外部实体 (External Entities)
+#### A.4 ExternalEntity (External Entities)
 
-| ID | 名称 | 类型 | 描述 |
+| ID | Name | Type | Description |
 |----|------|------|------|
 {EXTERNAL_ENTITIES_TABLE}
 
-### 附录 B: Mermaid DFD 源码
+### Appendices B: Mermaid DFD SourceCode
 
 ```mermaid
 {MERMAID_DFD_SOURCE}
 ```
 
-### 附录 C: 威胁完整清单
+### Appendices C: Complete Threat List
 
 {FULL_THREAT_LIST}
 <!--
-所有威胁的简化列表，包含 ID、名称、CWE、严重程度、状态
+AllThreatSimplifiedListTable，Include ID、Name、CWE、Severity、Status
 -->
 
-### 附录 D: 知识库查询记录
+### Appendices D: Knowledge Base Query Records
 
-| 查询类型 | 查询参数 | 结果 | 使用位置 |
+| Query Type | Query Parameters | Result | UsageLocation |
 |---------|---------|------|---------|
 {KB_QUERIES_TABLE}
 
-### 附录 E: 参考资料
+### Appendices E: References
 
 1. Microsoft STRIDE Threat Modeling
 2. OWASP Top 10 2021
@@ -706,10 +706,10 @@ Worker           2      0        0       1       1     ██       Low
 
 ---
 
-**报告结束**
+**ReportEnd**
 
 ---
 
-> **免责声明**: 本风险评估报告基于提供的代码和信息进行自动化分析生成。
-> 实际安全风险可能因运行环境、配置和使用方式而异。
-> 建议结合渗透测试和安全审计进行综合评估。
+> **DisclaimerDeclaration**: ThisRisk Assessment Report based on Provided Code and InformationProceedActionFromAutomationAnalysisGenerate。
+> ActualSecurityRiskLikelyDue to operationActionEnvironment、Configuration and UsageMethod and Abnormal。
+> RecommendationCombinePenetrationTesting and SecurityAuditProceedActionComprehensiveAssessment。

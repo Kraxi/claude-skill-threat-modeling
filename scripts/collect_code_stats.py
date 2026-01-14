@@ -61,12 +61,12 @@ LANGUAGE_EXTENSIONS = {
 
 # Security-related path patterns
 SECURITY_PATTERNS = {
-    '认证/授权': ['auth', 'login', 'session', 'oauth', 'jwt', 'permission', 'access'],
-    '加密/密钥': ['crypto', 'encrypt', 'decrypt', 'key', 'secret', 'hash', 'sign'],
-    '数据访问': ['model', 'database', 'db', 'repository', 'dao', 'orm', 'query'],
-    'API接口': ['api', 'route', 'endpoint', 'controller', 'handler', 'view'],
-    '配置管理': ['config', 'setting', 'env', 'secret'],
-    '输入验证': ['validate', 'sanitize', 'filter', 'escape', 'schema'],
+    'Authentication/Authorization': ['auth', 'login', 'session', 'oauth', 'jwt', 'permission', 'access'],
+    'Encryption/Keys': ['crypto', 'encrypt', 'decrypt', 'key', 'secret', 'hash', 'sign'],
+    'Data Access': ['model', 'database', 'db', 'repository', 'dao', 'orm', 'query'],
+    'API Interface': ['api', 'route', 'endpoint', 'controller', 'handler', 'view'],
+    'Configuration': ['config', 'setting', 'env', 'secret'],
+    'Input Validation': ['validate', 'sanitize', 'filter', 'escape', 'schema'],
 }
 
 # Directories to exclude
@@ -98,7 +98,7 @@ class SecurityModuleStats:
     paths: List[str] = field(default_factory=list)
     file_count: int = 0
     loc: int = 0
-    security_level: str = "中"
+    security_level: str = "Medium"
 
 
 @dataclass
@@ -248,7 +248,7 @@ def collect_stats(project_path: str) -> ProjectStats:
     for category in SECURITY_PATTERNS:
         security_stats[category] = SecurityModuleStats(
             category=category,
-            security_level="高" if category in ['认证/授权', '加密/密钥', '数据访问'] else "中"
+            security_level="High" if category in ['Authentication/Authorization', 'Encryption/Keys', 'Data Access'] else "Medium"
         )
 
     # Walk the project directory
@@ -442,21 +442,21 @@ def format_markdown(stats: ProjectStats) -> str:
     lines = []
 
     # Project Scale Metrics
-    lines.append("## 项目规模指标\n")
-    lines.append("### 代码统计")
-    lines.append("| 指标 | 数值 | 说明 |")
-    lines.append("|------|------|------|")
-    lines.append(f"| **代码总行数** | {stats.total_loc:,} | 不含空行和注释 |")
-    lines.append(f"| **文件总数** | {stats.total_files:,} | 源代码文件 |")
-    lines.append(f"| **目录数** | {stats.total_dirs:,} | 代码目录 |")
-    lines.append(f"| **主要模块数** | {stats.module_count} | 顶层功能模块 |")
-    lines.append(f"| **依赖数量** | {stats.dependency_count} | 直接依赖 |")
+    lines.append("## Project Scale Metrics\n")
+    lines.append("### Code Statistics")
+    lines.append("| Indicator | Value | Description |")
+    lines.append("|-----------|-------|-------------|")
+    lines.append(f"| **Total Lines of Code** | {stats.total_loc:,} | Excluding blanks and comments |")
+    lines.append(f"| **Total Files** | {stats.total_files:,} | Source code files |")
+    lines.append(f"| **Directory Count** | {stats.total_dirs:,} | Code directories |")
+    lines.append(f"| **Main Module Count** | {stats.module_count} | Top-level functional modules |")
+    lines.append(f"| **Dependency Count** | {stats.dependency_count} | Direct dependencies |")
     lines.append("")
 
     # Language Distribution
-    lines.append("### 语言分布")
-    lines.append("| 语言 | 文件数 | 代码行数 | 占比 |")
-    lines.append("|------|--------|---------|------|")
+    lines.append("### Language Distribution")
+    lines.append("| Language | Files | Lines of Code | Percentage |")
+    lines.append("|----------|-------|---------------|------------|")
     for lang in stats.languages[:10]:  # Top 10 languages
         pct = round(lang.loc / stats.total_loc * 100, 1) if stats.total_loc > 0 else 0
         lines.append(f"| {lang.name} | {lang.file_count:,} | {lang.loc:,} | {pct}% |")
@@ -464,9 +464,9 @@ def format_markdown(stats: ProjectStats) -> str:
 
     # Security Modules
     if stats.security_modules:
-        lines.append("### 安全相关模块统计")
-        lines.append("| 模块类型 | 路径 | 文件数 | 行数 | 安全等级 |")
-        lines.append("|---------|------|--------|------|---------|")
+        lines.append("### Security-Related Module Statistics")
+        lines.append("| Module Type | Path | Files | LOC | Security Level |")
+        lines.append("|-------------|------|-------|-----|----------------|")
         for sec in stats.security_modules:
             if sec.file_count > 0:
                 path = sec.paths[0] if sec.paths else "-"

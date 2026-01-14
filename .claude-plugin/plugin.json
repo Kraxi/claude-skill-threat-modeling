@@ -1,12 +1,23 @@
 {
   "name": "skill-threat-modeling",
-  "version": "2.1.2",
-  "description": "Code-First Deep Threat Modeling Skill - Automated 8-phase security analysis with STRIDE methodology, knowledge base integration, and risk validation",
+  "version": "2.2.0",
+  "description": "Code-First Deep Threat Modeling Skill - Automated 8-phase security analysis with STRIDE methodology, knowledge base integration, and risk validation. English-only fork.",
   "author": {
-    "name": "fr33d3m0n",
-    "url": "https://github.com/fr33d3m0n"
+    "name": "Kraxi",
+    "url": "https://github.com/Kraxi"
   },
+  "contributors": [
+    {
+      "name": "fr33d3m0n",
+      "url": "https://github.com/fr33d3m0n",
+      "role": "Original author"
+    }
+  ],
   "repository": {
+    "type": "git",
+    "url": "https://github.com/Kraxi/claude-skill-threat-modeling"
+  },
+  "upstream": {
     "type": "git",
     "url": "https://github.com/fr33d3m0n/skill-threat-modeling"
   },

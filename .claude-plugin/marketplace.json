@@ -1,16 +1,22 @@
 {
   "name": "skill-threat-modeling",
   "owner": {
+    "name": "Kraxi",
+    "url": "https://github.com/Kraxi"
+  },
+  "original_author": {
     "name": "fr33d3m0n",
-    "url": "https://github.com/fr33d3m0n"
+    "url": "https://github.com/fr33d3m0n",
+    "note": "Original creator of this threat modeling skill. This fork maintains the original BSD-3-Clause license."
   },
   "metadata": {
-    "description": "Code-First Deep Threat Modeling - LLM-native security analysis framework with automated 8-phase workflow, dual-track knowledge architecture (Security Controls + Threat Patterns), and comprehensive verification capabilities. Transform any codebase into structured threat models without design documents.",
-    "version": "2.1.2",
+    "description": "Code-First Deep Threat Modeling - LLM-native security analysis framework with automated 8-phase workflow, dual-track knowledge architecture (Security Controls + Threat Patterns), and comprehensive verification capabilities. Transform any codebase into structured threat models without design documents. English-only fork with cleaned translations.",
+    "version": "2.2.0",
     "license": "BSD-3-Clause",
-    "homepage": "https://github.com/fr33d3m0n/skill-threat-modeling",
-    "documentation": "https://github.com/fr33d3m0n/skill-threat-modeling/wiki",
-    "changelog": "https://github.com/fr33d3m0n/skill-threat-modeling/blob/main/CHANGELOG.md",
+    "homepage": "https://github.com/Kraxi/claude-skill-threat-modeling",
+    "upstream": "https://github.com/fr33d3m0n/skill-threat-modeling",
+    "documentation": "https://github.com/Kraxi/claude-skill-threat-modeling/wiki",
+    "changelog": "https://github.com/Kraxi/claude-skill-threat-modeling/blob/main/CHANGELOG.md",
     "keywords": [
       "threat-modeling",
       "STRIDE",
@@ -35,8 +41,7 @@
       "risk-assessment"
     ],
     "languages": [
-      "en",
-      "zh"
+      "en"
     ]
   },
   "plugins": [
@@ -58,7 +63,7 @@
       "Manual: Copy to ~/.claude/skills/threat-modeling/"
     ],
     "dependencies": [],
-    "post_install": "Skill auto-activates when triggered by: 'threat model', 'STRIDE', 'security assessment', 'DFD', 'risk analysis', '威胁建模', '安全评估'"
+    "post_install": "Skill auto-activates when triggered by: 'threat model', 'STRIDE', 'security assessment', 'DFD', 'risk analysis'"
   },
   "features": {
     "8_phase_workflow": {
@@ -108,7 +113,7 @@
       "ascii-diagrams",
       "yaml-structured"
     ],
-    "bilingual": true,
+    "bilingual": false,
     "session_recovery": true,
     "count_conservation": true,
     "parallel_subagents": true
@@ -124,28 +129,24 @@
       "modes": [
         {
           "name": "Knowledge Base Consultation",
-          "name_zh": "知识库咨询模式",
           "description": "Use knowledge base as security consulting resource for developers, auditors, and architects",
           "use_cases": ["Security questions during coding", "Vulnerability type understanding", "Best practice reference"],
           "output": "Structured knowledge responses (CWE, attack patterns, test methods, mitigations)"
         },
         {
           "name": "Deep Vulnerability Analysis",
-          "name_zh": "深度漏洞分析模式",
           "description": "In-depth assessment of specific vulnerabilities or code snippets",
           "use_cases": ["SAST tool report evaluation", "Penetration test findings deep-dive", "Security research"],
           "output": "Vulnerability mechanism analysis, attack paths, POC design"
         },
         {
           "name": "Security Test Generation",
-          "name_zh": "安全测试生成模式",
           "description": "Generate automated security test cases based on knowledge base",
           "use_cases": ["CI/CD pipeline testing", "Penetration test preparation", "Security training demos"],
           "output": "WSTG-standard test case checklist"
         },
         {
           "name": "Forward Integration (Design Phase Security)",
-          "name_zh": "前向集成模式",
           "description": "Pre-emptive threat modeling during design phase - shift-left security",
           "use_cases": ["New project security architecture", "Major feature change assessment"],
           "input": "API specs (OpenAPI), design documents",
@@ -153,7 +154,6 @@
         },
         {
           "name": "Backward Integration (Penetration Test Support)",
-          "name_zh": "后向集成模式",
           "description": "Attack path and POC support for penetration testing - shift-right validation",
           "use_cases": ["Penetration test planning", "Vulnerability deep exploitation", "Security report generation"],
           "output": "Attack chain construction, POC payloads, ATT&CK mapping"

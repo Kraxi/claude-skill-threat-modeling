@@ -1,0 +1,455 @@
+# Code-First Deep Threat Modeling Workflow | Version 2.1.1 | https://github.com/fr33d3m0n/skill-threat-modeling | License: BSD-3-Clause | Welcome to cite but please retain all sources and declarations
+
+# Security Design - Unified Security Domain Structure
+# Version: 4.0 (Strict Domain Sequence + Extension Naming)
+# Referenced in: Phase 2, 3, 4
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+# FOUR-LEVEL KNOWLEDGE HIERARCHY
+# ═══════════════════════════════════════════════════════════════════════════════
+# L1: Security Principles - SKILL.md (11 principles: DID, LP, ZT, FS, SOD, SBD, CM, EOM, OD, IV, LA)
+# L2: Security Design    - This file (10 core + 6 extended domains)
+# L3: Security Controls  - security-controls/control-set-*.md (18 files)
+# L4: Scenario Practices - security-controls/references/reference-set-*.md (74 files)
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+# NAMING CONVENTIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+# Core Domain:        control-set-{NN}-{topic}.md          (NN: 01-10)
+# Domain Extension:   control-set-ext-{NN}-{topic}.md      (e.g., ext-10-hardcoded-credentials)
+# Cross-Domain Ext:   control-set-ext-{NN}_{MM}-{topic}.md (e.g., ext-01_02-auth-patterns)
+# Extended Domain:    control-set-ext-{NN}-{topic}.md      (NN: 11-15 for extended domains)
+# Ext-Domain Sub-Ext: control-set-ext-{NN}-a{N}-{topic}.md (e.g., ext-11-a1-container-hardening)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CORE SECURITY DOMAINS (10)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+core_domains:
+  authn:
+    code: AUTHN
+    seq: "01"
+    name: "Authentication & Session"
+    stride_category: S  # Spoofing
+    description: "Identity verification and session lifecycle management"
+    core_requirements:
+      - "Multi-factor authentication (MFA) for sensitive operations"
+      - "Secure password storage (bcrypt/argon2)"
+      - "Session fixation attack protection"
+      - "Session timeout and invalidation mechanism"
+    core_principles: [ZT, CM, FS]
+    controls_ref: control-set-01-authentication.md
+    patterns_ref: control-set-ext-01_02-auth-patterns.md
+    owasp_refs:
+      - reference-set-01-authentication.md
+      - reference-set-01-multifactor-authentication.md
+      - reference-set-01-session-management.md
+      - reference-set-01-password-storage.md
+      - reference-set-01-forgot-password.md
+      - reference-set-01-credential-stuffing-prevention.md
+      - reference-set-01-saml-security.md
+      - reference-set-01-cookie-theft-mitigation.md
+      - reference-set-01-jwt-java.md
+      - reference-set-01-jaas.md
+      - reference-set-01-security-questions.md
+
+  authz:
+    code: AUTHZ
+    seq: "02"
+    name: "Authorization & Access Control"
+    stride_category: E  # Elevation of Privilege
+    description: "Access permission enforcement and verification"
+    core_requirements:
+      - "RBAC/ABAC access control model"
+      - "API layer permission checking"
+      - "Resource ownership verification"
+      - "Least Privilege principle"
+    core_principles: [LP, SOD, CM]
+    controls_ref: control-set-02-authorization.md
+    patterns_ref: control-set-ext-01_02-auth-patterns.md
+    owasp_refs:
+      - reference-set-02-authorization.md
+      - reference-set-02-access-control.md
+      - reference-set-02-idor-prevention.md
+      - reference-set-02-transaction-authorization.md
+
+  input:
+    code: INPUT
+    seq: "03"
+    name: "Input validation"
+    stride_category: T  # Tampering
+    description: "External input validation and sanitization"
+    core_requirements:
+      - "Validation at trust boundaries"
+      - "Parameterized queries for injection prevention"
+      - "Whitelist over blacklist"
+      - "Type and range validation"
+    core_principles: [IV, DID]
+    controls_ref: control-set-03-input-validation.md
+    owasp_refs:
+      - reference-set-03-input-validation.md
+      - reference-set-03-sql-injection-prevention.md
+      - reference-set-03-os-command-injection-defense.md
+      - reference-set-03-ldap-injection-prevention.md
+      - reference-set-03-deserialization.md
+      - reference-set-03-file-upload.md
+      - reference-set-03-ssrf-prevention.md
+      - reference-set-03-injection-prevention.md
+      - reference-set-03-query-parameterization.md
+      - reference-set-03-mass-assignment.md
+      - reference-set-03-unvalidated-redirects.md
+      - reference-set-03-bean-validation.md
+      - reference-set-03-injection-prevention-java.md
+
+  output:
+    code: OUTPUT
+    seq: "04"
+    name: "Output Encoding"
+    stride_category: [T, I]  # Tampering, Information Disclosure
+    description: "Context-aware encoding and secure handling of output content"
+    core_requirements:
+      - "Context-aware output encoding"
+      - "Template engine security configuration"
+      - "File export security"
+      - "API response security"
+      - "Log output masking"
+    core_principles: [DID, SBD]
+    controls_ref: control-set-04-output-encoding.md
+    owasp_refs: []  # No dedicated OWASP refs yet
+
+  client:
+    code: CLIENT
+    seq: "05"
+    name: "Client-Side Security"
+    stride_category: [S, T, I]  # Multiple categories
+    description: "Browser and client-side security controls"
+    core_requirements:
+      - "XSS/DOM XSS protection"
+      - "CSP (Content Security Policy)"
+      - "CSRF protection"
+      - "Clickjacking protection"
+      - "Third-party script isolation"
+    core_principles: [DID, SBD]
+    controls_ref: control-set-05-client-side.md
+    owasp_refs:
+      - reference-set-05-xss-prevention.md
+      - reference-set-05-dom-xss-prevention.md
+      - reference-set-05-dom-clobbering-prevention.md
+      - reference-set-05-prototype-pollution-prevention.md
+      - reference-set-05-third-party-javascript.md
+      - reference-set-05-xss-filter-evasion.md
+      - reference-set-05-css-security.md
+      - reference-set-05-csp.md
+      - reference-set-05-http-headers.md
+      - reference-set-05-csrf-prevention.md
+      - reference-set-05-clickjacking-defense.md
+      - reference-set-05-html5-security.md
+      - reference-set-05-hsts.md
+
+  crypto:
+    code: CRYPTO
+    seq: "06"
+    name: "Cryptography & Transport Security"
+    stride_category: I  # Information Disclosure
+    description: "Data transmission and storage encryption"
+    core_requirements:
+      - "TLS 1.2+ transport encryption"
+      - "AES-256/ChaCha20 storage encryption"
+      - "Secure key management and rotation"
+      - "Avoid custom cryptographic implementations"
+    core_principles: [DID, EOM]
+    controls_ref: control-set-06-cryptography.md
+    owasp_refs:
+      - reference-set-06-cryptographic-storage.md
+      - reference-set-06-key-management.md
+      - reference-set-06-tls.md
+      - reference-set-06-tls-cipher-string.md
+      - reference-set-06-certificate-pinning.md
+      - reference-set-06-transport-layer-protection.md
+
+  log:
+    code: LOG
+    seq: "07"
+    name: "Logging & Monitoring"
+    stride_category: R  # Repudiation
+    description: "Security event recording and auditing"
+    core_requirements:
+      - "Structured logging (JSON)"
+      - "Sensitive data masking"
+      - "Log integrity protection"
+      - "Correlation ID tracing"
+    core_principles: [DID, CM]
+    controls_ref: control-set-07-logging.md
+    owasp_refs:
+      - reference-set-07-logging.md
+      - reference-set-07-logging-vocabulary.md
+
+  error:
+    code: ERROR
+    seq: "08"
+    name: "Error Handling"
+    stride_category: I  # Information Disclosure
+    description: "Secure error handling and information control"
+    core_requirements:
+      - "Generic error messages for users"
+      - "Detailed logging for internal use"
+      - "Avoid stack trace exposure"
+      - "Fail-safe mode"
+    core_principles: [FS, OD]
+    controls_ref: control-set-08-error-handling.md
+    owasp_refs:
+      - reference-set-08-error-handling.md
+      - reference-set-08-xs-leaks.md
+
+  api:
+    code: API
+    seq: "09"
+    name: "API & Service Security"
+    stride_category: [S, T, I, D, E]  # Multiple categories
+    description: "API endpoint and inter-service communication security"
+    core_requirements:
+      - "API authentication and authorization"
+      - "Rate limiting and quotas"
+      - "Input/output validation"
+      - "Version management and deprecation"
+    core_principles: [ZT, CM, LP]
+    controls_ref: control-set-09-api-security.md
+    owasp_refs:
+      - reference-set-09-rest-security.md
+      - reference-set-09-graphql.md
+      - reference-set-09-web-service-security.md
+      - reference-set-09-microservices-security.md
+      - reference-set-09-dos-prevention.md
+      - reference-set-09-rest-assessment.md
+      - reference-set-09-ajax-security.md
+
+  data:
+    code: DATA
+    seq: "10"
+    name: "Data Protection"
+    stride_category: I  # Information Disclosure
+    description: "Sensitive data and credential protection"
+    core_requirements:
+      - "Data classification and labeling"
+      - "Secure credential storage"
+      - "PII minimization"
+      - "Data lifecycle management"
+    core_principles: [LP, DID]
+    controls_ref: control-set-10-data-protection.md
+    extensions:
+      - control-set-ext-10-hardcoded-credentials.md
+    owasp_refs:
+      - reference-set-10-database-security.md
+      - reference-set-10-secrets-management.md
+      - reference-set-10-user-privacy.md
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CROSS-DOMAIN EXTENSIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cross_domain_extensions:
+  auth_patterns:
+    code: AUTHN_AUTHZ
+    domains: ["01", "02"]
+    name: "Authentication & Authorization Patterns"
+    description: "Implementation patterns spanning AUTHN and AUTHZ domains"
+    controls_ref: control-set-ext-01_02-auth-patterns.md
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXTENDED SECURITY DOMAINS (5) - Loaded on-demand based on tech stack detection
+# ═══════════════════════════════════════════════════════════════════════════════
+
+extended_domains:
+  infra:
+    code: INFRA
+    seq: "ext-11"
+    name: "Infrastructure Security"
+    trigger_conditions:
+      - "Dockerfile detected"
+      - "docker-compose.yml detected"
+      - "kubernetes/*.yaml detected"
+      - "helm chart detected"
+    core_requirements:
+      - "Container image security scanning"
+      - "Least privilege container execution"
+      - "Network isolation and segmentation"
+      - "Resource limits configuration"
+    controls_ref: control-set-ext-11-infrastructure.md
+    owasp_refs:
+      - reference-set-ext-11-docker-security.md
+      - reference-set-ext-11-kubernetes-security.md
+      - reference-set-ext-11-iac-security.md
+      - reference-set-ext-11-nodejs-docker.md
+
+  supply:
+    code: SUPPLY
+    seq: "ext-12"
+    name: "Supply Chain Security"
+    trigger_conditions:
+      - "package.json detected"
+      - "requirements.txt detected"
+      - "pom.xml detected"
+      - "go.mod detected"
+    core_requirements:
+      - "Dependency vulnerability scanning"
+      - "SBOM generation and maintenance"
+      - "Dependency locking"
+      - "Private repository security"
+    controls_ref: control-set-ext-12-supply-chain.md
+    owasp_refs:
+      - reference-set-ext-12-dependency-management.md
+      - reference-set-ext-12-supply-chain-security.md
+      - reference-set-ext-12-npm-security.md
+      - reference-set-ext-12-cicd-security.md
+
+  ai:
+    code: AI
+    seq: "ext-13"
+    name: "AI/LLM Security"
+    trigger_conditions:
+      - "openai API usage"
+      - "anthropic API usage"
+      - "langchain import"
+      - "LLM model loading"
+    core_requirements:
+      - "Prompt injection protection"
+      - "Output filtering and validation"
+      - "Model access control"
+      - "Sensitive data isolation"
+    controls_ref: control-set-ext-13-ai-llm.md
+    owasp_refs:
+      - reference-set-ext-13-ai-agent-security.md
+    internal_ref: llm-threats.yaml
+
+  mobile:
+    code: MOBILE
+    seq: "ext-14"
+    name: "Mobile Security"
+    trigger_conditions:
+      - "iOS project detected"
+      - "Android project detected"
+      - "React Native detected"
+      - "Flutter detected"
+    core_requirements:
+      - "Secure local storage"
+      - "Certificate pinning"
+      - "Code obfuscation"
+      - "Runtime protection"
+    controls_ref: control-set-ext-14-mobile.md
+    owasp_refs:
+      - reference-set-ext-14-mobile-security.md
+      - reference-set-ext-14-automotive-security.md
+      - reference-set-06-certificate-pinning.md  # Shared with CRYPTO
+
+  cloud:
+    code: CLOUD
+    seq: "ext-15"
+    name: "Cloud Service Security"
+    trigger_conditions:
+      - "terraform/*.tf detected"
+      - "AWS SDK usage"
+      - "Azure SDK usage"
+      - "GCP SDK usage"
+      - "serverless.yml detected"
+    core_requirements:
+      - "IAM least privilege"
+      - "Resource access policy"
+      - "Security group configuration"
+      - "Logging and monitoring enabled"
+    controls_ref: control-set-ext-15-cloud.md
+    owasp_refs:
+      - reference-set-ext-15-cloud-architecture.md
+
+  agent:
+    code: AGENT
+    seq: "ext-16"
+    name: "Agentic Security"
+    trigger_conditions:
+      - "langchain import"
+      - "langgraph import"
+      - "crewai import"
+      - "autogen import"
+      - "mcp.json detected"
+      - ".claude/skills detected"
+      - "tool_definitions detected"
+      - "function_calling usage"
+    core_requirements:
+      - "Least Agency principle"
+      - "Tool invocation whitelist"
+      - "Goal hijacking protection"
+      - "Conversation memory security"
+      - "Runaway prevention mechanism"
+      - "Resource limits"
+      - "Sandbox enforcement"
+      - "Trust boundary enforcement"
+    core_principles: [LA, LP, ZT, CM]
+    controls_ref: control-set-ext-16-agentic.md
+    owasp_refs:
+      - reference-set-ext-17-agentic-security.md
+    internal_ref: agentic-threats.yaml
+    asi_mapping:
+      ASI01: "AGENT-01 Excessive Permission Control"
+      ASI02: "AGENT-02 Goal Hijacking Protection"
+      ASI03: "AGENT-03 Tool Abuse Protection"
+      ASI04: "AGENT-04 Conversation Memory Security"
+      ASI05: "AGENT-05 Runaway Prevention"
+      ASI06: "AGENT-06 Resource Limits"
+      ASI07: "AGENT-07 Input Validation"
+      ASI08: "AGENT-08 Identity Impersonation Protection"
+      ASI09: "AGENT-09 Sandbox Enforcement"
+      ASI10: "AGENT-10 Trust Boundary Enforcement"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STRIDE TO DOMAIN MAPPING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+stride_domain_map:
+  S: [authn, api, client]           # Spoofing
+  T: [input, output, api]           # Tampering
+  R: [log]                          # Repudiation
+  I: [crypto, error, data, output]  # Information Disclosure
+  D: [api]                          # Denial of Service
+  E: [authz]                        # Elevation of Privilege
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CONTROL SET INDEX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+control_set_index:
+  # Core Domains (01-10)
+  "01": { domain: AUTHN, file: control-set-01-authentication.md }
+  "02": { domain: AUTHZ, file: control-set-02-authorization.md }
+  "03": { domain: INPUT, file: control-set-03-input-validation.md }
+  "04": { domain: OUTPUT, file: control-set-04-output-encoding.md }
+  "05": { domain: CLIENT, file: control-set-05-client-side.md }
+  "06": { domain: CRYPTO, file: control-set-06-cryptography.md }
+  "07": { domain: LOG, file: control-set-07-logging.md }
+  "08": { domain: ERROR, file: control-set-08-error-handling.md }
+  "09": { domain: API, file: control-set-09-api-security.md }
+  "10": { domain: DATA, file: control-set-10-data-protection.md }
+  # Domain Extensions
+  "ext-01_02": { domain: AUTHN_AUTHZ, file: control-set-ext-01_02-auth-patterns.md }
+  "ext-10": { domain: DATA_EXT, file: control-set-ext-10-hardcoded-credentials.md }
+  # Extended Domains (ext-11 to ext-16)
+  "ext-11": { domain: INFRA, file: control-set-ext-11-infrastructure.md }
+  "ext-12": { domain: SUPPLY, file: control-set-ext-12-supply-chain.md }
+  "ext-13": { domain: AI, file: control-set-ext-13-ai-llm.md }
+  "ext-14": { domain: MOBILE, file: control-set-ext-14-mobile.md }
+  "ext-15": { domain: CLOUD, file: control-set-ext-15-cloud.md }
+  "ext-16": { domain: AGENT, file: control-set-ext-16-agentic.md }
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE REFERENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phase_reference:
+  phase_2:  # DFD security aspects
+    domains: [authn, authz, input]
+    focus: "Data flow security assessment"
+  phase_3:  # Trust boundary controls
+    domains: [authn, authz, data]
+    focus: "Trust boundary and access control"
+  phase_4:  # Full design assessment
+    domains: ALL
+    focus: "Comprehensive security design review"
+    extended_domains: "Loaded based on tech stack detection"

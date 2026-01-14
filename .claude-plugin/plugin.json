@@ -1,0 +1,34 @@
+{
+  "name": "skill-threat-modeling",
+  "version": "2.1.1",
+  "description": "Code-First Deep Threat Modeling Skill - Automated 8-phase security analysis with STRIDE methodology, knowledge base integration, and risk validation",
+  "author": {
+    "name": "fr33d3m0n",
+    "url": "https://github.com/fr33d3m0n"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fr33d3m0n/skill-threat-modeling"
+  },
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "threat-modeling",
+    "STRIDE",
+    "security",
+    "DFD",
+    "risk-assessment",
+    "penetration-testing",
+    "OWASP",
+    "CWE",
+    "CAPEC",
+    "ATT&CK"
+  ],
+  "engines": {
+    "claude-code": ">=1.0.0"
+  },
+  "categories": [
+    "security",
+    "code-analysis",
+    "documentation"
+  ]
+}

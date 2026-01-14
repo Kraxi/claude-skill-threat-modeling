@@ -1,0 +1,175 @@
+{
+  "name": "skill-threat-modeling",
+  "owner": {
+    "name": "fr33d3m0n",
+    "url": "https://github.com/fr33d3m0n"
+  },
+  "metadata": {
+    "description": "Code-First Deep Threat Modeling - LLM-native security analysis framework with automated 8-phase workflow, dual-track knowledge architecture (Security Controls + Threat Patterns), and comprehensive verification capabilities. Transform any codebase into structured threat models without design documents.",
+    "version": "2.1.1",
+    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/fr33d3m0n/skill-threat-modeling",
+    "documentation": "https://github.com/fr33d3m0n/skill-threat-modeling/wiki",
+    "changelog": "https://github.com/fr33d3m0n/skill-threat-modeling/blob/main/CHANGELOG.md",
+    "keywords": [
+      "threat-modeling",
+      "STRIDE",
+      "security-assessment",
+      "DFD",
+      "risk-validation",
+      "penetration-testing",
+      "OWASP",
+      "CWE",
+      "CAPEC",
+      "MITRE-ATT&CK",
+      "code-first",
+      "automated-security",
+      "LLM-native",
+      "AI-security"
+    ],
+    "categories": [
+      "security",
+      "code-analysis",
+      "threat-intelligence",
+      "compliance",
+      "risk-assessment"
+    ],
+    "languages": [
+      "en",
+      "zh"
+    ]
+  },
+  "plugins": [
+    {
+      "name": "threat-modeling",
+      "description": "Code-First Deep Threat Modeling Skill with strict 8-phase sequential workflow: P1 Project Understanding, P2 Call Flow & DFD Analysis, P3 Trust Boundary Evaluation, P4 Security Design Review, P5 STRIDE Threat Analysis, P6 Risk Validation with POC Design, P7 Mitigation Planning with ASVS alignment, P8 Report Generation with mandatory outputs.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./"
+      ]
+    }
+  ],
+  "installation": {
+    "scope": "user",
+    "instructions": [
+      "Run: /plugin install threat-modeling@skill-threat-modeling",
+      "Or: claude plugin install threat-modeling@skill-threat-modeling",
+      "Manual: Copy to ~/.claude/skills/threat-modeling/"
+    ],
+    "dependencies": [],
+    "post_install": "Skill auto-activates when triggered by: 'threat model', 'STRIDE', 'security assessment', 'DFD', 'risk analysis', '威胁建模', '安全评估'"
+  },
+  "features": {
+    "8_phase_workflow": {
+      "enabled": true,
+      "phases": [
+        "P1: Project Understanding - Codebase structure analysis, tech stack detection",
+        "P2: Call Flow & DFD - Data flow diagram construction from code",
+        "P3: Trust Boundary - Security zone identification and boundary mapping",
+        "P4: Security Design Review - 16 security domain assessment matrix",
+        "P5: STRIDE Analysis - Systematic threat enumeration with KB integration",
+        "P6: Risk Validation - Attack path verification, POC design, count conservation",
+        "P7: Mitigation Planning - Tech-specific remediation with ASVS alignment",
+        "P8: Report Generation - 4 mandatory reports + 6 phase documents"
+      ]
+    },
+    "knowledge_base": {
+      "5_layer_architecture": true,
+      "layer_1_threat_intelligence": {
+        "cwe_count": 974,
+        "capec_count": 615,
+        "attack_techniques": 835,
+        "cve_index": 323830,
+        "semantic_embeddings": 3278
+      },
+      "layer_2_security_controls": {
+        "security_domains": 16,
+        "control_sets": 18,
+        "owasp_references": 74
+      },
+      "layer_3_verification": {
+        "wstg_tests": 121,
+        "mastg_tests": 206,
+        "asvs_requirements": 345
+      },
+      "layer_4_compliance": {
+        "frameworks": 14,
+        "controls": 115
+      },
+      "layer_5_realtime": {
+        "nvd_api": true,
+        "kev_lookup": true
+      }
+    },
+    "output_formats": [
+      "markdown",
+      "mermaid-dfd",
+      "ascii-diagrams",
+      "yaml-structured"
+    ],
+    "bilingual": true,
+    "session_recovery": true,
+    "count_conservation": true,
+    "parallel_subagents": true
+  },
+  "usage_modes": {
+    "standard": {
+      "name": "Full 8-Phase Assessment",
+      "description": "Complete sequential threat modeling workflow",
+      "trigger": "threat model [project]"
+    },
+    "extended": [
+      {
+        "name": "Lightweight Quick Scan",
+        "description": "Rapid security posture assessment (P1+P4+P5)",
+        "use_case": "Initial security review or time-constrained assessments"
+      },
+      {
+        "name": "Single-Phase Deep Analysis",
+        "description": "Deep dive into specific phase (e.g., P5 STRIDE only)",
+        "use_case": "Focused analysis on specific security domain"
+      },
+      {
+        "name": "Delta Assessment",
+        "description": "Analyze changes between versions",
+        "use_case": "Security review for pull requests or releases"
+      },
+      {
+        "name": "Compliance Verification",
+        "description": "Map findings to compliance frameworks",
+        "use_case": "Audit preparation (NIST, ISO, SOC2)"
+      },
+      {
+        "name": "Penetration Test Support",
+        "description": "Generate POC-focused attack paths from P6",
+        "use_case": "Pre-engagement reconnaissance for pentesters"
+      }
+    ]
+  },
+  "design_principles": {
+    "code_first": "No design documents required - analyze directly from codebase",
+    "llm_autonomous": "Knowledge base provides context, not control - LLM performs semantic reasoning",
+    "dual_track_knowledge": "Security Control Set (defensive) + Threat Pattern Set (offensive)",
+    "context_not_control": "Empower LLM intelligence rather than constrain it",
+    "script_as_blackbox": "Scripts handle deterministic operations, LLM handles semantic analysis"
+  },
+  "security_domains": [
+    "AUTHN - Authentication & Session",
+    "AUTHZ - Authorization & Access Control",
+    "INPUT - Input Validation",
+    "OUTPUT - Output Encoding",
+    "CLIENT - Client-Side Security",
+    "CRYPTO - Cryptography & Transport",
+    "LOG - Logging & Monitoring",
+    "ERROR - Error Handling",
+    "API - API & Service Security",
+    "DATA - Data Protection",
+    "INFRA - Infrastructure Security",
+    "SUPPLY - Supply Chain Security",
+    "AI - AI/LLM Security (OWASP LLM Top 10)",
+    "MOBILE - Mobile Security",
+    "CLOUD - Cloud Security",
+    "AGENT - Agentic Security (OWASP ASI Top 10)"
+  ]
+}

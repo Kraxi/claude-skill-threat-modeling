@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Code-First Deep Threat Modeling - LLM-native security analysis framework with automated 8-phase workflow, dual-track knowledge architecture (Security Controls + Threat Patterns), and comprehensive verification capabilities. Transform any codebase into structured threat models without design documents.",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "license": "BSD-3-Clause",
     "homepage": "https://github.com/fr33d3m0n/skill-threat-modeling",
     "documentation": "https://github.com/fr33d3m0n/skill-threat-modeling/wiki",
@@ -119,33 +119,47 @@
       "description": "Complete sequential threat modeling workflow",
       "trigger": "threat model [project]"
     },
-    "extended": [
-      {
-        "name": "Lightweight Quick Scan",
-        "description": "Rapid security posture assessment (P1+P4+P5)",
-        "use_case": "Initial security review or time-constrained assessments"
-      },
-      {
-        "name": "Single-Phase Deep Analysis",
-        "description": "Deep dive into specific phase (e.g., P5 STRIDE only)",
-        "use_case": "Focused analysis on specific security domain"
-      },
-      {
-        "name": "Delta Assessment",
-        "description": "Analyze changes between versions",
-        "use_case": "Security review for pull requests or releases"
-      },
-      {
-        "name": "Compliance Verification",
-        "description": "Map findings to compliance frameworks",
-        "use_case": "Audit preparation (NIST, ISO, SOC2)"
-      },
-      {
-        "name": "Penetration Test Support",
-        "description": "Generate POC-focused attack paths from P6",
-        "use_case": "Pre-engagement reconnaissance for pentesters"
-      }
-    ]
+    "flexible_modes": {
+      "description": "Beyond 8-phase workflow - knowledge base as versatile security asset",
+      "modes": [
+        {
+          "name": "Knowledge Base Consultation",
+          "name_zh": "知识库咨询模式",
+          "description": "Use knowledge base as security consulting resource for developers, auditors, and architects",
+          "use_cases": ["Security questions during coding", "Vulnerability type understanding", "Best practice reference"],
+          "output": "Structured knowledge responses (CWE, attack patterns, test methods, mitigations)"
+        },
+        {
+          "name": "Deep Vulnerability Analysis",
+          "name_zh": "深度漏洞分析模式",
+          "description": "In-depth assessment of specific vulnerabilities or code snippets",
+          "use_cases": ["SAST tool report evaluation", "Penetration test findings deep-dive", "Security research"],
+          "output": "Vulnerability mechanism analysis, attack paths, POC design"
+        },
+        {
+          "name": "Security Test Generation",
+          "name_zh": "安全测试生成模式",
+          "description": "Generate automated security test cases based on knowledge base",
+          "use_cases": ["CI/CD pipeline testing", "Penetration test preparation", "Security training demos"],
+          "output": "WSTG-standard test case checklist"
+        },
+        {
+          "name": "Forward Integration (Design Phase Security)",
+          "name_zh": "前向集成模式",
+          "description": "Pre-emptive threat modeling during design phase - shift-left security",
+          "use_cases": ["New project security architecture", "Major feature change assessment"],
+          "input": "API specs (OpenAPI), design documents",
+          "output": "Endpoint-based DFD, trust boundary identification, STRIDE analysis"
+        },
+        {
+          "name": "Backward Integration (Penetration Test Support)",
+          "name_zh": "后向集成模式",
+          "description": "Attack path and POC support for penetration testing - shift-right validation",
+          "use_cases": ["Penetration test planning", "Vulnerability deep exploitation", "Security report generation"],
+          "output": "Attack chain construction, POC payloads, ATT&CK mapping"
+        }
+      ]
+    }
   },
   "design_principles": {
     "code_first": "No design documents required - analyze directly from codebase",
